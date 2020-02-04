@@ -1,0 +1,77 @@
+
+- cal_id: paul@giff.ca
+  entities:
+  - device_id: personal
+    ignore_availability: true
+    name: Personal
+    track: true
+
+- cal_id: tl7nhsum3bbcjjnh38k270akg38ildiv@import.calendar.google.com
+  entities:
+  - device_id: glenlake_hawks_minor_novice_2_blue
+    ignore_availability: true
+    name: Glenlake Hawks Minor Novice  2 Blue
+    track: true
+
+- cal_id: giff.ca_huorksddln0d3bqhdio3u5693o@group.calendar.google.com
+  entities:
+  - device_id: vmware
+    ignore_availability: true
+    name: VMware
+    track: true
+
+- cal_id: foldddof3gc5spl74u2q5bkqfagrggkb@import.calendar.google.com
+  entities:
+  - device_id: glenlake_hawks_atom_house_yellow
+    ignore_availability: true
+    name: Glenlake Hawks Atom House Yellow
+    track: true
+
+- cal_id: kbk1u9nc9lm3kdg75d2i36cqs4llu1r1@import.calendar.google.com
+  entities:
+  - device_id: 418_bridlecreek_green_sw_calgary
+    ignore_availability: true
+    name: 418 Bridlecreek Green SW, Calgary
+    track: true
+
+- cal_id: home@giff.ca
+  entities:
+  - device_id: home_giff_ca
+    ignore_availability: true
+    name: home@giff.ca
+    track: true
+
+- cal_id: 31qqv0jttkkidt6oa8tftg28l8814fum@import.calendar.google.com
+  entities:
+  - device_id: calendar
+    ignore_availability: true
+    name: Calendar
+    track: true
+
+- cal_id: en.canadian#holiday@group.v.calendar.google.com
+  entities:
+  - device_id: holidays_in_canada
+    ignore_availability: true
+    name: Holidays in Canada
+    track: true
+
+- cal_id: family01815086393430082037@group.calendar.google.com
+  entities:
+  - device_id: family
+    ignore_availability: true
+    name: Family
+    track: true
+
+- cal_id: h8nm05pvnk8k88pdheiu842o92rnad3r@import.calendar.google.com
+  entities:
+  - device_id: 418_bridlecreek_green_sw_calgary
+    ignore_availability: true
+    name: 418 Bridlecreek Green SW, Calgary
+    track: true
+
+- cal_id: homegifford@gmail.com
+  entities:
+  - device_id: homegifford_gmail_com
+    ignore_availability: true
+    name: homegifford@gmail.com
+    track: true

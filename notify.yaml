@@ -1,0 +1,4 @@
+- platform: slack
+  name: slack_notify
+  api_key: !secret slack_api
+  default_channel: '#notifications'

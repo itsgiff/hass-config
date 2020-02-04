@@ -1,0 +1,16 @@
+###########################################
+# Philips Hue Sensors
+###########################################
+
+- platform: template
+  sensors:
+    hue_status:
+        value_template: >-
+          {%- if is_state("binary_sensor.phillipshue", "on") %}
+              Online
+          {%- elif is_state("binary_sensor.phillipshue", "off") %}
+              Offline
+          {%- else %}
+              Error
+          {%- endif %}
+

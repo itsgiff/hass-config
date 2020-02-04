@@ -1,0 +1,92 @@
+  project_id: !secret google_project_id
+  api_key: !secret google_assistant_api
+  service_account: !include .storage/google-assistant.json
+  secure_devices_pin: !secret google_assistant_secure_pin
+  expose_by_default: false
+  report_state: true
+  entity_config:
+    switch.office_lamp:
+      expose: true
+      room: 'Office'
+      name: 'Office Lamp'
+    light.office_light:
+      expose: true
+      room: 'Office'
+      name: 'Office Lights'
+    switch.kitchen_coffee_light:
+      expose: true
+      room: 'Kitchen'
+      name: 'Coffee Lights'
+    switch.bed_light:
+      expose: true
+      room: 'Bedroom'
+      name: 'Bed Light'
+    switch.back_deck_lights:
+      expose: true
+      room: 'Backyard'
+      name: 'Back Deck Lights'
+    switch.seasonal_front_lights:
+      expose: true
+      room: 'Frontyard'
+      name: 'Seasonal Front Lights'
+    switch.water_fountain:
+      expose: true
+      room: 'Backyard'
+      name: 'Water Fountain'
+    camera.basement:
+      expose: true
+      room: 'Basement'
+      name: 'Basement Camera'
+    camera.back_deck:
+      expose: true
+      room: 'Backyard'
+      name: 'Backdeck Camera'
+    camera.backyard:
+      expose: true
+      room: 'Backyard'
+      name: 'Backyard Camera'
+    camera.driveway:
+      expose: true
+      room: 'Frontyard'
+      name: 'Driveway Camera'
+    camera.front_deck:
+      expose: true
+      room: 'Frontyard'
+      name: 'Front Deck Camera'
+    camera.front_gate:
+      expose: true
+      room: 'Frontyard'
+      name: 'Front Gate Camera'
+    camera.back_gate:
+      expose: true
+      room: 'Backyard'
+      name: 'Back Gate Camera'
+    camera.side_gate:
+      expose: true
+      room: 'Backyard'
+      name: 'Side Gate Camera'
+    cover.garage_door:
+      expose: true
+      room: 'Garage'
+      name: 'Garage Door'
+    lock.garage_door:
+      expose: true
+      room: 'Garage Door'
+      name: 'Garage Door Lock'      
+    lock.front_door:
+      expose: true
+      room: 'Front Door'
+      name: 'Front Door Lock'
+    lock.back_door:
+      expose: true
+      room: 'Back Door'
+      name: 'Back Door Lock'
+    fan.bedroom:
+      expose: true
+      room: 'Bedroom'
+      name: 'Bedroom Fan'
+    climate.bedroom:
+      expose: true
+      room: 'Bedroom'
+      name: 'Bedroom Climate'
+    

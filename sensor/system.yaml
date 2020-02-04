@@ -1,0 +1,57 @@
+###########################################
+# System Sensors
+###########################################
+- platform: websocket_api
+
+- platform: version
+
+- platform: rest
+  resource: https://api.github.com/repos/home-assistant/home-assistant/releases/latest
+  username: !secret email_account
+  password: !secret github_token
+  authentication: basic
+  value_template: '{{ value_json.tag_name }}'
+  name: 'HASS Release'
+  headers:
+    Accept: application/vnd.github.v3+json
+    Content-Type: application/json
+    User-Agent: Home Assistant REST sensor
+
+- platform: command_line
+  command: cat /etc/os-release | grep "PRETTY_NAME" | sed 's/PRETTY_NAME=//g' | sed 's/["]//g'
+  name: Operating System
+
+- platform: command_line
+  command: "df -h | grep overlay | awk '{print $4}'"
+  name: "Disk Free Space"
+  scan_interval: 60
+
+- platform: command_line
+  command: "du -h /config/home-assistant_v2.db | awk '{print $1}'"
+  name: "Database Size"
+  scan_interval: 60
+
+- platform: command_line
+  command: "cat /sys/class/thermal/thermal_zone0/temp"
+  name: "Processor Temperature"
+  unit_of_measurement: "°C"
+  value_template: '{{ value | multiply(0.001) | round(2) }}'
+
+- platform: systemmonitor
+  resources:
+    - type: last_boot
+    - type: memory_free
+    - type: memory_use_percent
+    - type: memory_use
+    - type: disk_free
+    - type: disk_use_percent
+    - type: disk_use
+    - type: swap_free
+    - type: swap_use_percent
+    - type: swap_use
+    - type: processor_use
+
+- platform: uptime
+  name: "Uptime"
+  unit_of_measurement: hours
+

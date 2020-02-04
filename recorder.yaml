@@ -1,0 +1,20 @@
+purge_keep_days: 3
+purge_interval: 1
+include:
+  domains:
+    - switch
+    - lock
+    - cover
+    - light
+    - sensor
+    - binary_sensor
+    - weather
+    - image_processing
+    - media_player
+    - person
+    - climate
+exclude:
+  domains:
+    - weblink
+    - updater
+    - camera

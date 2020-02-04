@@ -1,0 +1,37 @@
+
+###########################################
+# Download Sensors
+###########################################
+
+- platform: sonarr
+  api_key: !secret sonarr_api
+  host: !secret sonarr_address
+  port: !secret sonarr_port
+  monitored_conditions:
+  - status
+  - series
+  - upcoming
+  - wanted
+  - queue
+  days: 1
+
+- platform: radarr
+  api_key: !secret radarr_api
+  host: !secret radarr_address
+  port: !secret radarr_port
+  monitored_conditions:
+  - upcoming
+  - movies
+  - diskspace
+  - status
+  - commands
+  days: 7
+
+
+###########################################
+# tautulli 
+###########################################
+
+- platform: tautulli
+  api_key: !secret tautulli_api
+  host: !secret host_address

@@ -1,0 +1,69 @@
+###########################################
+# Doppler Radar
+###########################################
+
+- platform: generic
+  still_image_url: https://radblast.wunderground.com/cgi-bin/radar/WUNIDS_map?station=XSM&brand=wui&num=10&delay=100&type=C0R&frame=0&scale=1.000&noclutter=0&showstorms=5&mapx=400&mapy=240&centerx=400&centery=240&transx=0&transy=0&showlabels=1&severe=0&rainsnow=1&lightning=0&smooth=1&rand=24740140&lat=0&lon=0&label=you
+  name: 'YYC Doppler'
+
+###########################################
+# Enviornment Canada
+###########################################
+- platform: environment_canada
+
+- platform: combined
+  base_address: https://home.giff.ca
+  entities:
+      - camera.back_deck
+      - camera.backyard
+      - camera.basement
+      - camera.driveway
+      - camera.front_deck
+      - camera.front_gate
+      # - camera.hot_tub
+      # - camera.side_gate
+      # - camera.back_gate
+
+      
+###########################################
+# Traffic Cams
+###########################################
+- platform: generic
+  still_image_url: http://trafficcam.calgary.ca/loc116.jpg
+  name: '162 Avenue & Shawville Blvd SW'
+- platform: generic
+  still_image_url: http://trafficcam.calgary.ca/loc101.jpg
+  name: '162 Avenue & Macleod Trail S'
+- platform: generic
+  still_image_url: http://trafficcam.calgary.ca/loc88.jpg
+  name: 'Lake Fraser Gate & Macleod Trail SE'
+- platform: generic
+  still_image_url: http://trafficcam.calgary.ca/loc15.jpg
+  name: 'Glenmore Trail & Crowchild Trail SW'
+- platform: generic
+  still_image_url: http://trafficcam.calgary.ca/loc48.jpg
+  name: 'Southland Drive & Macleod Trail S'
+- platform: generic
+  still_image_url: http://trafficcam.calgary.ca/loc8.jpg
+  name: 'Heritage Drive & Macleod Trail S'
+
+
+###########################################
+# Unifi Protect
+###########################################
+- platform: unifiprotect
+
+###########################################
+# Vehicle GPS Tracking
+###########################################
+
+- platform: generic
+  still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.sensor.audi_latitude.state }},{{ states.sensor.audi_longitude.state }}&zoom=13&scale=2&size=300x300&maptype=roadmap&markers=color:0xff0000%7Clabel:P%7C{{ states.sensor.audi_latitude.state }},{{ states.sensor.audi_longitude.state }}
+  limit_refetch_to_url_change: true
+  name: RS5 GPS
+
+
+- platform: generic
+  still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.sensor.f150_latitude.state }},{{ states.sensor.f150_longitude.state }}&zoom=13&scale=2&size=300x300&maptype=roadmap&markers=color:0xff0000%7Clabel:B%7C{{ states.sensor.f150_latitude.state }},{{ states.sensor.f150_longitude.state }}
+  limit_refetch_to_url_change: true
+  name: F150 GPS

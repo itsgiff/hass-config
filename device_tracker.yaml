@@ -1,0 +1,12 @@
+- platform: automatic
+  client_id: !secret automatic_client_id
+  secret: !secret automatic_secret
+  current_location: true
+  # username: !secret email_account
+  # password: !secret automatic_password
+
+
+# - platform: unifi_direct
+#   host: !secret unifi_ip
+#   username: !secret unifi_username
+#   password: !secret unifi_password

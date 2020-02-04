@@ -1,0 +1,304 @@
+- id: '2579374675082'
+  alias: Startup - Theme
+  trigger:
+  - event: start
+    platform: homeassistant
+  action:
+  - data:
+      name: slate
+    service: frontend.set_theme
+  initial_state: 'on'
+- id: '1495373253029'
+  alias: Notification - Garage Door Closed
+  description: Close notification for Garage Door
+  trigger:
+  - entity_id: cover.garage_door
+    from: open
+    platform: state
+    to: closed
+  action:
+  - data:
+      entity_id: light.notify
+      rgb_color:
+      - 246
+      - 255
+      - 254
+    entity_id: light.notify
+    service: light.turn_on
+  - entity_id: light.notify
+    service: light.turn_off
+  - data:
+      message: The Garage door closed
+    service: notify.ios_mobile
+  - data:
+      message: The Garage door closed
+    service: notify.ios_tablet
+- id: '1502817251957'
+  alias: Sunrise
+  description: Morning lighting and switch automation for office, coffee, back deck
+    water fountain and bed lights.
+  trigger:
+  - entity_id: sun.sun
+    for: 00:30
+    from: below_horizon
+    platform: state
+    to: above_horizon
+  condition:
+  - condition: state
+    entity_id: switch.back_deck_lights
+    state: 'on'
+  action:
+  - alias: Rear Deck Stairs Light Off
+    data: {}
+    entity_id: switch.back_deck_lights
+    service: switch.turn_off
+  - entity_id: switch.bed_light
+    service: switch.turn_off
+  - entity_id: switch.kitchen_coffee_light
+    service: switch.turn_off
+  - entity_id: switch.office_lamp
+    service: switch.turn_off
+  - entity_id: light.office_light
+    service: light.turn_off
+  - entity_id: switch.water_fountain
+    service: switch.turn_off
+- id: '1502832340378'
+  alias: Lighting - Office bedtime
+  description: Lighting automation for the office for the night
+  trigger:
+  - at: '20:30'
+    platform: time
+  condition: []
+  action:
+  - alias: Office Lamp Off
+    data: {}
+    entity_id: switch.office_lamp
+    service: switch.turn_off
+  - entity_id: light.office_light
+    service: light.turn_off
+- id: '1558218116963'
+  alias: Sunset
+  description: Evening lighting and switch automation for office, coffee, back deck
+    water fountain and bed lights.
+  trigger:
+  - entity_id: sun.sun
+    for: 00:30
+    from: above_horizon
+    platform: state
+    to: below_horizon
+  condition: []
+  action:
+  - data: {}
+    entity_id: switch.back_deck_lights
+    service: switch.turn_on
+  - entity_id: switch.bed_light
+    service: switch.turn_off
+  - entity_id: switch.kitchen_coffee_light
+    service: switch.turn_on
+  - entity_id: switch.office_lamp
+    service: switch.turn_on
+  - entity_id: switch.water_fountain
+    service: switch.turn_off
+- id: '1558229616820'
+  alias: Notificaton - Z-Wave Ready
+  trigger:
+  - event_data: {}
+    event_type: zwave.network_ready
+    platform: event
+  condition: []
+  action:
+  - data:
+      message: Z-Wave network is ready
+    service: notify.ios_mobile
+  - data:
+      message: Z-Wave network is ready
+    service: notify.ios_tablet
+- id: '1558230115098'
+  alias: Notification - Home Assistant Startup
+  trigger:
+  - event: start
+    platform: homeassistant
+  condition: []
+  action:
+  - data:
+      message: Home Assistant started
+    service: notify.ios_mobile
+  - data:
+      message: Home Assistant started
+    service: notify.ios_tablet
+- id: '1558230236693'
+  alias: Notification - Home Assistant Shutdown
+  trigger:
+  - event: shutdown
+    platform: homeassistant
+  condition: []
+  action:
+  - data:
+      message: Home Assistant has shutdown
+    service: notify.ios_mobile
+  - data:
+      message: Home Assistant has shutdown
+    service: notify.ios_tablet
+- id: '1558890166958'
+  alias: Auto Lock - Front Door
+  trigger:
+  - entity_id: lock.front_door
+    for: 00:30
+    from: locked
+    platform: state
+    to: unlocked
+  condition: []
+  action:
+  - data:
+      entity_id: lock.front_door
+    entity_id: lock.front_door
+    service: lock.lock
+- id: '1538860156959'
+  alias: Auto Lock - Back Door
+  trigger:
+  - entity_id: lock.back_door
+    for: 00:30
+    from: locked
+    platform: state
+    to: unlocked
+  condition: []
+  action:
+  - data:
+      entity_id: lock.back_door
+    entity_id: lock.back_door
+    service: lock.lock
+- id: '1559450583488'
+  alias: Auto Lock - Garage Door
+  trigger:
+  - entity_id: lock.garage_door
+    for: 00:30
+    from: unlocked
+    platform: state
+    to: locked
+  condition: []
+  action:
+  - entity_id: lock.garage_door
+    service: lock.lock
+- id: '1569672724355'
+  alias: Startup - HomeKit
+  trigger:
+  - event_data: {}
+    event_type: zwave.network_ready
+    platform: event
+  - event_data: {}
+    event_type: zwave.network_complete
+    platform: event
+  - event_data: {}
+    event_type: zwave.network_complete_some_dead
+    platform: event
+  condition: []
+  action:
+  - service: homekit.start
+- id: '1579996885432'
+  alias: Notification - Garage Door Open
+  description: ''
+  trigger:
+  - entity_id: cover.garage_door
+    from: closed
+    platform: state
+    to: open
+  condition: []
+  action:
+  - data:
+      message: The Garage door opened
+    service: notify.ios_mobile
+  - data:
+      message: The Garage door opened
+    service: notify.ios_tablet
+  - data:
+      entity_id: light.notify
+      rgb_color:
+      - 25
+      - 255
+      - 25
+    entity_id: light.notify
+    service: light.turn_on
+- id: '1580003362412'
+  alias: Notification - Home Assistant Update
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.updater
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      message: Home Assistant {{ state_attr('binary_sensor.updater', 'newest_version')
+        }} is available.
+    service: notify.ios_mobile
+  - data:
+      message: Home Assistant {{ state_attr('binary_sensor.updater', 'newest_version')
+        }} is available.
+    service: notify.ios_tablet
+- id: '1580077708650'
+  alias: Notification - Home Assistant Community Store Update
+  description: Home Assistant Community Store Update Notification
+  trigger:
+  - above: '0'
+    entity_id: sensor.hacs
+    platform: numeric_state
+  condition: []
+  action:
+  - data:
+      message: Home Assistant Community Store has {{ states('sensor.hacs') }} pending
+        update(s) available.
+    service: notify.ios_mobile
+  - data:
+      message: Home Assistant Community Store has {{ states('sensor.hacs') }} pending
+        update(s) available.
+    service: notify.ios_tablet
+- id: '1580224449809'
+  alias: Lighting - Work
+  description: Morning work automation for lights in the office
+  trigger:
+  - at: 05:00
+    platform: time
+  condition:
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
+    state: 'on'
+  - condition: state
+    entity_id: sun.sun
+    state: below_horizon
+  action:
+  - data:
+      brightness: 30
+    entity_id: light.office_light
+    service: light.turn_on
+  - entity_id: switch.office_lamp
+    service: switch.turn_on
+  - entity_id: switch.kitchen_coffee_light
+    service: switch.turn_on
+- id: '1580477302204'
+  alias: Snapshot - Nightly
+  description: Nightly Auto Snapshot
+  trigger:
+  - at: 02:00
+    platform: time
+  condition: []
+  action:
+    service: auto_backup.snapshot_full
+    data_template:
+      name: '{{ now().strftime(''%b-%d-%Y'') }}'
+      keep_days: 7
+- id: '1580477536052'
+  alias: Notification - Snapshot Failure
+  description: Notification on snapshot failure
+  trigger:
+  - event_data: {}
+    event_type: auto_backup.snapshot_failed
+    platform: event
+  condition: []
+  action:
+    service: persistent_notification.create
+    data_template:
+      title: Snapshot Failed.
+      message: 'Name: {{ trigger.event.data.name }}
+
+        Error: {{ trigger.event.data.error }}'

@@ -1,0 +1,1122 @@
+{
+    "data": {
+        "config": {
+            "custom_header": {
+                "chevrons": false,
+                "compact_mode": true,
+                "menu_hide": true,
+                "voice_hide": true
+            },
+            "resources": [
+                {
+                    "type": "module",
+                    "url": "/community_plugin/banner-card/banner-card.js"
+                },
+                {
+                    "type": "module",
+                    "url": "/community_plugin/mini-graph-card/mini-graph-card-bundle.js"
+                },
+                {
+                    "type": "module",
+                    "url": "/community_plugin/mini-media-player/mini-media-player-bundle.js"
+                },
+                {
+                    "type": "module",
+                    "url": "/community_plugin/simple-weather-card/simple-weather-card-bundle.js"
+                },
+                {
+                    "type": "js",
+                    "url": "/community_plugin/upcoming-media-card/upcoming-media-card.js"
+                },
+                {
+                    "type": "module",
+                    "url": "/community_plugin/lovelace-auto-entities/auto-entities.js"
+                },
+                {
+                    "type": "module",
+                    "url": "/community_plugin/lovelace-card-mod/card-mod.js"
+                },
+                {
+                    "type": "module",
+                    "url": "/community_plugin/lovelace-card-tools/card-tools.js"
+                },
+                {
+                    "type": "module",
+                    "url": "/community_plugin/lovelace-hass-aarlo/hass-aarlo.js"
+                },
+                {
+                    "type": "module",
+                    "url": "/community_plugin/simple-thermostat/simple-thermostat.js"
+                },
+                {
+                    "type": "module",
+                    "url": "/community_plugin/custom-header/custom-header.js"
+                },
+                {
+                    "type": "js",
+                    "url": "/community_plugin/dual-thermostat/dual-thermostat.js"
+                },
+                {
+                    "type": "js",
+                    "url": "/community_plugin/dual-gauge-card/dual-gauge-card.js"
+                },
+                {
+                    "type": "module",
+                    "url": "/community_plugin/swipe-glance-card/swipe-glance-card.js"
+                },
+                {
+                    "type": "js",
+                    "url": "/community_plugin/calendar-card/calendar-card.js"
+                }
+            ],
+            "title": "Home",
+            "views": [
+                {
+                    "badges": [
+                        {
+                            "entity": "person.paul"
+                        },
+                        {
+                            "entity": "person.beth"
+                        },
+                        {
+                            "entity": "person.jordan"
+                        },
+                        {
+                            "entity": "device_tracker.2015_audi_rs_5"
+                        },
+                        {
+                            "entity": "device_tracker.2013_ford_f_150"
+                        }
+                    ],
+                    "cards": [
+                        {
+                            "backdrop": {
+                                "day": "var(--primary-color)",
+                                "night": "#292929"
+                            },
+                            "entity": "weather.thermostat",
+                            "name": "at home",
+                            "type": "custom:simple-weather-card"
+                        },
+                        {
+                            "cards": [
+                                {
+                                    "entities": [
+                                        "sensor.dark_sky_apparent_temperature"
+                                    ],
+                                    "font_size": 75,
+                                    "line_color": "#66850c",
+                                    "line_width": 8,
+                                    "type": "custom:mini-graph-card"
+                                },
+                                {
+                                    "entities": [
+                                        "sensor.humidity"
+                                    ],
+                                    "font_size": 75,
+                                    "line_color": "#2d3758",
+                                    "line_width": 8,
+                                    "type": "custom:mini-graph-card"
+                                },
+                                {
+                                    "entities": [
+                                        "sensor.air_quality_health_index"
+                                    ],
+                                    "font_size": 75,
+                                    "line_color": "#4e6895",
+                                    "line_width": 8,
+                                    "type": "custom:mini-graph-card"
+                                }
+                            ],
+                            "type": "horizontal-stack"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "climate.thermostat"
+                                },
+                                {
+                                    "entity": "climate.bedroom"
+                                },
+                                {
+                                    "entity": "fan.bedroom"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "type": "entities"
+                        },
+                        {
+                            "card": {
+                                "show_header_toggle": false,
+                                "title": null,
+                                "type": "entities"
+                            },
+                            "filter": {
+                                "exclude": [
+                                    {
+                                        "state": "idle"
+                                    },
+                                    {
+                                        "state": "off"
+                                    },
+                                    {
+                                        "state": "unavailable"
+                                    },
+                                    {
+                                        "entity_id": "media_player.bravia_bedroom_tv"
+                                    },
+                                    {
+                                        "entity_id": "media_player.bravia_living_room_tv"
+                                    }
+                                ],
+                                "include": [
+                                    {
+                                        "domain": "media_player",
+                                        "options": {
+                                            "artwork": "cover",
+                                            "hide": {
+                                                "icon": true,
+                                                "power": true,
+                                                "source": true,
+                                                "volume": true
+                                            },
+                                            "type": "custom:mini-media-player"
+                                        }
+                                    }
+                                ]
+                            },
+                            "show_empty": false,
+                            "type": "custom:auto-entities"
+                        },
+                        {
+                            "card": {
+                                "show_header_toggle": false,
+                                "title": null,
+                                "type": "entities"
+                            },
+                            "entities": [
+                                "sensor.hacs",
+                                "binary_sensor.updater"
+                            ],
+                            "filter": {
+                                "exclude": [
+                                    {
+                                        "state": "0"
+                                    },
+                                    {
+                                        "state": "off"
+                                    },
+                                    {
+                                        "state": "unknown"
+                                    },
+                                    {
+                                        "state": "unavailable"
+                                    }
+                                ]
+                            },
+                            "show_empty": false,
+                            "type": "custom:auto-entities"
+                        },
+                        {
+                            "dateBottomFormat": "ddd",
+                            "dateTopFormat": "DD",
+                            "disableLinks": true,
+                            "endText": "End",
+                            "entities": [
+                                "calendar.418_bridlecreek_green_sw_calgary"
+                            ],
+                            "eventsLimit": "99",
+                            "fullDayEventText": "",
+                            "hardLimit": false,
+                            "hideDeclined": false,
+                            "hideHeader": true,
+                            "hidePastEvents": false,
+                            "hideTime": true,
+                            "highlightToday": false,
+                            "ignoreEventsByLocationExpression": "",
+                            "ignoreEventsExpression": "",
+                            "maxHeight": false,
+                            "notifyDateTimeFormat": "MM/DD/YYYY HH:mma",
+                            "notifyEntity": null,
+                            "numberOfDays": "7",
+                            "progressBar": false,
+                            "removeFromEventTitle": "",
+                            "showEventOrigin": false,
+                            "showLocation": false,
+                            "showLocationIcon": false,
+                            "showMultiDay": false,
+                            "startText": "Start",
+                            "timeFormat": "HH:mma",
+                            "title": "Waste & Recycling",
+                            "type": "custom:calendar-card"
+                        },
+                        {
+                            "cards": [
+                                {
+                                    "aspect_ratio": "0%",
+                                    "camera_image": "camera.combined",
+                                    "entities": [],
+                                    "type": "picture-glance"
+                                },
+                                {
+                                    "card": {
+                                        "title": null,
+                                        "type": "entities"
+                                    },
+                                    "filter": {
+                                        "exclude": [
+                                            {
+                                                "state": "unavailable"
+                                            },
+                                            {
+                                                "state": "locked"
+                                            }
+                                        ],
+                                        "include": [
+                                            {
+                                                "domain": "lock"
+                                            }
+                                        ]
+                                    },
+                                    "show_empty": false,
+                                    "show_header_toggle": false,
+                                    "type": "custom:auto-entities"
+                                },
+                                {
+                                    "card": {
+                                        "title": null,
+                                        "type": "entities"
+                                    },
+                                    "entities": [
+                                        "switch.office_lamp",
+                                        "switch.bed_light",
+                                        "switch.kitchen_coffee_light"
+                                    ],
+                                    "filter": {
+                                        "exclude": [
+                                            {
+                                                "state": "off"
+                                            },
+                                            {
+                                                "state": "unavailable"
+                                            },
+                                            {
+                                                "entity_id": "light.living_room_switch"
+                                            }
+                                        ],
+                                        "include": [
+                                            {
+                                                "domain": "light"
+                                            },
+                                            {
+                                                "domain": "fan"
+                                            }
+                                        ]
+                                    },
+                                    "show_empty": false,
+                                    "show_header_toggle": false,
+                                    "type": "custom:auto-entities"
+                                }
+                            ],
+                            "show_empty": false,
+                            "type": "vertical-stack"
+                        }
+                    ],
+                    "icon": "mdi:view-dashboard-outline",
+                    "path": "dash",
+                    "title": "dash"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "action": "toggle",
+                            "entities": [
+                                "lock.front_door",
+                                "sensor.front_door",
+                                "sensor.front_deck_temperature",
+                                "camera.front_gate",
+                                "binary_sensor.front_gate",
+                                "camera.front_deck",
+                                "switch.seasonal_front_lights",
+                                "climate.thermostat"
+                            ],
+                            "image": "/local/house.jpg",
+                            "tap action": "toggle",
+                            "title": "Home",
+                            "type": "picture-glance"
+                        },
+                        {
+                            "aspect_ratio": "0%",
+                            "entities": [
+                                {
+                                    "entity": "camera.driveway"
+                                },
+                                {
+                                    "entity": "sensor.garage_door"
+                                },
+                                {
+                                    "entity": "cover.garage_door"
+                                },
+                                {
+                                    "entity": "device_tracker.2015_audi_rs_5"
+                                },
+                                {
+                                    "entity": "sensor.audi_gas"
+                                },
+                                {
+                                    "entity": "device_tracker.2013_ford_f_150"
+                                },
+                                {
+                                    "entity": "sensor.f150_gas"
+                                },
+                                {
+                                    "entity": "media_player.garage_speaker"
+                                }
+                            ],
+                            "hold_action": {
+                                "action": "toggle"
+                            },
+                            "image": "/local/garage.jpg",
+                            "title": "Garage",
+                            "type": "picture-glance"
+                        },
+                        {
+                            "aspect_ratio": "0%",
+                            "entities": [
+                                {
+                                    "entity": "fan.bedroom"
+                                },
+                                {
+                                    "entity": "sensor.bedroom_temperature"
+                                },
+                                {
+                                    "entity": "binary_sensor.bedroom_occupancy"
+                                },
+                                {
+                                    "entity": "sensor.bedroom_window"
+                                },
+                                {
+                                    "entity": "media_player.bedroom_tv"
+                                },
+                                {
+                                    "entity": "media_player.bedroom_hub"
+                                },
+                                {
+                                    "entity": "switch.bed_light"
+                                },
+                                {
+                                    "entity": "climate.bedroom"
+                                }
+                            ],
+                            "image": "/local/bedroom.jpg",
+                            "theme": "dark_theme",
+                            "title": "Bedroom",
+                            "type": "picture-glance"
+                        },
+                        {
+                            "aspect_ratio": "0%",
+                            "entities": [
+                                {
+                                    "entity": "sensor.living_room_temperature"
+                                },
+                                {
+                                    "entity": "binary_sensor.living_room_occupancy"
+                                },
+                                {
+                                    "entity": "lock.back_door"
+                                },
+                                {
+                                    "entity": "sensor.back_door"
+                                },
+                                {
+                                    "entity": "media_player.living_room_tv"
+                                },
+                                {
+                                    "entity": "light.paul"
+                                },
+                                {
+                                    "entity": "light.beth"
+                                },
+                                {
+                                    "entity": "light.jordan"
+                                },
+                                {
+                                    "entity": "light.notify"
+                                }
+                            ],
+                            "hold_action": {
+                                "action": "toggle"
+                            },
+                            "image": "/local/living_room.jpg",
+                            "title": "Living",
+                            "type": "picture-glance"
+                        },
+                        {
+                            "aspect_ratio": "0%",
+                            "entities": [
+                                {
+                                    "entity": "sensor.guest_bedroom_temperature"
+                                },
+                                {
+                                    "entity": "sensor.guest_bedroom_window"
+                                },
+                                {
+                                    "entity": "binary_sensor.guest_bedroom_occupancy"
+                                },
+                                {
+                                    "entity": "media_player.guest_bedroom_hub"
+                                }
+                            ],
+                            "image": "/local/guest_bedroom.jpg",
+                            "title": "Guest Bedroom",
+                            "type": "picture-glance"
+                        },
+                        {
+                            "aspect_ratio": "0%",
+                            "entities": [
+                                {
+                                    "entity": "light.office_light"
+                                },
+                                {
+                                    "entity": "binary_sensor.office_occupancy"
+                                },
+                                {
+                                    "entity": "switch.office_lamp"
+                                },
+                                {
+                                    "entity": "sensor.office_temperature"
+                                },
+                                {
+                                    "entity": "media_player.office_hub"
+                                },
+                                {
+                                    "entity": "sensor.work_meeting"
+                                },
+                                {
+                                    "entity": "sensor.office_window"
+                                }
+                            ],
+                            "hold_action": {
+                                "action": "toggle"
+                            },
+                            "image": "/local/desk.jpg",
+                            "tap_action": {
+                                "action": "more-info"
+                            },
+                            "title": "Office",
+                            "type": "picture-glance"
+                        },
+                        {
+                            "aspect_ratio": "0%",
+                            "entities": [
+                                {
+                                    "entity": "sensor.kitchen_temperature"
+                                },
+                                {
+                                    "entity": "binary_sensor.kitchen_occupancy"
+                                },
+                                {
+                                    "entity": "switch.kitchen_coffee_light"
+                                },
+                                {
+                                    "entity": "sensor.kitchen_window"
+                                },
+                                {
+                                    "entity": "media_player.kitchen_hub"
+                                }
+                            ],
+                            "hold_action": {
+                                "action": "toggle"
+                            },
+                            "image": "/local/kitchen.jpg",
+                            "title": "Kitchen",
+                            "type": "picture-glance"
+                        },
+                        {
+                            "aspect_ratio": "0%",
+                            "entities": [
+                                "sensor.plex",
+                                "sensor.radarr_upcoming",
+                                "sensor.sonarr_upcoming",
+                                "media_player.living_room_tv",
+                                "media_player.bedroom_tv"
+                            ],
+                            "hold_action": {
+                                "action": "toggle"
+                            },
+                            "image": "/local/tv.jpg",
+                            "title": "Media",
+                            "type": "picture-glance"
+                        }
+                    ],
+                    "icon": "mdi:home-roof",
+                    "panel": false,
+                    "path": "home",
+                    "theme": "Backend-selected",
+                    "title": "home"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "cards": [
+                                {
+                                    "entities": [
+                                        "sensor.bedroom_humidity"
+                                    ],
+                                    "font_size": 75,
+                                    "line_color": "#66850c",
+                                    "line_width": 8,
+                                    "type": "custom:mini-graph-card"
+                                },
+                                {
+                                    "entities": [
+                                        "sensor.bedroom_aqi"
+                                    ],
+                                    "font_size": 75,
+                                    "line_color": "#2d3758",
+                                    "line_width": 8,
+                                    "type": "custom:mini-graph-card"
+                                },
+                                {
+                                    "entities": [
+                                        "sensor.bedroom_dust"
+                                    ],
+                                    "font_size": 75,
+                                    "line_color": "#4e6895",
+                                    "line_width": 8,
+                                    "type": "custom:mini-graph-card"
+                                }
+                            ],
+                            "type": "vertical-stack"
+                        },
+                        {
+                            "animate": true,
+                            "card": {
+                                "show_header_toggle": false,
+                                "title": null,
+                                "type": "entities"
+                            },
+                            "color_thresholds": [
+                                {
+                                    "color": "#515b99",
+                                    "value": 15
+                                },
+                                {
+                                    "color": "#549cce",
+                                    "value": 19
+                                },
+                                {
+                                    "color": "#eaac3c",
+                                    "value": 20
+                                },
+                                {
+                                    "color": "#dc7a39",
+                                    "value": 22
+                                },
+                                {
+                                    "color": "#c53e4a",
+                                    "value": 24
+                                }
+                            ],
+                            "entities": [
+                                "sensor.thermostat_temperature",
+                                "sensor.basement_temperature",
+                                "sensor.bedroom_temperature",
+                                "sensor.guest_bedroom_temperature",
+                                "sensor.jordans_room_temperature",
+                                "sensor.kitchen_temperature",
+                                "sensor.living_room_temperature",
+                                "sensor.office_temperature"
+                            ],
+                            "font_size": 60,
+                            "font_size_header": 12,
+                            "hours_to_show": 24,
+                            "line_color": "var(--accent-color)",
+                            "line_width": 3,
+                            "name": "room temperatures",
+                            "points_per_hour": 0.75,
+                            "show": {
+                                "legend": false
+                            },
+                            "type": "custom:mini-graph-card"
+                        }
+                    ],
+                    "icon": "mdi:home-thermometer-outline",
+                    "path": "climate",
+                    "title": "climate"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entity": "camera.162_avenue_shawville_blvd_sw",
+                            "type": "picture-entity"
+                        },
+                        {
+                            "entity": "camera.162_avenue_macleod_trail_s",
+                            "type": "picture-entity"
+                        },
+                        {
+                            "entity": "camera.lake_fraser_gate_macleod_trail_se",
+                            "type": "picture-entity"
+                        },
+                        {
+                            "entity": "camera.southland_drive_macleod_trail_s",
+                            "type": "picture-entity"
+                        }
+                    ],
+                    "icon": "mdi:city-variant-outline",
+                    "path": "city",
+                    "title": "city"
+                },
+                {
+                    "badges": [
+                        {
+                            "entity": "sensor.audi_gas"
+                        },
+                        {
+                            "entity": "device_tracker.2015_audi_rs_5"
+                        },
+                        {
+                            "entity": "device_tracker.2013_ford_f_150"
+                        },
+                        {
+                            "entity": "sensor.f150_gas"
+                        }
+                    ],
+                    "cards": [
+                        {
+                            "aspect_ratio": "16:9",
+                            "dark_mode": true,
+                            "default_zoom": 14,
+                            "entities": [
+                                {
+                                    "entity": "device_tracker.2015_audi_rs_5"
+                                }
+                            ],
+                            "type": "map"
+                        },
+                        {
+                            "aspect_ratio": "16:9",
+                            "dark_mode": true,
+                            "default_zoom": 14,
+                            "entities": [
+                                {
+                                    "entity": "device_tracker.2013_ford_f_150"
+                                }
+                            ],
+                            "type": "map"
+                        }
+                    ],
+                    "icon": "mdi:car-connected",
+                    "path": "vehicles",
+                    "title": "vehicles"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "cards": [
+                                {
+                                    "aspect_ratio": "50%",
+                                    "camera_image": "camera.front_deck",
+                                    "entities": [
+                                        {
+                                            "entity": "lock.front_door"
+                                        },
+                                        {
+                                            "entity": "sensor.front_door"
+                                        },
+                                        {
+                                            "entity": "switch.seasonal_front_lights"
+                                        },
+                                        {
+                                            "entity": "sensor.front_gate"
+                                        },
+                                        {
+                                            "entity": "binary_sensor.unifiprotect_motion_front_deck"
+                                        }
+                                    ],
+                                    "type": "picture-glance"
+                                },
+                                {
+                                    "aspect_ratio": "50%",
+                                    "camera_image": "camera.back_deck",
+                                    "entities": [
+                                        {
+                                            "entity": "lock.back_door"
+                                        },
+                                        {
+                                            "entity": "sensor.back_door"
+                                        },
+                                        {
+                                            "entity": "binary_sensor.unifiprotect_motion_back_deck"
+                                        },
+                                        {
+                                            "entity": "binary_sensor.back_gate"
+                                        }
+                                    ],
+                                    "type": "picture-glance"
+                                },
+                                {
+                                    "aspect_ratio": "50%",
+                                    "camera_image": "camera.back_gate",
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.back_gate"
+                                        },
+                                        {
+                                            "entity": "binary_sensor.unifiprotect_motion_back_gate"
+                                        }
+                                    ],
+                                    "type": "picture-glance"
+                                }
+                            ],
+                            "type": "vertical-stack"
+                        },
+                        {
+                            "cards": [
+                                {
+                                    "aspect_ratio": "50%",
+                                    "camera_image": "camera.driveway",
+                                    "entities": [
+                                        {
+                                            "entity": "lock.garage_door"
+                                        },
+                                        {
+                                            "entity": "cover.garage_door"
+                                        },
+                                        {
+                                            "entity": "sensor.garage_door"
+                                        },
+                                        {
+                                            "entity": "device_tracker.2015_audi_rs_5"
+                                        },
+                                        {
+                                            "entity": "sensor.audi_gas"
+                                        },
+                                        {
+                                            "entity": "device_tracker.2013_ford_f_150"
+                                        },
+                                        {
+                                            "entity": "sensor.f150_gas"
+                                        },
+                                        {
+                                            "entity": "binary_sensor.unifiprotect_motion_driveway"
+                                        }
+                                    ],
+                                    "type": "picture-glance"
+                                },
+                                {
+                                    "aspect_ratio": "50%",
+                                    "camera_image": "camera.backyard",
+                                    "entities": [
+                                        {
+                                            "entity": "binary_sensor.unifiprotect_motion_backyard"
+                                        }
+                                    ],
+                                    "type": "picture-glance"
+                                },
+                                {
+                                    "aspect_ratio": "50%",
+                                    "camera_image": "camera.side_gate",
+                                    "entities": [
+                                        {
+                                            "entity": "binary_sensor.unifiprotect_motion_side_gate"
+                                        }
+                                    ],
+                                    "type": "picture-glance"
+                                }
+                            ],
+                            "type": "vertical-stack"
+                        },
+                        {
+                            "cards": [
+                                {
+                                    "aspect_ratio": "50%",
+                                    "camera_image": "camera.front_gate",
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.front_gate"
+                                        },
+                                        {
+                                            "entity": "binary_sensor.unifiprotect_motion_front_gate"
+                                        }
+                                    ],
+                                    "type": "picture-glance"
+                                },
+                                {
+                                    "aspect_ratio": "50%",
+                                    "camera_image": "camera.hot_tub",
+                                    "entities": [
+                                        {
+                                            "entity": "binary_sensor.unifiprotect_motion_hot_tub"
+                                        }
+                                    ],
+                                    "type": "picture-glance"
+                                },
+                                {
+                                    "aspect_ratio": "50%",
+                                    "camera_image": "camera.basement",
+                                    "entities": [
+                                        {
+                                            "entity": "binary_sensor.basement_occupancy"
+                                        },
+                                        {
+                                            "entity": "sensor.basement_temperature"
+                                        },
+                                        {
+                                            "entity": "camera.basement"
+                                        },
+                                        {
+                                            "entity": "zwave.leak_water_heater"
+                                        },
+                                        {
+                                            "entity": "sensor.jordans_room_temperature"
+                                        },
+                                        {
+                                            "entity": "binary_sensor.jordans_room_occupancy"
+                                        },
+                                        {
+                                            "entity": "media_player.basement_hub"
+                                        }
+                                    ],
+                                    "hold_action": {
+                                        "action": "toggle"
+                                    },
+                                    "image": "/local/basement.jpg",
+                                    "type": "picture-glance"
+                                }
+                            ],
+                            "type": "vertical-stack"
+                        }
+                    ],
+                    "icon": "mdi:cctv",
+                    "path": "security",
+                    "title": "security "
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "cards": [
+                                {
+                                    "entities": [
+                                        "sensor.host_cpu_used"
+                                    ],
+                                    "font_size": 75,
+                                    "line_color": "blue",
+                                    "line_width": 8,
+                                    "type": "custom:mini-graph-card"
+                                },
+                                {
+                                    "entities": [
+                                        "sensor.host_ram_used_percent"
+                                    ],
+                                    "font_size": 75,
+                                    "line_color": "#e74c3c",
+                                    "line_width": 8,
+                                    "type": "custom:mini-graph-card"
+                                },
+                                {
+                                    "entities": [
+                                        "sensor.host_disk_used_percent"
+                                    ],
+                                    "font_size": 75,
+                                    "line_color": "#af8e42",
+                                    "line_width": 8,
+                                    "type": "custom:mini-graph-card"
+                                }
+                            ],
+                            "type": "vertical-stack"
+                        },
+                        {
+                            "cards": [
+                                {
+                                    "entities": [
+                                        "sensor.media_cpu_used"
+                                    ],
+                                    "font_size": 75,
+                                    "line_color": "blue",
+                                    "line_width": 8,
+                                    "type": "custom:mini-graph-card"
+                                },
+                                {
+                                    "entities": [
+                                        "sensor.media_ram_used_percent"
+                                    ],
+                                    "font_size": 75,
+                                    "line_color": "#e74c3c",
+                                    "line_width": 8,
+                                    "type": "custom:mini-graph-card"
+                                },
+                                {
+                                    "entities": [
+                                        "sensor.media_disk_used_percent"
+                                    ],
+                                    "font_size": 75,
+                                    "line_color": "#af8e42",
+                                    "line_width": 8,
+                                    "type": "custom:mini-graph-card"
+                                }
+                            ],
+                            "type": "vertical-stack"
+                        },
+                        {
+                            "cards": [
+                                {
+                                    "entities": [
+                                        "sensor.ping"
+                                    ],
+                                    "font_size": 75,
+                                    "line_color": "blue",
+                                    "line_width": 8,
+                                    "type": "custom:mini-graph-card"
+                                },
+                                {
+                                    "entities": [
+                                        "sensor.speedtest_download"
+                                    ],
+                                    "font_size": 75,
+                                    "line_color": "#e74c3c",
+                                    "line_width": 8,
+                                    "type": "custom:mini-graph-card"
+                                },
+                                {
+                                    "entities": [
+                                        "sensor.speedtest_upload"
+                                    ],
+                                    "font_size": 75,
+                                    "line_color": "#af8e42",
+                                    "line_width": 8,
+                                    "type": "custom:mini-graph-card"
+                                }
+                            ],
+                            "type": "vertical-stack"
+                        },
+                        {
+                            "cards": [
+                                {
+                                    "entities": [
+                                        "sensor.synology_dsm_cpu_load_total"
+                                    ],
+                                    "font_size": 75,
+                                    "line_color": "blue",
+                                    "line_width": 8,
+                                    "type": "custom:mini-graph-card"
+                                },
+                                {
+                                    "entities": [
+                                        "sensor.synology_dsm_memory_usage_real"
+                                    ],
+                                    "font_size": 75,
+                                    "line_color": "#e74c3c",
+                                    "line_width": 8,
+                                    "type": "custom:mini-graph-card"
+                                },
+                                {
+                                    "entities": [
+                                        "sensor.synology_dsm_volume_used_volume_1"
+                                    ],
+                                    "font_size": 75,
+                                    "line_color": "#af8e42",
+                                    "line_width": 8,
+                                    "type": "custom:mini-graph-card"
+                                }
+                            ],
+                            "type": "vertical-stack"
+                        }
+                    ],
+                    "icon": "mdi:dns-outline",
+                    "path": "info",
+                    "theme": "Backend-selected",
+                    "title": "info"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.current_version"
+                                },
+                                {
+                                    "entity": "sensor.hass_release"
+                                },
+                                {
+                                    "entity": "sensor.hacs"
+                                },
+                                {
+                                    "entity": "sensor.potential_breaking_changes"
+                                },
+                                {
+                                    "entity": "sensor.uptime"
+                                },
+                                {
+                                    "entity": "sensor.disk_free_space"
+                                },
+                                {
+                                    "entity": "sensor.last_boot"
+                                },
+                                {
+                                    "entity": "sensor.ssl_certificate_expiry"
+                                },
+                                {
+                                    "entity": "sensor.connected_clients"
+                                },
+                                {
+                                    "entity": "zwave.aeon_z_stick"
+                                },
+                                {
+                                    "entity": "zwave.extender"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "type": "entities"
+                        },
+                        {
+                            "cards": [
+                                {
+                                    "entities": [
+                                        "sensor.memory_use_percent"
+                                    ],
+                                    "font_size": 75,
+                                    "line_color": "blue",
+                                    "line_width": 8,
+                                    "type": "custom:mini-graph-card"
+                                },
+                                {
+                                    "entities": [
+                                        "sensor.processor_use"
+                                    ],
+                                    "font_size": 75,
+                                    "line_color": "#e74c3c",
+                                    "line_width": 8,
+                                    "type": "custom:mini-graph-card"
+                                },
+                                {
+                                    "entities": [
+                                        "sensor.database_size"
+                                    ],
+                                    "font_size": 75,
+                                    "line_color": "#af8e42",
+                                    "line_width": 8,
+                                    "type": "custom:mini-graph-card"
+                                }
+                            ],
+                            "type": "vertical-stack"
+                        }
+                    ],
+                    "icon": "mdi:home-assistant",
+                    "path": "hassio",
+                    "title": "hassio"
+                }
+            ]
+        }
+    },
+    "key": "lovelace",
+    "version": 1
+}

@@ -1,0 +1,41 @@
+###########################################
+# Weather Sensors
+###########################################
+- platform: yr
+  monitored_conditions:
+  - 'temperature'
+  - 'humidity'
+  - 'symbol'
+
+- platform: darksky
+  api_key: !secret darksky_api
+  forecast:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  monitored_conditions:
+  - icon
+  - summary
+  - daily_summary
+  - 'precip_probability'
+  - 'apparent_temperature'
+  - 'pressure'
+  - 'wind_speed'
+  - 'precip_type'
+  - 'precip_intensity'
+  - 'precip_probability'
+  - 'precip_intensity_max'
+  - 'cloud_cover'
+  - 'wind_bearing'
+  - 'wind_speed'
+
+# - platform: waqi
+#   token: !secret waqi_api
+#   locations:
+#   - calgary
+
+- platform: season
+
+- platform: environment_canada
