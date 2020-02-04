@@ -34,6 +34,8 @@ auth*
 core.*
 onboarding
 .gmusic_authtoken
+.google.token
+._*
 *_*
 *_*.*
 *.conf
