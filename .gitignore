@@ -10,7 +10,7 @@ www/community/
 www/snapshot/*
 custom_components/
 .cloud/
-.storage/._
+.storage/._*
 .storage/tmp*
 .storage/hassio
 .storage/person
@@ -34,6 +34,7 @@ core.*
 onboarding
 *.DS_*
 *._.*
+*._*
 .gmusic_authtoken
 .google.token
 .password
