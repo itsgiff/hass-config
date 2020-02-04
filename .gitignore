@@ -14,6 +14,7 @@ custom_components/
 .storage/hassio
 .storage/person
 .storage/cloud
+.storage/icloud
 .storage/camera
 .storage/custom_updater.cards
 .storage/zha.storage
