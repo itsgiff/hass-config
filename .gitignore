@@ -22,7 +22,7 @@ custom_components/
 .storage/hacs
 .storage/hacs.*
 .storage/frontend.user_data_*
-.storage/androidtv_*
+.storage/android*.*
 .storage/adbkey
 .storage/adbkey.pub
 .storage/auto_backup.*
