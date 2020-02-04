@@ -21,8 +21,10 @@ custom_components/
 .storage/hacs
 .storage/hacs.*
 .storage/frontend.user_data_*
+.storage/androidtv_*
 .storage/adbkey
 .storage/adbkey.pub
+.storage/auto_backup.*
 .storage/unifi_data
 .storage/netatmo_*
 .storage/mobile_app
