@@ -4,7 +4,7 @@
 
 ## Change Log:
 =======
-* v3.0 - hassio migration + massive cleanup
+* v3.0 - hassio migration + massive cleanup + alro purge
 * v2.5 - add unifi UVC-G3-Flex
 * v2.4 - upgrade schlages to zwp, add coffee light
 * v2.3 - cleaning house + the great wink purge
@@ -32,12 +32,11 @@
 
 ## Devices / Technology
 - Intel NUC i7
-- Arlo Pro HD Cameras (5)
-- Schlage (Allegion) BE469ZP Connect Smart Deadbolt (2)
+- Schlage (Allegion) BE469ZP Connect Smart Deadbolt (3)
 - Chamerlain MyQ Garage Door
 - ecobee3 (8 sensors)
 - GE 45604 Z-Wave Technology Outdoor Module (2)
-- Google Home (4)
+- Google Home (6)
 - GOCONTROL WNK01-21KIT (8)
 - Harmony Companion Hub
 - Nest Protect (3)
@@ -46,14 +45,14 @@
 - Nest Hello Doorbell (1)
 - Unifi Cloud Key 2
 - Unifi Wireless
-- Ubiquiti UVC-G3-Flex 1080p Indoor/Outdoor PoE Camera (1)
+- Ubiquiti UVC-G3-Flex 1080p Indoor/Outdoor PoE Camera (9)
 
 ## Automations
 - Front Door Motion Detection
 - Front Gate Open / Close Notifications
 - Garage Door Open / Close Notifications
 - Home Assistant Update Notification
-- Hue Update Notification
+- HACS Update Notification
 - Rear Gate Open / Close Notifications
 - Rear Deck Light Sunrise / Sunset with Notifications
 - Work Meetings (0365) Lighting Notification (Free/Busy)
