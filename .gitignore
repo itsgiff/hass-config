@@ -62,3 +62,9 @@ known_devices.yaml
 secrets.yaml
 ip_bans.yaml
 .ip_authenticated.yaml
+.storage/androidtv_adbkey
+.storage/androidtv_adbkey.pub
+.google.token
+*.snapshots_expiry
+.storage/androidtv_adbkey.pub
+.storage/icloud/paulgiffca
