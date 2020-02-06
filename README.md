@@ -4,6 +4,7 @@
 
 ## Change Log:
 =======
+* v3.1 - cleanup, hassio version sensors, updates for 0.105.0
 * v3.0 - hassio migration + massive cleanup + alro purge
 * v2.5 - add unifi UVC-G3-Flex
 * v2.4 - upgrade schlages to zwp, add coffee light
@@ -18,7 +19,7 @@
 * spaces Paul, not tabs...
 
 ## To Do
-* [issues](https://github.com/pauldgifford/hass-config/issues)
+* [issues](https://github.com/itsgiff/hass-config/issues)
 
 ## Layout
 - The *Home* group is the default_view and shows relevant information I want at first glance.

@@ -4,6 +4,30 @@
 - platform: websocket_api
 
 - platform: version
+  source: hassio
+
+- platform: version
+  source: local
+
+- platform: template
+  sensors:
+    home_assistant_update:
+      friendly_name: 'Home Assistant Update'
+      value_template: "{{ states.sensor.latest_version.state != states.sensor.current_version.state }}"
+
+# - platform: template
+#   sensors:
+#     home_assistant_update:
+#       friendly_name: 'Home Assistant Update'
+#       value_template: "{{ states.sensor.latest_version.state != states.sensor.current_version.state }}"
+#       icon_template:
+#           {% if states.sensor.latest_version.state != states.sensor.current_version.state %}
+#             mdi:package-up
+#           {% elif states.sensor.latest_version.state == states.sensor.current_version.state %}
+#             mdi:check-circle-outline
+#           {% else %}
+#             mdi:alert-circle-outline
+#           {% endif %}
 
 - platform: rest
   resource: https://api.github.com/repos/home-assistant/home-assistant/releases/latest

@@ -702,3 +702,6 @@ media_player.bedroom_tv_2:
 camera.combined:
   friendly_name: combined
   icon: mdi:cctv
+sensor.home_assistant_update:
+  friendly_name: Home Assistant Update
+  icon: mdi:package-up

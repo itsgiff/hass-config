@@ -197,7 +197,8 @@
                             },
                             "entities": [
                                 "sensor.hacs",
-                                "binary_sensor.updater"
+                                "sensor.home_assistant_update",
+                                "sensor.potential_breaking_changes"
                             ],
                             "filter": {
                                 "exclude": [
@@ -209,6 +210,9 @@
                                     },
                                     {
                                         "state": "unknown"
+                                    },
+                                    {
+                                        "state": "False"
                                     },
                                     {
                                         "state": "unavailable"
@@ -1044,10 +1048,13 @@
                                     "entity": "sensor.current_version"
                                 },
                                 {
-                                    "entity": "sensor.hass_release"
+                                    "entity": "sensor.latest_version"
                                 },
                                 {
                                     "entity": "sensor.hacs"
+                                },
+                                {
+                                    "entity": "sensor.last_update_trigger"
                                 },
                                 {
                                     "entity": "sensor.potential_breaking_changes"
