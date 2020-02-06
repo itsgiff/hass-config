@@ -9,11 +9,32 @@
 - platform: version
   source: local
 
+# - platform: template
+#   sensors:
+#     home_assistant_update:
+#       friendly_name: 'Home Assistant Update'
+#       value_template: "{{ states.sensor.latest_version.state != states.sensor.current_version.state }}"
+
 - platform: template
   sensors:
     home_assistant_update:
-      friendly_name: 'Home Assistant Update'
-      value_template: "{{ states.sensor.latest_version.state != states.sensor.current_version.state }}"
+        value_template: >-
+          {%- if states.sensor.latest_version.state != states.sensor.current_version.state %}
+              Update Available
+          {%- elif states.sensor.latest_version.state == states.sensor.current_version.state  %}
+              Current Release
+          {%- else %}
+              Error
+          {%- endif %}
+        friendly_name: 'Home Assistant Update'
+        icon_template: >-
+            {%- if states.sensor.latest_version.state != states.sensor.current_version.state %}
+            mdi:package-up
+            {%- elif states.sensor.latest_version.state == states.sensor.current_version.state %}
+            mdi:check-circle-outline
+            {% else %}
+            mdi:alert-circle-outline
+            {% endif %}   
 
 # - platform: template
 #   sensors:

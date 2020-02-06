@@ -103,7 +103,10 @@
                             "cards": [
                                 {
                                     "entities": [
-                                        "sensor.dark_sky_apparent_temperature"
+                                        {
+                                            "entity": "sensor.dark_sky_apparent_temperature",
+                                            "index": 0
+                                        }
                                     ],
                                     "font_size": 75,
                                     "line_color": "#66850c",
@@ -112,7 +115,10 @@
                                 },
                                 {
                                     "entities": [
-                                        "sensor.humidity"
+                                        {
+                                            "entity": "sensor.humidity",
+                                            "index": 0
+                                        }
                                     ],
                                     "font_size": 75,
                                     "line_color": "#2d3758",
@@ -121,7 +127,10 @@
                                 },
                                 {
                                     "entities": [
-                                        "sensor.air_quality_health_index"
+                                        {
+                                            "entity": "sensor.air_quality_health_index",
+                                            "index": 0
+                                        }
                                     ],
                                     "font_size": 75,
                                     "line_color": "#4e6895",
@@ -568,7 +577,10 @@
                             "cards": [
                                 {
                                     "entities": [
-                                        "sensor.bedroom_humidity"
+                                        {
+                                            "entity": "sensor.bedroom_humidity",
+                                            "index": 0
+                                        }
                                     ],
                                     "font_size": 75,
                                     "line_color": "#66850c",
@@ -577,7 +589,10 @@
                                 },
                                 {
                                     "entities": [
-                                        "sensor.bedroom_aqi"
+                                        {
+                                            "entity": "sensor.bedroom_aqi",
+                                            "index": 0
+                                        }
                                     ],
                                     "font_size": 75,
                                     "line_color": "#2d3758",
@@ -586,7 +601,10 @@
                                 },
                                 {
                                     "entities": [
-                                        "sensor.bedroom_dust"
+                                        {
+                                            "entity": "sensor.bedroom_dust",
+                                            "index": 0
+                                        }
                                     ],
                                     "font_size": 75,
                                     "line_color": "#4e6895",
@@ -605,35 +623,59 @@
                             },
                             "color_thresholds": [
                                 {
-                                    "color": "#515b99",
-                                    "value": 15
-                                },
-                                {
-                                    "color": "#549cce",
-                                    "value": 19
-                                },
-                                {
-                                    "color": "#eaac3c",
-                                    "value": 20
+                                    "color": "#c53e4a",
+                                    "value": 24
                                 },
                                 {
                                     "color": "#dc7a39",
                                     "value": 22
                                 },
                                 {
-                                    "color": "#c53e4a",
-                                    "value": 24
+                                    "color": "#eaac3c",
+                                    "value": 20
+                                },
+                                {
+                                    "color": "#549cce",
+                                    "value": 19
+                                },
+                                {
+                                    "color": "#515b99",
+                                    "value": 15
                                 }
                             ],
                             "entities": [
-                                "sensor.thermostat_temperature",
-                                "sensor.basement_temperature",
-                                "sensor.bedroom_temperature",
-                                "sensor.guest_bedroom_temperature",
-                                "sensor.jordans_room_temperature",
-                                "sensor.kitchen_temperature",
-                                "sensor.living_room_temperature",
-                                "sensor.office_temperature"
+                                {
+                                    "entity": "sensor.thermostat_temperature",
+                                    "index": 0
+                                },
+                                {
+                                    "entity": "sensor.basement_temperature",
+                                    "index": 1
+                                },
+                                {
+                                    "entity": "sensor.bedroom_temperature",
+                                    "index": 2
+                                },
+                                {
+                                    "entity": "sensor.guest_bedroom_temperature",
+                                    "index": 3
+                                },
+                                {
+                                    "entity": "sensor.jordans_room_temperature",
+                                    "index": 4
+                                },
+                                {
+                                    "entity": "sensor.kitchen_temperature",
+                                    "index": 5
+                                },
+                                {
+                                    "entity": "sensor.living_room_temperature",
+                                    "index": 6
+                                },
+                                {
+                                    "entity": "sensor.office_temperature",
+                                    "index": 7
+                                }
                             ],
                             "font_size": 60,
                             "font_size_header": 12,
@@ -909,7 +951,10 @@
                             "cards": [
                                 {
                                     "entities": [
-                                        "sensor.host_cpu_used"
+                                        {
+                                            "entity": "sensor.host_cpu_used",
+                                            "index": 0
+                                        }
                                     ],
                                     "font_size": 75,
                                     "line_color": "blue",
@@ -918,7 +963,10 @@
                                 },
                                 {
                                     "entities": [
-                                        "sensor.host_ram_used_percent"
+                                        {
+                                            "entity": "sensor.host_ram_used_percent",
+                                            "index": 0
+                                        }
                                     ],
                                     "font_size": 75,
                                     "line_color": "#e74c3c",
@@ -927,7 +975,10 @@
                                 },
                                 {
                                     "entities": [
-                                        "sensor.host_disk_used_percent"
+                                        {
+                                            "entity": "sensor.host_disk_used_percent",
+                                            "index": 0
+                                        }
                                     ],
                                     "font_size": 75,
                                     "line_color": "#af8e42",
@@ -941,7 +992,10 @@
                             "cards": [
                                 {
                                     "entities": [
-                                        "sensor.media_cpu_used"
+                                        {
+                                            "entity": "sensor.media_cpu_used",
+                                            "index": 0
+                                        }
                                     ],
                                     "font_size": 75,
                                     "line_color": "blue",
@@ -950,7 +1004,10 @@
                                 },
                                 {
                                     "entities": [
-                                        "sensor.media_ram_used_percent"
+                                        {
+                                            "entity": "sensor.media_ram_used_percent",
+                                            "index": 0
+                                        }
                                     ],
                                     "font_size": 75,
                                     "line_color": "#e74c3c",
@@ -959,7 +1016,10 @@
                                 },
                                 {
                                     "entities": [
-                                        "sensor.media_disk_used_percent"
+                                        {
+                                            "entity": "sensor.media_disk_used_percent",
+                                            "index": 0
+                                        }
                                     ],
                                     "font_size": 75,
                                     "line_color": "#af8e42",
@@ -973,7 +1033,10 @@
                             "cards": [
                                 {
                                     "entities": [
-                                        "sensor.ping"
+                                        {
+                                            "entity": "sensor.ping",
+                                            "index": 0
+                                        }
                                     ],
                                     "font_size": 75,
                                     "line_color": "blue",
@@ -982,7 +1045,10 @@
                                 },
                                 {
                                     "entities": [
-                                        "sensor.speedtest_download"
+                                        {
+                                            "entity": "sensor.speedtest_download",
+                                            "index": 0
+                                        }
                                     ],
                                     "font_size": 75,
                                     "line_color": "#e74c3c",
@@ -991,7 +1057,10 @@
                                 },
                                 {
                                     "entities": [
-                                        "sensor.speedtest_upload"
+                                        {
+                                            "entity": "sensor.speedtest_upload",
+                                            "index": 0
+                                        }
                                     ],
                                     "font_size": 75,
                                     "line_color": "#af8e42",
@@ -1005,7 +1074,10 @@
                             "cards": [
                                 {
                                     "entities": [
-                                        "sensor.synology_dsm_cpu_load_total"
+                                        {
+                                            "entity": "sensor.synology_dsm_cpu_load_total",
+                                            "index": 0
+                                        }
                                     ],
                                     "font_size": 75,
                                     "line_color": "blue",
@@ -1014,7 +1086,10 @@
                                 },
                                 {
                                     "entities": [
-                                        "sensor.synology_dsm_memory_usage_real"
+                                        {
+                                            "entity": "sensor.synology_dsm_memory_usage_real",
+                                            "index": 0
+                                        }
                                     ],
                                     "font_size": 75,
                                     "line_color": "#e74c3c",
@@ -1023,7 +1098,10 @@
                                 },
                                 {
                                     "entities": [
-                                        "sensor.synology_dsm_volume_used_volume_1"
+                                        {
+                                            "entity": "sensor.synology_dsm_volume_used_volume_1",
+                                            "index": 0
+                                        }
                                     ],
                                     "font_size": 75,
                                     "line_color": "#af8e42",
@@ -1052,9 +1130,6 @@
                                 },
                                 {
                                     "entity": "sensor.hacs"
-                                },
-                                {
-                                    "entity": "sensor.last_update_trigger"
                                 },
                                 {
                                     "entity": "sensor.potential_breaking_changes"
@@ -1088,7 +1163,10 @@
                             "cards": [
                                 {
                                     "entities": [
-                                        "sensor.memory_use_percent"
+                                        {
+                                            "entity": "sensor.memory_use_percent",
+                                            "index": 0
+                                        }
                                     ],
                                     "font_size": 75,
                                     "line_color": "blue",
@@ -1097,7 +1175,10 @@
                                 },
                                 {
                                     "entities": [
-                                        "sensor.processor_use"
+                                        {
+                                            "entity": "sensor.processor_use",
+                                            "index": 0
+                                        }
                                     ],
                                     "font_size": 75,
                                     "line_color": "#e74c3c",
@@ -1106,7 +1187,10 @@
                                 },
                                 {
                                     "entities": [
-                                        "sensor.database_size"
+                                        {
+                                            "entity": "sensor.database_size",
+                                            "index": 0
+                                        }
                                     ],
                                     "font_size": 75,
                                     "line_color": "#af8e42",

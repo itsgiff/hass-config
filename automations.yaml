@@ -222,19 +222,17 @@
   alias: Notification - Home Assistant Update
   description: ''
   trigger:
-  - entity_id: binary_sensor.updater
-    from: 'off'
+  - entity_id: sensor.home_assistant_update
+    from: Current Release
     platform: state
-    to: 'on'
+    to: Update Available
   condition: []
   action:
   - data:
-      message: Home Assistant {{ state_attr('binary_sensor.updater', 'newest_version')
-        }} is available.
+      message: Home Assistant {{ states.sensor.latest_version.state }} is available.
     service: notify.ios_mobile
   - data:
-      message: Home Assistant {{ state_attr('binary_sensor.updater', 'newest_version')
-        }} is available.
+      message: Home Assistant {{ states.sensor.latest_version.state }} is available.
     service: notify.ios_tablet
 - id: '1580077708650'
   alias: Notification - Home Assistant Community Store Update

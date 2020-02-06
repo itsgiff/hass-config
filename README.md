@@ -4,6 +4,7 @@
 
 ## Change Log:
 =======
+* v3.2 - hassio update sensors & notifications
 * v3.1 - cleanup, hassio version sensors, updates for 0.105.0
 * v3.0 - hassio migration + massive cleanup + alro purge
 * v2.5 - add unifi UVC-G3-Flex
