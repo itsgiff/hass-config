@@ -224,6 +224,9 @@
                                         "state": "False"
                                     },
                                     {
+                                        "state": "Current Release"
+                                    },
+                                    {
                                         "state": "unavailable"
                                     }
                                 ]

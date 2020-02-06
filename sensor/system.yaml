@@ -21,8 +21,8 @@
               Error
           {%- endif %}
         attribute_templates:
-            current: {{ states.sensor.current_version.state }}
-            release:  {{ states.sensor.latest_version.state }}
+          current: '{{ states.sensor.current_version.state }}'
+          release:  '{{ states.sensor.latest_version.state }}'
         friendly_name: 'Home Assistant Update'
         icon_template: >-
             {%- if states.sensor.latest_version.state != states.sensor.current_version.state %}
