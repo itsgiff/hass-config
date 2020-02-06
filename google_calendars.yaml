@@ -1,5 +1,5 @@
 
-- cal_id: paul@giff.ca
+- cal_id: !secret email_account
   entities:
   - device_id: personal
     ignore_availability: true

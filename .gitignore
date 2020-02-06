@@ -12,6 +12,7 @@ custom_components/
 .cloud/
 .storage/tmp*
 .storage/hassio
+.storage/http
 .storage/person
 .storage/cloud
 .storage/icloud
@@ -66,5 +67,6 @@ onboarding
 entity_registry.yaml
 known_devices.yaml
 secrets.yaml
+google_calendars.yaml
 ip_bans.yaml
 .ip_authenticated.yaml
