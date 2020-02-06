@@ -4,7 +4,7 @@
 
 ## Change Log:
 =======
-
+* v.3.3 - add attributes to hass update sensor
 * v.3.2.2 - updated secrets and ignore
 * v3.2 - hassio update sensors & notifications
 * v3.1 - cleanup, hassio version sensors, updates for 0.105.0
