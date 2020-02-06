@@ -20,13 +20,6 @@
 
 ## To Do
 * [issues](https://github.com/itsgiff/hass-config/issues)
-
-## Layout
-- The *Home* group is the default_view and shows relevant information I want at first glance.
-- The *City* group is a local dashboard with the most useful information about Calgary.
-- The *Security* group shows cameras and access to the yard and home.
-- The *Info* group is for home infrastructure related items and status.
-
 ## Acknowledgments
 * Hat tip to [jtscott](https://github.com/jtscott/hass-config)
 * All the [Home Assistant examples](https://home-assistant.io/cookbook/) and contributors.
