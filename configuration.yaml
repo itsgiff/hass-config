@@ -98,6 +98,14 @@ ecobee:
   api_key: !secret ecobee_token
 
 speedtestdotnet:
+  scan_interval:
+    minutes: 90
+  monitored_conditions:
+    - ping
+    - download
+    - upload
+
+fastdotcom:
 
 google:
   client_id: !secret google_client_id

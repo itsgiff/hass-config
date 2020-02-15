@@ -179,10 +179,10 @@ switch.office_lamp:
   icon: mdi:lamp
 switch.seasonal_front_lights:
   friendly_name: Seasonal Front Lights
-  icon: mdi:led-strip
+  icon: mdi:led-strip-variant
 switch.back_deck:
   friendly_name: Back Deck Lights
-  icon: mdi:led-strip
+  icon: mdi:led-strip-variant
 media_player.living_room:
   friendly_name: Living Room
 media_player.office_speaker:
@@ -711,3 +711,7 @@ sensor.hacs:
   icon: mdi:package
 light.living_room:
   icon: mdi:lightbulb-group
+light.living_room_switch:
+  icon: mdi:light-switch
+sensor.wind_speed:
+  icon: mdi:weather-windy
