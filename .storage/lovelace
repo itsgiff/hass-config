@@ -67,6 +67,10 @@
                 {
                     "type": "js",
                     "url": "/community_plugin/calendar-card/calendar-card.js"
+                },
+                {
+                    "type": "module",
+                    "url": "/community_plugin/surveillance-card/surveillance-card.js"
                 }
             ],
             "title": "Home",
@@ -161,6 +165,42 @@
                                 "title": null,
                                 "type": "entities"
                             },
+                            "entities": [
+                                "sensor.hacs",
+                                "sensor.home_assistant_update",
+                                "sensor.potential_breaking_changes"
+                            ],
+                            "filter": {
+                                "exclude": [
+                                    {
+                                        "state": "0"
+                                    },
+                                    {
+                                        "state": "off"
+                                    },
+                                    {
+                                        "state": "unknown"
+                                    },
+                                    {
+                                        "state": "False"
+                                    },
+                                    {
+                                        "state": "Current Release"
+                                    },
+                                    {
+                                        "state": "unavailable"
+                                    }
+                                ]
+                            },
+                            "show_empty": false,
+                            "type": "custom:auto-entities"
+                        },
+                        {
+                            "card": {
+                                "show_header_toggle": false,
+                                "title": null,
+                                "type": "entities"
+                            },
                             "filter": {
                                 "exclude": [
                                     {
@@ -199,72 +239,48 @@
                             "type": "custom:auto-entities"
                         },
                         {
-                            "card": {
-                                "show_header_toggle": false,
-                                "title": null,
-                                "type": "entities"
-                            },
-                            "entities": [
-                                "sensor.hacs",
-                                "sensor.home_assistant_update",
-                                "sensor.potential_breaking_changes"
-                            ],
-                            "filter": {
-                                "exclude": [
-                                    {
-                                        "state": "0"
-                                    },
-                                    {
-                                        "state": "off"
-                                    },
-                                    {
-                                        "state": "unknown"
-                                    },
-                                    {
-                                        "state": "False"
-                                    },
-                                    {
-                                        "state": "Current Release"
-                                    },
-                                    {
-                                        "state": "unavailable"
-                                    }
-                                ]
-                            },
-                            "show_empty": false,
-                            "type": "custom:auto-entities"
-                        },
-                        {
                             "dateBottomFormat": "ddd",
                             "dateTopFormat": "DD",
                             "disableLinks": true,
                             "endText": "End",
                             "entities": [
-                                "calendar.418_bridlecreek_green_sw_calgary"
+                                {
+                                    "entity": "calendar.418_bridlecreek_green_sw_calgary",
+                                    "name": "calendar.418_bridlecreek_green_sw_calgary"
+                                },
+                                {
+                                    "entity": "calendar.family",
+                                    "name": "Family"
+                                },
+                                {
+                                    "entity": "calendar.homegifford_gmail_com",
+                                    "name": "homegifford@gmail.com"
+                                }
                             ],
                             "eventsLimit": "99",
                             "fullDayEventText": "",
                             "hardLimit": false,
                             "hideDeclined": false,
                             "hideHeader": true,
-                            "hidePastEvents": false,
+                            "hidePastEvents": true,
                             "hideTime": true,
-                            "highlightToday": false,
+                            "highlightToday": true,
                             "ignoreEventsByLocationExpression": "",
                             "ignoreEventsExpression": "",
                             "maxHeight": false,
                             "notifyDateTimeFormat": "MM/DD/YYYY HH:mma",
-                            "notifyEntity": null,
-                            "numberOfDays": "7",
+                            "notifyEntity": "ios_mobile",
+                            "numberOfDays": "2",
                             "progressBar": false,
                             "removeFromEventTitle": "",
                             "showEventOrigin": false,
                             "showLocation": false,
                             "showLocationIcon": false,
                             "showMultiDay": false,
+                            "show_empty": false,
                             "startText": "Start",
                             "timeFormat": "HH:mma",
-                            "title": "Waste & Recycling",
+                            "title": "Calendar",
                             "type": "custom:calendar-card"
                         },
                         {
@@ -1113,6 +1129,32 @@
                                 }
                             ],
                             "type": "vertical-stack"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "binary_sensor.printer_status"
+                                },
+                                {
+                                    "entity": "sensor.printer_printer"
+                                },
+                                {
+                                    "entity": "sensor.printer_scanner"
+                                },
+                                {
+                                    "entity": "sensor.printer_toner_black"
+                                },
+                                {
+                                    "entity": "sensor.printer_toner_cyan"
+                                },
+                                {
+                                    "entity": "sensor.printer_toner_yellow"
+                                },
+                                {
+                                    "entity": "sensor.printer_toner_magenta"
+                                }
+                            ],
+                            "type": "entities"
                         }
                     ],
                     "icon": "mdi:dns-outline",
@@ -1148,6 +1190,9 @@
                                 },
                                 {
                                     "entity": "sensor.ssl_certificate_expiry"
+                                },
+                                {
+                                    "entity": "sensor.last_successful_authentication"
                                 },
                                 {
                                     "entity": "sensor.connected_clients"

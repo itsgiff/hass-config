@@ -4,6 +4,7 @@
 
 ## Change Log:
 =======
+* v.3.4 - google assistant update, authenticated sensor, speedtest
 * v.3.3 - add attributes to hass update sensor
 * v.3.2.2 - updated secrets and ignore
 * v3.2 - hassio update sensors & notifications

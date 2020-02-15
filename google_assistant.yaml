@@ -46,7 +46,7 @@
       name: 'Backyard Camera'
     camera.driveway:
       expose: true
-      room: 'Frontyard'
+      room: 'Garage'
       name: 'Driveway Camera'
     camera.front_deck:
       expose: true

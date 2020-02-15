@@ -669,7 +669,7 @@ sensor.plex:
 zwave.bed_lights:
   friendly_name: Bed Light
 switch.bed_light:
-  icon: mdi:led-strip
+  icon: mdi:led-strip-variant
 fan.bedroom:
   friendly_name: Bedroom Fan
 binary_sensor.guest_bedroom_occupancy:
@@ -705,3 +705,9 @@ camera.combined:
 sensor.home_assistant_update:
   friendly_name: Home Assistant Update
   icon: mdi:package-up
+light.office_light:
+  icon: mdi:light-switch
+sensor.hacs:
+  icon: mdi:package
+light.living_room:
+  icon: mdi:lightbulb-group
