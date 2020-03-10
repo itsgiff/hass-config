@@ -166,6 +166,31 @@
                                 "type": "entities"
                             },
                             "entities": [
+                                "sensor.gdacs_50_895343_114_097853"
+                            ],
+                            "filter": {
+                                "exclude": [
+                                    {
+                                        "state": "unknown"
+                                    },
+                                    {
+                                        "state": "error"
+                                    },
+                                    {
+                                        "state": "0"
+                                    }
+                                ]
+                            },
+                            "show_empty": false,
+                            "type": "custom:auto-entities"
+                        },
+                        {
+                            "card": {
+                                "show_header_toggle": false,
+                                "title": null,
+                                "type": "entities"
+                            },
+                            "entities": [
                                 "sensor.hacs",
                                 "sensor.home_assistant_update",
                                 "sensor.potential_breaking_changes"
@@ -1196,6 +1221,9 @@
                                 },
                                 {
                                     "entity": "sensor.connected_clients"
+                                },
+                                {
+                                    "entity": "sensor.auto_backup"
                                 },
                                 {
                                     "entity": "zwave.aeon_z_stick"

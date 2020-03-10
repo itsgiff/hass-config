@@ -1,0 +1,26 @@
+{
+    "data": {
+        "items": [
+            {
+                "icon": "mdi:stadium",
+                "id": "saddledome",
+                "latitude": 51.037400182941234,
+                "longitude": -114.05199050903322,
+                "name": "Saddledome",
+                "passive": false,
+                "radius": 265.87858509701977
+            },
+            {
+                "icon": "mdi:map-marker",
+                "id": "mckenzie_town",
+                "latitude": 50.916508705775236,
+                "longitude": -113.96433591842653,
+                "name": "McKenzie Town",
+                "passive": false,
+                "radius": 504.80756864811207
+            }
+        ]
+    },
+    "key": "zone",
+    "version": 1
+}

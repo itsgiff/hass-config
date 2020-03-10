@@ -679,6 +679,7 @@ binary_sensor.upstairs_nest_protect_online:
   icon: mdi:smoke-detector
 sensor.last_boot:
   friendly_name: Last host boot
+  icon: mdi:restart
 lock.garage_door:
   icon: mdi:lock-smart
 switch.furnace_room_camera:
@@ -715,3 +716,10 @@ light.living_room_switch:
   icon: mdi:light-switch
 sensor.wind_speed:
   icon: mdi:weather-windy
+zwave.leak_kitchen_sink:
+  icon: mdi:water
+sensor.latest_version:
+  icon: mdi:home-assistant
+sensor.gdacs_50_895343_114_097853:
+  friendly_name: gdacs
+  icon: mdi:alert-circle-outline

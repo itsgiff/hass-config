@@ -4,6 +4,7 @@
 
 ## Change Log:
 =======
+* v.3.6 - add corona virus and GDACS
 * v.3.5 - fix speedtest and add fast.com
 * v.3.4 - google assistant update, authenticated sensor, speedtest
 * v.3.3 - add attributes to hass update sensor
