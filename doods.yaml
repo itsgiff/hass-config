@@ -1,7 +1,7 @@
 - platform: doods
   url: !secret doods_url
   auth_key: !secret doods_auth_key
-  detector: tensorflow
+  detector: default
   scan_interval: 10800
   timeout: 60
   source:

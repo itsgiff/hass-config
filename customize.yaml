@@ -105,9 +105,6 @@ sensor.back_door_lock:
 cover.garage_door:
   friendly_name: Garage
   icon: mdi:garage
-  icon_template: '{%- if is_state(''binary_sensor.front_door'', ''off'') %} mdi:garage
-    {%- elif is_state(''binary_sensor.front_door'', ''on'') %} mdi:garage-open {%
-    else %} mdi:garage-alert {% endif %}   '
 sensor.nzbget_uptime_hours:
   friendly_name: NZBGet Uptime
   icon: mdi:timer
