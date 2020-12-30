@@ -1,14 +1,3 @@
-###########################################
-# DNS IP
-###########################################
-- platform: dnsip
-
-###########################################
-# Certificate Expiry
-###########################################
-- platform: cert_expiry
-  host: home.giff.ca
-
 - platform: template
   sensors:
     ping:
@@ -17,3 +6,8 @@
       icon_template: 'mdi:dots-horizontal'
       entity_id: 'binary_sensor.ping_binary_sensor'
       value_template: "{{ state_attr('binary_sensor.ping_binary_sensor', 'round_trip_time_avg') }}"
+
+
+- platform: command_line
+  name: Public IP Address
+  command: "curl icanhazip.com"

@@ -20,9 +20,10 @@
       - camera.driveway
       - camera.front_deck
       - camera.front_gate
-      # - camera.hot_tub
-      # - camera.side_gate
-      # - camera.back_gate
+      - camera.hot_tub
+      - camera.side_gate
+      - camera.back_side
+      - camer.doorbell
 
       
 ###########################################
@@ -48,22 +49,3 @@
   name: 'Heritage Drive & Macleod Trail S'
 
 
-###########################################
-# Unifi Protect
-###########################################
-- platform: unifiprotect
-
-###########################################
-# Vehicle GPS Tracking
-###########################################
-
-- platform: generic
-  still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.sensor.audi_latitude.state }},{{ states.sensor.audi_longitude.state }}&zoom=13&scale=2&size=300x300&maptype=roadmap&markers=color:0xff0000%7Clabel:P%7C{{ states.sensor.audi_latitude.state }},{{ states.sensor.audi_longitude.state }}
-  limit_refetch_to_url_change: true
-  name: RS5 GPS
-
-
-- platform: generic
-  still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.sensor.f150_latitude.state }},{{ states.sensor.f150_longitude.state }}&zoom=13&scale=2&size=300x300&maptype=roadmap&markers=color:0xff0000%7Clabel:B%7C{{ states.sensor.f150_latitude.state }},{{ states.sensor.f150_longitude.state }}
-  limit_refetch_to_url_change: true
-  name: F150 GPS

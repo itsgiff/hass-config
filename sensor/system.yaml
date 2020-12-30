@@ -3,13 +3,30 @@
 ###########################################
 - platform: websocket_api
 
-- platform: authenticated
-
 - platform: version
   source: hassio
 
 - platform: version
   source: local
+
+- platform: authenticated
+  enable_notification: false
+  exclude:
+    - 172.30.32.2
+    - 172.30.33.0
+    - 172.30.33.1
+    - 172.30.33.2
+    - 172.30.33.3
+    - 172.30.33.4
+    - 172.30.33.5
+
+- platform: template
+  sensors:
+    last_successful_authentication_hostname:
+      value_template: '{{ states.sensor.last_successful_authentication.attributes.hostname }}'
+    last_successful_authentication_username:
+      value_template: '{{ states.sensor.last_successful_authentication.attributes.username }}'
+
 
 - platform: template
   sensors:
@@ -35,6 +52,27 @@
             mdi:alert-circle-outline
             {% endif %}   
 
+
+- platform: template
+  sensors:
+    synology_update:
+        value_template: >-
+          {%- if is_state("binary_sensor.nas_update_available", "on") %}
+              Update(s) Available
+          {%- elif is_state("binary_sensor.nas_update_available", "off") %}
+              No Update(s)
+          {%- else %}
+              Error
+          {%- endif %}
+        friendly_name: 'Synology Update'
+        icon_template: >-
+            {%- if is_state('binary_sensor.nas_update_available', 'off') %}
+            mdi:checkbox-marked-circle-outline
+            {%- elif is_state('binary_sensor.nas_update_available', 'on') %}
+            mdi:package-down
+            {% else %}
+            mdi:alert-circle-outline
+            {% endif %}   
 
 - platform: rest
   resource: https://api.github.com/repos/home-assistant/home-assistant/releases/latest
@@ -86,3 +124,12 @@
   name: "Uptime"
   unit_of_measurement: hours
 
+- platform: mqtt
+  name: "Zwave Controller Status"
+  state_topic: "homeassistant/zwave_stick/status"
+  value_template: "{{ value_json.status }}"
+
+- platform: mqtt
+  name: "Zwave Controller Last Activity"
+  state_topic: "homeassistant/zwave_stick/status"
+  value_template: "{{ value_json.time | multiply(0.001) | round(0) | timestamp_local }}"

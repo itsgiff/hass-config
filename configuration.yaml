@@ -1,17 +1,19 @@
 homeassistant:
   # Name of the location where Home Assistant is running
-  name: Home
+  # name: Home
   # Location required to calculate the time the sun rises and sets
-  latitude: !secret latitude
-  longitude: !secret longitude
+  # latitude: !secret latitude
+  # longitude: !secret longitude
+  # external_url: "https://home.giff.ca"
   # Impacts weather/sunrise data
-  elevation: !secret elevation
+  # elevation: !secret elevation
   # 'metric' for the metric system, 'imperial' for the imperial system
-  unit_system: metric
+  # unit_system: metric
   # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-  time_zone: America/Edmonton
+  # time_zone: America/Edmonton
   # customize must nested within homeassistant entity
   customize: !include customize.yaml
+  packages: !include_dir_named packages
 
 # Enables the frontend
 frontend:
@@ -23,7 +25,8 @@ http:
   - !secret base_origin
   use_x_forwarded_for: true
   trusted_proxies:
-  - !secret host_address
+  - !secret nginx_proxy
+  - !secret hassio_proxy
 
 # Core Components
 config:
@@ -48,43 +51,19 @@ tts:
 # Includes
 automation: !include automations.yaml
 binary_sensor: !include binary_sensor.yaml
-group: !include_dir_merge_named groups
+group: !include group.yaml
 camera: !include camera.yaml
-device_tracker: !include device_tracker.yaml
-homekit: !include homekit.yaml
 ios: 
 notify: !include notify.yaml
 script: !include scripts.yaml
 sensor: !include_dir_merge_list sensor
 zone: !include zones.yaml
 
-# iFrame
-panel_custom:
-  - name: zwavegraph2
-    sidebar_title: Z-Wave Network
-    sidebar_icon: mdi:z-wave
-    url_path: zwave
-
-# Z-Wave
-# https://unix.stackexchange.com/questions/66901/how-to-bind-usb-device-under-a-static-name
-zwave:
-#  usb_path: /dev/zwave
-  usb_path: /dev/ttyACM0
-  debug: true
-  device_config: !include zwave_device_config.yaml
-  network_key: !secret zwave_key
-
 # Third Party Platforms
 auto_backup:
   auto_purge: true
 
 breaking_changes:
-
-cover:
-  - platform: myq
-    username: !secret email_account
-    password: !secret myq_password
-    type: chamberlain
 
 dyson:
   username: !secret dyson_username
@@ -93,9 +72,6 @@ dyson:
   devices:
     - device_id: !secret dyson_bedroom_serial
       device_ip: !secret dyson_bedroom_ip
-
-ecobee:
-  api_key: !secret ecobee_token
 
 speedtestdotnet:
   scan_interval:
@@ -115,13 +91,13 @@ google_assistant: !include google_assistant.yaml
 
 media_player:
   - platform: androidtv
-    name: Living Room TV
+    name: Livingroom Android TV
     host: !secret living_room_tv_ip
   - platform: androidtv
-    name: Bedroom TV
+    name: Bedroom Android TV
     host: !secret bedroom_tv_ip
+  - platform: androidtv
+    name: Guest Bedroom Android TV
+    host: !secret guest_bedroom_tv_ip
 
-unifiprotect:
-  host: !secret unifi_ip
-  username: !secret unifi_protect_username
-  password: !secret unifi_protect_password
+stream:

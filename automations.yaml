@@ -8,6 +8,7 @@
       name: slate
     service: frontend.set_theme
   initial_state: 'on'
+  mode: single
 - id: '1495373253029'
   alias: Notification - Garage Door Closed
   description: Close notification for Garage Door
@@ -16,6 +17,7 @@
     from: open
     platform: state
     to: closed
+    for: 00:00:10
   action:
   - data:
       entity_id: light.notify
@@ -29,53 +31,63 @@
     service: light.turn_off
   - data:
       message: The Garage door closed
-    service: notify.ios_mobile
+    service: notify.mobile_app_mobile
   - data:
       message: The Garage door closed
-    service: notify.ios_tablet
+    service: notify.mobile_app_tablet
+  mode: single
 - id: '1502817251957'
   alias: Sunrise
   description: Morning lighting and switch automation for office, coffee, back deck
     water fountain and bed lights.
   trigger:
   - entity_id: sun.sun
-    for: 00:30
+    for: 02:00
     from: below_horizon
     platform: state
     to: above_horizon
   condition:
   - condition: state
-    entity_id: switch.back_deck_lights
+    entity_id: switch.pergola_lights
     state: 'on'
   action:
-  - alias: Rear Deck Stairs Light Off
-    data: {}
-    entity_id: switch.back_deck_lights
+  - entity_id: switch.bedroom_bed_light_switch
     service: switch.turn_off
-  - entity_id: switch.bed_light
+  - entity_id: switch.kitchen_coffee_light_switch
     service: switch.turn_off
-  - entity_id: switch.kitchen_coffee_light
-    service: switch.turn_off
-  - entity_id: switch.office_lamp
+  - entity_id: switch.office_office_lamp_switch
     service: switch.turn_off
   - entity_id: light.office_light
     service: light.turn_off
-  - entity_id: switch.water_fountain
+  - entity_id: switch.backyard_water_fountain_switch
     service: switch.turn_off
+  - service: switch.turn_off
+    data: {}
+    entity_id: switch.frontyard_frontyard_lights_switch
+  - service: switch.turn_off
+    data: {}
+    entity_id: switch.backyard_backyard_lights_switch
+  mode: single
 - id: '1502832340378'
   alias: Lighting - Office bedtime
   description: Lighting automation for the office for the night
   trigger:
-  - at: '20:30'
+  - at: '19:30'
     platform: time
   condition: []
   action:
-  - alias: Office Lamp Off
-    data: {}
+  - data: {}
     entity_id: switch.office_lamp
     service: switch.turn_off
   - entity_id: light.office_light
     service: light.turn_off
+  - service: light.turn_off
+    data: {}
+    entity_id: light.desk
+  - service: light.turn_off
+    data: {}
+    entity_id: light.under_desk
+  mode: single
 - id: '1558218116963'
   alias: Sunset
   description: Evening lighting and switch automation for office, coffee, back deck
@@ -89,30 +101,21 @@
   condition: []
   action:
   - data: {}
-    entity_id: switch.back_deck_lights
+    entity_id: switch.backyard_pergola_lights_switch
     service: switch.turn_on
-  - entity_id: switch.bed_light
+  - entity_id: switch.bedroom_bed_light_switch
     service: switch.turn_off
-  - entity_id: switch.kitchen_coffee_light
+  - entity_id: switch.kitchen_coffee_light_switch
     service: switch.turn_on
-  - entity_id: switch.office_lamp
-    service: switch.turn_on
-  - entity_id: switch.water_fountain
+  - entity_id: switch.backyard_water_fountain_switch
     service: switch.turn_off
-- id: '1558229616820'
-  alias: Notificaton - Z-Wave Ready
-  trigger:
-  - event_data: {}
-    event_type: zwave.network_ready
-    platform: event
-  condition: []
-  action:
-  - data:
-      message: Z-Wave network is ready
-    service: notify.ios_mobile
-  - data:
-      message: Z-Wave network is ready
-    service: notify.ios_tablet
+  - service: switch.turn_on
+    data: {}
+    entity_id: switch.frontyard_frontyard_lights_switch
+  - service: switch.turn_on
+    data: {}
+    entity_id: switch.backyard_backyard_lights_switch
+  mode: single
 - id: '1558230115098'
   alias: Notification - Home Assistant Startup
   trigger:
@@ -122,10 +125,11 @@
   action:
   - data:
       message: Home Assistant started
-    service: notify.ios_mobile
+    service: notify.mobile_app_mobile
   - data:
       message: Home Assistant started
-    service: notify.ios_tablet
+    service: notify.mobile_app_tablet
+  mode: single
 - id: '1558230236693'
   alias: Notification - Home Assistant Shutdown
   trigger:
@@ -135,10 +139,11 @@
   action:
   - data:
       message: Home Assistant has shutdown
-    service: notify.ios_mobile
+    service: notify.mobile_app_mobile
   - data:
       message: Home Assistant has shutdown
     service: notify.ios_tablet
+  mode: single
 - id: '1558890166958'
   alias: Auto Lock - Front Door
   trigger:
@@ -175,10 +180,14 @@
     from: unlocked
     platform: state
     to: locked
-  condition: []
+  condition:
+  - condition: sun
+    before: sunrise
+    after: sunset
   action:
   - entity_id: lock.garage_door
     service: lock.lock
+  mode: single
 - id: '1569672724355'
   alias: Startup - HomeKit
   trigger:
@@ -206,10 +215,10 @@
   action:
   - data:
       message: The Garage door opened
-    service: notify.ios_mobile
+    service: notify.mobile_app_mobile
   - data:
       message: The Garage door opened
-    service: notify.ios_tablet
+    service: notify.mobile_app_tablet
   - data:
       entity_id: light.notify
       rgb_color:
@@ -218,6 +227,7 @@
       - 25
     entity_id: light.notify
     service: light.turn_on
+  mode: single
 - id: '1580003362412'
   alias: Notification - Home Assistant Update
   description: ''
@@ -230,10 +240,11 @@
   action:
   - data:
       message: Home Assistant {{ states.sensor.latest_version.state }} is available.
-    service: notify.ios_mobile
+    service: notify.mobile_app_mobile
   - data:
       message: Home Assistant {{ states.sensor.latest_version.state }} is available.
-    service: notify.ios_tablet
+    service: notify.mobile_app_tablet
+  mode: single
 - id: '1580077708650'
   alias: Notification - Home Assistant Community Store Update
   description: Home Assistant Community Store Update Notification
@@ -246,11 +257,12 @@
   - data:
       message: Home Assistant Community Store has {{ states('sensor.hacs') }} pending
         update(s) available.
-    service: notify.ios_mobile
+    service: notify.mobile_app_mobile
   - data:
       message: Home Assistant Community Store has {{ states('sensor.hacs') }} pending
         update(s) available.
-    service: notify.ios_tablet
+    service: notify.mobile_app_tablet
+  mode: single
 - id: '1580224449809'
   alias: Lighting - Work
   description: Morning work automation for lights in the office
@@ -266,13 +278,17 @@
     state: below_horizon
   action:
   - data:
-      brightness: 30
+      brightness: 50
     entity_id: light.office_light
     service: light.turn_on
-  - entity_id: switch.office_lamp
-    service: switch.turn_on
+  - entity_id: light.desk
+    service: light.turn_on
   - entity_id: switch.kitchen_coffee_light
     service: switch.turn_on
+  - service: light.turn_on
+    data: {}
+    entity_id: light.under_desk
+  mode: single
 - id: '1580477302204'
   alias: Snapshot - Nightly
   description: Nightly Auto Snapshot
@@ -300,3 +316,157 @@
       message: 'Name: {{ trigger.event.data.name }}
 
         Error: {{ trigger.event.data.error }}'
+- id: '1603110760010'
+  alias: Goodnight - Lighting
+  description: Lighting automation
+  trigger:
+  - platform: time
+    at: '22:30'
+  condition: []
+  action:
+  - service: switch.turn_off
+    data: {}
+    entity_id: switch.backyard_pergola_lights_switch
+  - service: switch.turn_off
+    data: {}
+    entity_id: switch.backyard_backyard_lights_switch
+  - service: switch.turn_off
+    data: {}
+    entity_id: switch.frontyard_frontyard_lights_switch
+  mode: single
+- id: '1603927830253'
+  alias: Doorbell
+  description: Doorbell Notification
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.doorbell_front_door
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: time
+    after: '10:00'
+  action:
+  - service: notify.mobile_app_tablet
+    data:
+      message: Someone is at the frontdoor
+      data:
+        attachment:
+          content-type: jpeg
+        push:
+          category: camera
+        entity_id: camera.front_door
+  - service: notify.mobile_app_mobile
+    data:
+      message: Someone is at the frontdoor
+      data:
+        attachment:
+          content-type: jpeg
+        push:
+          category: camera
+        entity_id: camera.front_door
+  - service: camera.play_stream
+    data:
+      media_player: media_player.office_hub,media_player.kitchen_hub, media_player.bedroom_hub,
+        media_player.guest_bedroom_hub, media_player.basement_hub,
+    entity_id: camera.front_door
+  - delay: 00:00:60
+  - service: media_player.turn_off
+    entity_id: media_player.office_hub,media_player.kitchen_hub, media_player.bedroom_hub,
+      media_player.guest_bedroom_hub, media_player.basement_hub, media_player.bedroom_tv,
+      media_player.guest_bedroom_tv, media_player.livingroom_tv
+  mode: single
+- id: '1603982875632'
+  alias: Cleanup
+  description: Cleanup Tasks
+  trigger:
+  - platform: time
+    at: 00:30:00
+  condition: []
+  action:
+  - service: tts.clear_cache
+    data: {}
+  mode: single
+- id: '1603986314847'
+  alias: Driveway
+  description: Driveway Notifications
+  trigger:
+  - type: motion
+    platform: device
+    device_id: 4b7267ad3d3c4d9280b9fc583d9e646d
+    entity_id: binary_sensor.motion_driveway
+    domain: binary_sensor
+  condition: []
+  action:
+  - service: notify.mobile_app_mobile
+    data:
+      message: Someone is in the driveway
+      data:
+        attachment:
+          content-type: jpeg
+        push:
+          category: camera
+        entity_id: camera.driveway
+  - service: notify.mobile_app_tablet
+    data:
+      message: Someone is in the driveway
+      data:
+        attachment:
+          content-type: jpeg
+        push:
+          category: camera
+        entity_id: camera.driveway
+  - delay: 00:00:60
+  mode: single
+- id: '1606135576092'
+  alias: Notification - Synology Update
+  description: Synology Update Notification
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.nas_update_available
+    from: 'off'
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      message: Synology has pending update(s) available.
+    service: notify.mobile_app_mobile
+  - data:
+      message: Synology has pending update(s) available.
+    service: notify.mobile_app_tablet
+  mode: single
+- id: '1606840874562'
+  alias: 'Reminder: Dyson Filter Reminder'
+  description: Dyson Filter Reminder
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.filter_days_remaining
+    below: '30'
+  condition: []
+  action:
+  - service: notify.mobile_app_mobile
+    data:
+      message: Please order a new filter for the Dyson Fan, the filter has {{ states('sensor.filter_days_remaining')
+        }} days remaining.
+  - service: notify.mobile_app_tablet
+    data:
+      message: Please order a new filter for the Dyson Fan, the filter has {{ states('sensor.filter_days_remaining')
+        }} days remaining.
+  mode: single
+- id: '1606842109568'
+  alias: 'Alert: Dyson Filter Reminder'
+  description: Dyson Filter Alert
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.filter_days_remaining
+    below: '30'
+  condition: []
+  action:
+  - service: notify.mobile_app_mobile
+    data:
+      message: Please change the Dyson Fan, the filter has {{ states('sensor.filter_days_remaining')
+        }} days remaining.
+  - service: notify.mobile_app_tablet
+    data:
+      message: Please change the Dyson Fan, the filter has {{ states('sensor.filter_days_remaining')
+        }} days remaining.
+  mode: single

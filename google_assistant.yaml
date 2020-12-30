@@ -2,40 +2,51 @@
   service_account: !include .storage/google-assistant.json
   secure_devices_pin: !secret google_assistant_secure_pin
   expose_by_default: false
+  exposed_domains:
+   - stream
+   - camera
   report_state: true
   entity_config:
-    switch.office_lamp:
+    switch.office_office_lamp_switch:
       expose: true
       room: 'Office'
       name: 'Office Lamp'
     light.office_light:
       expose: true
       room: 'Office'
-      name: 'Office Lights'
-    switch.kitchen_coffee_light:
+      name: 'Office Light Switch'
+    light.desk:
+      expose: true
+      room: 'Office'
+      name: 'Desk'
+    switch.kitchen_coffee_light_switch:
       expose: true
       room: 'Kitchen'
       name: 'Coffee Lights'
-    switch.bed_light:
+    switch.bedroom_bed_light_switch:
       expose: true
       room: 'Bedroom'
       name: 'Bed Light'
-    switch.back_deck_lights:
+    switch.backyard_pergola_lights_switch:
       expose: true
       room: 'Backyard'
-      name: 'Back Deck Lights'
-    switch.seasonal_front_lights:
+      name: 'Pergola Lights'
+    switch.backyard_backyard_lights_switch:
+      expose: true
+      room: 'Backyard'
+      name: 'Backyard Christmas Lights'
+    switch.frontyard_frontyard_lights_switch:
       expose: true
       room: 'Frontyard'
-      name: 'Seasonal Front Lights'
-    switch.water_fountain:
+      name: 'Frontyard Christmas Lights'
+    switch.backyard_water_fountain_switch:
       expose: true
       room: 'Backyard'
       name: 'Water Fountain'
-    camera.basement:
+    camera.doorbelll:
       expose: true
-      room: 'Basement'
-      name: 'Basement Camera'
+      room: 'Front Door'
+      name: 'Doorbell'
     camera.back_deck:
       expose: true
       room: 'Backyard'
@@ -44,6 +55,10 @@
       expose: true
       room: 'Backyard'
       name: 'Backyard Camera'
+    camera.garage:
+      expose: true
+      room: 'Garage'
+      name: 'Garage Camera'
     camera.driveway:
       expose: true
       room: 'Garage'
@@ -60,10 +75,14 @@
       expose: true
       room: 'Backyard'
       name: 'Back Gate Camera'
-    camera.side_gate:
+    camera.hot_tub:
       expose: true
       room: 'Backyard'
-      name: 'Side Gate Camera'
+      name: 'Hot Tub Camera'
+    camera.back_side:
+      expose: true
+      room: 'Backyard'
+      name: 'Back Side Camera'
     cover.garage_door:
       expose: true
       room: 'Garage'
@@ -84,8 +103,19 @@
       expose: true
       room: 'Bedroom'
       name: 'Bedroom Fan'
-    climate.bedroom:
+    switch.basement_backyard_water_switch:
       expose: true
-      room: 'Bedroom'
-      name: 'Bedroom Climate'
-    
+      room: 'Backyard'
+      name: 'Backyard Water'
+    switch.basement_frontyard_water_switch:
+      expose: true
+      room: 'Frontyard'
+      name: 'Frontyard Water'
+    switch.basement_water_heater_switch:
+      expose: true
+      room: 'Basement'
+      name: 'Water Heater'
+    switch.basement_main_water_switch:
+      expose: true
+      room: 'Basement'
+      name: 'Water Main'                   

@@ -1,16 +1,4 @@
 
-###########################################
-# Doorbell Batteries
-###########################################
-
-- platform: template
-  sensors:
-    front_deck_motion_battery:
-      friendly_name: 'Front Deck Motion'
-      unit_of_measurement: '%'
-      icon_template: 'mdi:transit-transfer'
-      entity_id: 'zwave.front_deck_motion'
-      value_template: "{{ states.zwave.front_deck_motion.attributes.battery_level | round(0) }}"
 
 ###########################################
 # Door Batteries
@@ -43,65 +31,6 @@
       icon_template: 'mdi:door'
       entity_id: 'zwave.garage_door'
       value_template: "{{  states.zwave.garage_door.attributes.battery_level | round(0) }}"
-
-###########################################
-# Motion Detector Batteries
-###########################################
-
-- platform: template
-  sensors:
-    front_doorbell_battery:
-      friendly_name: 'Front Doorbell'
-      unit_of_measurement: '%'
-      icon_template: 'mdi:bell-ring-outline'
-      entity_id: 'zwave.front_door_motion'
-      value_template: "{{ states.zwave.front_door_motion.attributes.battery_level | round(0) }}"
-
-###########################################
-# Lock Batteries
-###########################################
-
-- platform: template
-  sensors:
-    front_door_lock_battery:
-      friendly_name: 'Front Door Lock'
-      unit_of_measurement: '%'
-      icon_template: 'mdi:lock-smart'
-      entity_id: 'zwave.front_door_lock'
-      value_template: "{{ states.zwave.front_door_lock.attributes.battery_level | round(0) }}"
-
-
-- platform: template
-  sensors:
-    back_door_lock_battery:
-      friendly_name: 'Back Door Lock'
-      unit_of_measurement: '%'
-      icon_template: 'mdi:lock-smart'
-      entity_id: 'zwave.back_door_lock'
-      value_template: "{{ states.zwave.back_door_lock.attributes.battery_level | round(0) }}"
-
-###########################################
-# Gate Sensor Batteries
-###########################################
-
-- platform: template
-  sensors:
-    front_gate_sensor_battery:
-      friendly_name: 'Front Gate'
-      unit_of_measurement: '%'
-      icon_template: 'mdi:gate'
-      entity_id: 'zwave.front_gate'
-      value_template: "{{ states.zwave.front_gate.attributes.battery_level | round(0) }}"
-
-
-- platform: template
-  sensors:
-    back_gate_sensor_battery:
-      friendly_name: 'Back Gate'
-      unit_of_measurement: '%'
-      icon_template: 'mdi:gate'
-      entity_id: 'zwave.back_gate'
-      value_template: "{{ states.zwave.back_gate.attributes.battery_level | round(0) }}"
 
 
 #- platform: template
@@ -175,44 +104,44 @@
 # Nest Protect Batteries
 ###########################################
 
-# - platform: template
-#   sensors:
-#     main_floor_nest_protect_battery:
-#       friendly_name: 'Main Floor Nest Protect'
-#       icon_template: 'mdi:smoke-detector'
-#       value_template: >-
-#           {%- if is_state("sensor.main_floor_nest_protect_battery_health", "Ok") %}
-#               Good
-#           {%- elif is_state("sensor.main_floor_nest_protect_battery_health", "Bad") %}
-#               Warning
-#           {%- else %}
-#               Warning
-#           {%- endif %}
+- platform: template
+  sensors:
+    main_floor_nest_protect_battery:
+      friendly_name: 'Main Floor Nest Protect'
+      icon_template: 'mdi:smoke-detector'
+      value_template: >-
+          {%- if is_state("sensor.main_floor_nest_protect_battery_health", "Ok") %}
+              Good
+          {%- elif is_state("sensor.main_floor_nest_protect_battery_health", "Bad") %}
+              Warning
+          {%- else %}
+              Warning
+          {%- endif %}
 
-# - platform: template
-#   sensors:
-#     basement_nest_protect_battery:
-#       friendly_name: 'Basement Nest Protect'
-#       icon_template: 'mdi:smoke-detector'
-#       value_template: >-
-#           {%- if is_state("sensor.basement_nest_protect_battery_health", "Ok") %}
-#               Good
-#           {%- elif is_state("sensor.basement_nest_protect_battery_health", "Bad") %}
-#               Warning
-#           {%- else %}
-#               Warning
-#           {%- endif %}
+- platform: template
+  sensors:
+    basement_nest_protect_battery:
+      friendly_name: 'Basement Nest Protect'
+      icon_template: 'mdi:smoke-detector'
+      value_template: >-
+          {%- if is_state("sensor.basement_nest_protect_battery_health", "Ok") %}
+              Good
+          {%- elif is_state("sensor.basement_nest_protect_battery_health", "Bad") %}
+              Warning
+          {%- else %}
+              Warning
+          {%- endif %}
 
-# - platform: template
-#   sensors:
-#     garage_nest_protect_battery:
-#       friendly_name: 'Garage Nest Protect'
-#       icon_template: 'mdi:smoke-detector'
-#       value_template: >-
-#           {%- if is_state("sensor.garage_nest_protect_battery_health", "Ok") %}
-#               Good
-#           {%- elif is_state("sensor.garage_nest_protect_battery_health", "Bad") %}
-#               Warning
-#           {%- else %}
-#               Warning
-#           {%- endif %}
+- platform: template
+  sensors:
+    garage_nest_protect_battery:
+      friendly_name: 'Garage Nest Protect'
+      icon_template: 'mdi:smoke-detector'
+      value_template: >-
+          {%- if is_state("sensor.garage_nest_protect_battery_health", "Ok") %}
+              Good
+          {%- elif is_state("sensor.garage_nest_protect_battery_health", "Bad") %}
+              Warning
+          {%- else %}
+              Warning
+          {%- endif %}

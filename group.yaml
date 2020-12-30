@@ -1,0 +1,36 @@
+###########################################
+# Lights
+########################################### 
+christmas_lights:
+  name: "Christmas Lights"
+  entities:
+    - switch.back_christmas_lights
+    - switch.front_christmas_lights
+outdoor_lights:
+  name: "Outdoor Lights"
+  entities:
+    - switch.back_christmas_lights
+    - switch.front_christmas_lights
+    - switch.pergola_lights
+
+###########################################
+# Locks
+########################################### 
+locks:
+  name: "Locks"
+  entities:
+    - lock.back_door
+    - lock.front_door
+    - lock.garage_door
+
+###########################################
+# Hubs
+########################################### 
+hubs:
+  name: "hubs"
+  entities:
+    - media_player.office_hub
+    - media_player.kitchen_hub
+    - media_player.guest_bedroom_hub
+    - media_player.bedroom_hub
+    - media_player.basement_hub 

@@ -2,8 +2,6 @@
   country: CA
   province: AB
 
-- platform: unifiprotect
-
 - platform: ping
   host:  1.1.1.1
   count: 2
