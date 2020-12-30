@@ -21,6 +21,8 @@ custom_components/
 .storage/zha.storage
 .storage/hacs
 .storage/hacs.*
+.storage/homekit.*
+/storage/.hpprinter.printer
 .storage/frontend.user_data_*
 .storage/android*.*
 .storage/adbkey
