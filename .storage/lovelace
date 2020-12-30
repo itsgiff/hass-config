@@ -818,6 +818,19 @@
                                 }
                             ],
                             "type": "vertical-stack"
+                        },
+                        {
+                            "type": "vertical-stack",
+                            "cards": [
+                                {
+                                    "type": "picture-entity",
+                                    "entity": "image_processing.doods_driveway",
+                                    "name": "Driveway Detection",
+                                    "camera_image": "camera.driveway_detection",
+                                    "camera_view": "live",
+                                    "aspect_ratio": "50%"
+                                }
+                            ]
                         }
                     ],
                     "icon": "mdi:cctv",
@@ -1248,6 +1261,40 @@
                             "type": "vertical-stack",
                             "cards": [
                                 {
+                                    "type": "sensor",
+                                    "entity": "sensor.public_ip_address",
+                                    "icon": "mdi:dots-horizontal",
+                                    "name": "Shaw Address"
+                                },
+                                {
+                                    "type": "sensor",
+                                    "entity": "sensor.speedtest_ping",
+                                    "detail": 2,
+                                    "graph": "line"
+                                },
+                                {
+                                    "type": "horizontal-stack",
+                                    "cards": [
+                                        {
+                                            "type": "sensor",
+                                            "entity": "sensor.speedtest_download",
+                                            "graph": "line",
+                                            "detail": 2
+                                        },
+                                        {
+                                            "type": "sensor",
+                                            "entity": "sensor.speedtest_upload",
+                                            "graph": "line",
+                                            "detail": 2
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "vertical-stack",
+                            "cards": [
+                                {
                                     "type": "horizontal-stack",
                                     "cards": [
                                         {
@@ -1279,6 +1326,11 @@
                                         },
                                         {
                                             "entity": "sensor.hacs",
+                                            "secondary_info": "last-changed"
+                                        },
+                                        {
+                                            "entity": "sensor.glances_containers_active",
+                                            "name": "Containers",
                                             "secondary_info": "last-changed"
                                         },
                                         {
@@ -1448,40 +1500,6 @@
                                             "entity": "sensor.nas_memory_usage_real",
                                             "graph": "line",
                                             "name": "Storage Memory",
-                                            "detail": 2
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "sensor",
-                                    "entity": "sensor.public_ip_address",
-                                    "icon": "mdi:dots-horizontal",
-                                    "name": "Shaw Address"
-                                },
-                                {
-                                    "type": "sensor",
-                                    "entity": "sensor.speedtest_ping",
-                                    "detail": 2,
-                                    "graph": "line"
-                                },
-                                {
-                                    "type": "horizontal-stack",
-                                    "cards": [
-                                        {
-                                            "type": "sensor",
-                                            "entity": "sensor.speedtest_download",
-                                            "graph": "line",
-                                            "detail": 2
-                                        },
-                                        {
-                                            "type": "sensor",
-                                            "entity": "sensor.speedtest_upload",
-                                            "graph": "line",
                                             "detail": 2
                                         }
                                     ]

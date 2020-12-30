@@ -4,7 +4,13 @@
   default_channel: '#notifications'
 
 - platform: group
-  name: pdg_devices
+  name: paul_devices
   services:
     - service: notify_mobile_app_mobile
     - service: notify_tablet_app_mobile
+
+- platform: group
+  name: family_devices
+  services:
+    - service: notify_mobile_app_mobile
+    - service: notify_tablet_app_mobile    

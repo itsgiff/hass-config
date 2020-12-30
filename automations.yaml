@@ -390,16 +390,14 @@
   alias: Driveway
   description: Driveway Notifications
   trigger:
-  - type: motion
-    platform: device
-    device_id: 4b7267ad3d3c4d9280b9fc583d9e646d
-    entity_id: binary_sensor.motion_driveway
-    domain: binary_sensor
+  - platform: numeric_state
+    entity_id: image_processing.doods_driveway
+    above: '0'
   condition: []
   action:
   - service: notify.mobile_app_mobile
     data:
-      message: Someone is in the driveway
+      message: Vehicle is in the driveway
       data:
         attachment:
           content-type: jpeg
@@ -408,14 +406,13 @@
         entity_id: camera.driveway
   - service: notify.mobile_app_tablet
     data:
-      message: Someone is in the driveway
+      message: Vehicle is in the driveway
       data:
         attachment:
           content-type: jpeg
         push:
           category: camera
         entity_id: camera.driveway
-  - delay: 00:00:60
   mode: single
 - id: '1606135576092'
   alias: Notification - Synology Update
@@ -469,4 +466,18 @@
     data:
       message: Please change the Dyson Fan, the filter has {{ states('sensor.filter_days_remaining')
         }} days remaining.
+  mode: single
+- id: '1609278551106'
+  alias: Doods Driveway
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.motion_driveway
+    from: 'off'
+    to: 'on'
+  condition: []
+  action:
+  - service: image_processing.scan
+    data:
+      entity_id: image_processing.doods_driveway
   mode: single

@@ -35,9 +35,10 @@ discovery:
 conversation:
 system_health:
 mobile_app:
-history: !include history.yaml
-logbook: !include logbook.yaml
-recorder: !include recorder.yaml
+logbook:
+recorder:
+  purge_keep_days: 7
+history:
 logger:
   default: warning
 updater:
@@ -101,3 +102,5 @@ media_player:
     host: !secret guest_bedroom_tv_ip
 
 stream:
+
+image_processing: !include doods.yaml

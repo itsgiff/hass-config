@@ -1,0 +1,24 @@
+- platform: doods
+  url: !secret doods_url
+  auth_key: !secret doods_auth_key
+  detector: tensorflow
+  scan_interval: 10800
+  timeout: 60
+  source:
+    - entity_id: camera.driveway
+  file_out:
+    - "/config/www/doods/{{ camera_entity.split('.')[1] }}_latest.jpg"
+    - "/config/www/doods/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S')}}.jpg" 
+  confidence: 85
+    # This global detection area is required for all labels
+  labels:
+    - car
+    - truck
+  # This global detection area is required for all labels
+  area:
+    # Exclude top 15% of image
+    top: 0.15
+    # Exclude right 10% of image
+    right: 0.9
+    # The entire detection must be inside this box
+    covers: true

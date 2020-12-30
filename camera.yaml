@@ -24,10 +24,19 @@
       - camera.side_gate
       - camera.back_side
       - camer.doorbell
+      - camera.garage
 
-      
+
 ###########################################
-# Traffic Cams
+# Doods
+###########################################
+      
+- platform: generic
+  still_image_url: https://home.giff.ca/local/doods/driveway_latest.jpg
+  name: 'Driveway Detection'
+
+###########################################
+# City of Calgary
 ###########################################
 - platform: generic
   still_image_url: http://trafficcam.calgary.ca/loc116.jpg
