@@ -397,7 +397,7 @@
   action:
   - service: notify.mobile_app_mobile
     data:
-      message: Vehicle is in the driveway
+      message: Someone is in the driveway
       data:
         attachment:
           content-type: jpeg
@@ -406,7 +406,7 @@
         entity_id: camera.driveway
   - service: notify.mobile_app_tablet
     data:
-      message: Vehicle is in the driveway
+      message: Someone is in the driveway
       data:
         attachment:
           content-type: jpeg
@@ -480,4 +480,18 @@
   - service: image_processing.scan
     data:
       entity_id: image_processing.doods_driveway
+  mode: single
+- id: '1610381562996'
+  alias: Doods Front Deck
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.motion_front_deck
+    from: 'off'
+    to: 'on'
+  condition: []
+  action:
+  - service: image_processing.scan
+    data:
+      entity_id: image_processing.doods_front_deck
   mode: single

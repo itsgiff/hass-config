@@ -58,9 +58,6 @@
                                             "entity": "sensor.front_deck_humidity"
                                         },
                                         {
-                                            "entity": "sensor.front_deck_motion_alarm"
-                                        },
-                                        {
                                             "entity": "sensor.dark_sky_precip_type"
                                         },
                                         {
@@ -116,7 +113,7 @@
                                             "entity": "light.office_light"
                                         },
                                         {
-                                            "entity": "switch.office_office_lamp_switch",
+                                            "entity": "light.office_lamp",
                                             "name": "Office Lamp"
                                         },
                                         {
@@ -155,6 +152,9 @@
                                         },
                                         {
                                             "entity": "sensor.dark_sky_apparent_temperature"
+                                        },
+                                        {
+                                            "entity": "image_processing.doods_driveway"
                                         }
                                     ],
                                     "camera_image": "camera.driveway",
@@ -196,8 +196,7 @@
                                     "showEventIcon": true,
                                     "entities": [
                                         "calendar.418_bridlecreek_green_sw_calgary",
-                                        "calendar.homegifford_gmail_com",
-                                        "calendar.family"
+                                        "calendar.homegifford_gmail_com"
                                     ],
                                     "showLocation": false,
                                     "sortByStartTime": true,
@@ -208,7 +207,10 @@
                                     "showDate": true,
                                     "dateFormat": "ll",
                                     "noEventsForTodayText": "all clear",
-                                    "untilText": "until"
+                                    "untilText": "until",
+                                    "showLastCalendarWeek": false,
+                                    "showMonth": false,
+                                    "dimFinishedEvents": true
                                 }
                             ]
                         },
@@ -218,13 +220,6 @@
                                 {
                                     "type": "horizontal-stack",
                                     "cards": [
-                                        {
-                                            "type": "sensor",
-                                            "entity": "sensor.front_deck_thermometer",
-                                            "graph": "line",
-                                            "name": "Thermometer",
-                                            "hours_to_show": 12
-                                        },
                                         {
                                             "type": "sensor",
                                             "entity": "sensor.dark_sky_apparent_temperature",
@@ -294,8 +289,6 @@
                             "cards": [
                                 {
                                     "type": "custom:mini-media-player",
-                                    "entity": "media_player.bedroom_tv",
-                                    "artwork": "full-cover",
                                     "hide": {
                                         "runtime": false,
                                         "icon": true,
@@ -303,12 +296,17 @@
                                         "source": true,
                                         "power_state": false,
                                         "artwork_border": false
-                                    }
+                                    },
+                                    "source": "icon",
+                                    "volume_stateless": true,
+                                    "group": false,
+                                    "info": "scroll",
+                                    "artwork": "full-cover",
+                                    "sound_mode": "icon",
+                                    "entity": "media_player.bedroom_tv"
                                 },
                                 {
                                     "type": "custom:mini-media-player",
-                                    "entity": "media_player.living_room_tv",
-                                    "artwork": "full-cover",
                                     "hide": {
                                         "runtime": false,
                                         "icon": true,
@@ -316,11 +314,17 @@
                                         "source": true,
                                         "power_state": false,
                                         "artwork_border": false
-                                    }
+                                    },
+                                    "artwork": "full-cover",
+                                    "source": "icon",
+                                    "group": false,
+                                    "volume_stateless": true,
+                                    "info": "scroll",
+                                    "sound_mode": "icon",
+                                    "entity": "media_player.living_room_tv"
                                 },
                                 {
                                     "type": "custom:mini-media-player",
-                                    "entity": "media_player.guest_bedroom_tv",
                                     "artwork": "full-cover",
                                     "hide": {
                                         "runtime": false,
@@ -329,7 +333,13 @@
                                         "source": true,
                                         "power_state": false,
                                         "artwork_border": false
-                                    }
+                                    },
+                                    "source": "icon",
+                                    "group": false,
+                                    "volume_stateless": true,
+                                    "info": "scroll",
+                                    "sound_mode": "icon",
+                                    "entity": "media_player.guest_bedroom_tv"
                                 },
                                 {
                                     "type": "custom:auto-entities",
@@ -397,6 +407,27 @@
                                         ],
                                         "method": "last_changed"
                                     }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "vertical-stack",
+                            "cards": [
+                                {
+                                    "type": "picture-entity",
+                                    "entity": "image_processing.doods_driveway",
+                                    "name": "Driveway Detection",
+                                    "camera_image": "camera.driveway_detection",
+                                    "camera_view": "live",
+                                    "aspect_ratio": "50%"
+                                },
+                                {
+                                    "type": "picture-entity",
+                                    "entity": "image_processing.doods_front_deck",
+                                    "name": "Front Deck Detection",
+                                    "camera_image": "camera.driveway_detection",
+                                    "camera_view": "live",
+                                    "aspect_ratio": "50%"
                                 }
                             ]
                         }
@@ -826,6 +857,14 @@
                                     "type": "picture-entity",
                                     "entity": "image_processing.doods_driveway",
                                     "name": "Driveway Detection",
+                                    "camera_image": "camera.driveway_detection",
+                                    "camera_view": "live",
+                                    "aspect_ratio": "50%"
+                                },
+                                {
+                                    "type": "picture-entity",
+                                    "entity": "image_processing.doods_front_deck",
+                                    "name": "Front Deck Detection",
                                     "camera_image": "camera.driveway_detection",
                                     "camera_view": "live",
                                     "aspect_ratio": "50%"

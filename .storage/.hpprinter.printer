@@ -55,9 +55,9 @@
         "IsOnline": true,
         "Name": "printer",
         "Printer": {
-            "Total": "1142",
-            "Color": "874",
-            "Monochrome": "268",
+            "Total": "1160",
+            "Color": "884",
+            "Monochrome": "276",
             "Jams": "0",
             "Cancelled": "N/A"
         },

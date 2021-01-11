@@ -7,10 +7,6 @@
    - camera
   report_state: true
   entity_config:
-    switch.office_office_lamp_switch:
-      expose: true
-      room: 'Office'
-      name: 'Office Lamp'
     light.office_light:
       expose: true
       room: 'Office'
@@ -34,11 +30,11 @@
     switch.backyard_backyard_lights_switch:
       expose: true
       room: 'Backyard'
-      name: 'Backyard Christmas Lights'
+      name: 'Backyard Lights'
     switch.frontyard_frontyard_lights_switch:
       expose: true
       room: 'Frontyard'
-      name: 'Frontyard Christmas Lights'
+      name: 'Frontyard Lights'
     switch.backyard_water_fountain_switch:
       expose: true
       room: 'Backyard'

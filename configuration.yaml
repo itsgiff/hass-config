@@ -90,6 +90,8 @@ google:
 
 google_assistant: !include google_assistant.yaml
 
+image_processing: !include doods.yaml
+
 media_player:
   - platform: androidtv
     name: Livingroom Android TV
@@ -102,5 +104,3 @@ media_player:
     host: !secret guest_bedroom_tv_ip
 
 stream:
-
-image_processing: !include doods.yaml
