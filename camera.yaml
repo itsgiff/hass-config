@@ -34,6 +34,15 @@
   still_image_url: https://home.giff.ca/local/doods/driveway_latest.jpg
   name: 'Driveway Detection'
 
+- platform: generic
+  still_image_url: https://home.giff.ca/local/doods/front_deck_latest.jpg
+  name: 'Front Deck Detection'
+
+- platform: generic
+  still_image_url: https://home.giff.ca/local/doods/back_deck_latest.jpg
+  name: 'Back Deck Detection'
+
+
 ###########################################
 # City of Calgary
 ###########################################

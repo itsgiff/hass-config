@@ -85,6 +85,9 @@
                                         },
                                         {
                                             "entity": "lock.back_door"
+                                        },
+                                        {
+                                            "entity": "image_processing.doods_back_deck"
                                         }
                                     ],
                                     "camera_image": "camera.back_deck",
@@ -425,7 +428,15 @@
                                     "type": "picture-entity",
                                     "entity": "image_processing.doods_front_deck",
                                     "name": "Front Deck Detection",
-                                    "camera_image": "camera.driveway_detection",
+                                    "camera_image": "camera.front_deck_detection",
+                                    "camera_view": "live",
+                                    "aspect_ratio": "50%"
+                                },
+                                {
+                                    "type": "picture-entity",
+                                    "entity": "image_processing.doods_back_deck",
+                                    "name": "Back Deck Detection",
+                                    "camera_image": "camera.back_deck_detection",
                                     "camera_view": "live",
                                     "aspect_ratio": "50%"
                                 }
@@ -600,7 +611,7 @@
                                     "entity": "binary_sensor.office_occupancy"
                                 },
                                 {
-                                    "entity": "switch.office_office_lamp_switch"
+                                    "entity": "light.office_lamp"
                                 },
                                 {
                                     "entity": "light.desk"
@@ -865,7 +876,15 @@
                                     "type": "picture-entity",
                                     "entity": "image_processing.doods_front_deck",
                                     "name": "Front Deck Detection",
-                                    "camera_image": "camera.driveway_detection",
+                                    "camera_image": "camera.front_deck_detection",
+                                    "camera_view": "live",
+                                    "aspect_ratio": "50%"
+                                },
+                                {
+                                    "type": "picture-entity",
+                                    "entity": "image_processing.doods_back_deck",
+                                    "name": "Back Deck Detection",
+                                    "camera_image": "camera.back_deck_detection",
                                     "camera_view": "live",
                                     "aspect_ratio": "50%"
                                 }
