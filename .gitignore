@@ -72,3 +72,4 @@ secrets.yaml
 google_calendars.yaml
 ip_bans.yaml
 .ip_authenticated.yaml
+.storage/.hpprinter.printer

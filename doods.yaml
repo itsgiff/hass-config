@@ -5,41 +5,15 @@
   scan_interval: 10800
   source:
     - entity_id: camera.driveway
-  file_out:
-    - "/config/www/doods/{{ camera_entity.split('.')[1] }}_latest.jpg"
-    - "/config/www/doods/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S')}}.jpg" 
-  confidence: 50
-    # This global detection area is required for all labels
-  labels:
-    - car
-    - truck
-    - person
-  # # This global detection area is required for all labels
-  area:
-    # Exclude top 10% of image
-    top: 0.10
-    # Exclude bottom 10% of image
-    bottom: 0.9    
-    # Exclude right 10% of image
-    left: 0.10
-    # Exclude right 10% of image
-    right: 0.9    
-    # The entire detection must be inside this box
-    # covers: true
-
-- platform: doods
-  url: !secret doods_url
-  auth_key: !secret doods_auth_key
-  detector: default
-  scan_interval: 10800
-  source:
     - entity_id: camera.front_deck
   file_out:
     - "/config/www/doods/{{ camera_entity.split('.')[1] }}_latest.jpg"
     - "/config/www/doods/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S')}}.jpg" 
-  confidence: 50
+  confidence: 80
     # This global detection area is required for all labels
   labels:
+    - car
+    - truck
     - person
   # # This global detection area is required for all labels
   area:
