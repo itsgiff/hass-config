@@ -34,15 +34,15 @@
 - Intel NUC i7
 - Schlage (Allegion) BE469ZP Connect Smart Deadbolt (3)
 - Chamberlain MyQ Garage Door
-- ecobee3 (8 sensors)
+- ecobee3 (9 sensors)
 - GE 45604 Z-Wave Technology Outdoor Module (2)
 - Google Home (6)
 - GOCONTROL WNK01-21KIT (8)
 - Harmony Companion Hub
 - Nest Protect (3)
-- Philips Hue Lights (4)
+- Philips Hue Lights (8)
 - Philips Hue Bridge
-- Nest Hello Doorbell (1) (╯°□°）╯︵ ┻━┻
+- Unifi Doorbell
 - Unifi Cloud Key 2
 - Unifi Wireless
 - Ubiquiti UVC-G3-Flex 1080p Indoor/Outdoor PoE Camera (9)
