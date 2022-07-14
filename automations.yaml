@@ -204,20 +204,68 @@
       entity_id: light.office_lights
   mode: single
 - id: '1603110760010'
-  alias: Goodnight
-  description: Lighting automation
+  alias: Good Night and Good Morning
+  description: Sleep and wake Automations
   trigger:
-  - platform: time
-    at: '21:30:00'
+  - platform: state
+    entity_id:
+    - input_boolean.good_night
+  - platform: state
+    entity_id:
+    - input_boolean.automations
+    to: 'on'
   condition: []
   action:
-  - service: switch.turn_off
-    data: {}
-    target:
-      entity_id:
-      - switch.outdoor_lights
-      - switch.pergola_lights
-      - switch.fountains
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.good_night
+        state: 'on'
+      sequence:
+      - service: light.turn_off
+        data: {}
+        target:
+          entity_id:
+          - light.office_lights
+          - light.outdoor_lights
+      - service: switch.turn_off
+        data: {}
+        target:
+          entity_id: switch.fountains
+      - device_id: fb3415a4265f3f481e20a92fe622420c
+        domain: select
+        entity_id: select.front_door_chime_type
+        type: select_option
+        option: None
+      - device_id: fb3415a4265f3f481e20a92fe622420c
+        domain: select
+        entity_id: select.front_door_doorbell_text
+        type: select_option
+        option: DO NOT DISTURB
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.good_morning
+      - service: lock.lock
+        data: {}
+        target:
+          entity_id: lock.locks
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.good_night
+        state: 'off'
+      sequence:
+      - device_id: fb3415a4265f3f481e20a92fe622420c
+        domain: select
+        entity_id: select.front_door_chime_type
+        type: select_option
+        option: Mechanical
+      - device_id: fb3415a4265f3f481e20a92fe622420c
+        domain: select
+        entity_id: select.front_door_doorbell_text
+        type: select_option
+        option: LEAVE PACKAGE AT DOOR
+    default: []
   mode: single
 - id: '1603927830253'
   alias: Doorbell
@@ -466,13 +514,13 @@
     conditions:
     - condition: numeric_state
       entity_id: sensor.garage_door_lock_battery
-      below: '20'
+      below: '25'
     - condition: numeric_state
       entity_id: sensor.back_door_lock_battery
-      below: '20'
+      below: '25'
     - condition: numeric_state
       entity_id: sensor.front_door_lock_battery
-      below: '20'
+      below: '25'
   action:
   - service: notify.mobile_app_mobile
     data:
@@ -838,24 +886,89 @@
       name: 'WeeklyBackup: {{ now().strftime(''%A, %B %-d, %Y'') }}'
       keep_days: 28
   mode: single
-- id: '1656859283914'
-  alias: Notification - Backup Failed
+- id: '1657401778736'
+  alias: Quiet Time - Set Preferences
   description: ''
   trigger:
-  - platform: event
-    event_type: auto_backup.backup_failed
+  - platform: state
+    entity_id:
+    - input_boolean.quiet_time
+  condition:
+  - condition: state
+    entity_id: input_boolean.automations
+    state: 'on'
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.quiet_time
+        state: 'on'
+      sequence:
+      - service: media_player.volume_set
+        data:
+          volume_level: 0.1
+        target:
+          entity_id:
+          - media_player.hubs
+      - device_id: fb3415a4265f3f481e20a92fe622420c
+        domain: select
+        entity_id: select.front_door_doorbell_text
+        type: select_option
+        option: DO NOT DISTURB
+      - device_id: fb3415a4265f3f481e20a92fe622420c
+        domain: select
+        entity_id: select.front_door_chime_type
+        type: select_option
+        option: None
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.quiet_time
+        state: 'off'
+      sequence:
+      - service: media_player.volume_set
+        data:
+          volume_level: 0.6
+        target:
+          entity_id: media_player.hubs
+      - device_id: fb3415a4265f3f481e20a92fe622420c
+        domain: select
+        entity_id: select.front_door_doorbell_text
+        type: select_option
+        option: LEAVE PACKAGE AT DOOR
+      - device_id: fb3415a4265f3f481e20a92fe622420c
+        domain: select
+        entity_id: select.front_door_chime_type
+        type: select_option
+        option: Mechanical
+    default: []
+  mode: single
+- id: '1657410529743'
+  alias: Automations
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - input_boolean.automations
   condition: []
   action:
-  - service: persistent_notification.create
-    data:
-      title: AutoBackup Failed
-      message: 'Name: {{ trigger.event.data.name }}
-
-        Error: {{ trigger.event.data.error }}'
-  - service: notify.mobile_app_mobile
-    data:
-      title: AutoBackup Failed
-      message: 'Name: {{ trigger.event.data.name }}
-
-        Error: {{ trigger.event.data.error }}'
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.automations
+        state: 'on'
+      sequence:
+      - service: automation.turn_on
+        data: {}
+        target:
+          entity_id: all
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.automations
+        state: 'off'
+      sequence:
+      - service: automation.turn_off
+        data: {}
+        target:
+          entity_id: all
+    default: []
   mode: single

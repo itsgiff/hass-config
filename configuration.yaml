@@ -14,6 +14,7 @@ http:
   - !secret hassio_proxy
 
 # Core Components
+default_config:
 config:
 sun:
 discovery:
@@ -31,8 +32,7 @@ tts:
   - platform: google_translate
 my:
 usb:
-input_select:
-input_text:
+
 
 # Includes
 automation: !include automations.yaml

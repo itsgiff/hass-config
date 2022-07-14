@@ -1,0 +1,23 @@
+- platform: template
+  sensors:
+    furnace_fan: 
+      value_template: '{{ states.climate.thermostat.attributes.fan }}'
+      friendly_name: Furnace Fan
+
+- platform: history_stats
+  name: Furnace Fan History (24 hours)
+  entity_id: sensor.furnace_fan
+  state: 'on'
+  type: time
+  start: '{{ now().replace(hour=0, minute=0, second=0) }}'
+  end: '{{ now() }}'
+
+- platform: history_stats
+  name: Furnace Fan History (7 days)
+  entity_id: sensor.furnace_fan
+  state: 'on'
+  type: time
+  # start: '{{ now().replace(hour=0, minute=0, second=0) }}'
+  end: '{{ now().replace(hour=0, minute=0, second=0) }}'
+  duration:
+    days: 7

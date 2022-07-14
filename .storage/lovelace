@@ -15,37 +15,71 @@
           "badges": [],
           "cards": [
             {
+              "type": "custom:mushroom-chips-card",
+              "chips": [
+                {
+                  "type": "action",
+                  "icon": "mdi:home-outline",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "house"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:shield-check-outline",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "security"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:countertop-outline",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "kitchen"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:server-network",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "rack"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:security-network",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "network"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:home-city-outline",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "city"
+                  }
+                }
+              ],
+              "alignment": "center"
+            },
+            {
               "type": "vertical-stack",
               "cards": [
                 {
                   "type": "custom:mushroom-title-card",
-                  "title": "{% set time = now().hour %}\n{% if (time >= 18) %}\n  Good Evening, {{user}}!\n{% elif (time >= 12) %}\n  Good Afternoon, {{user}}!\n{% elif (time >= 5) %}\n  Good Morning, {{user}}!\n{% else %}\n  Hello, {{user}}!\n{% endif %}"
+                  "title": "{% set time = now().hour %}\n{% if (time >= 18) %}\n  Good Evening, {{user}}!\n{% elif (time >= 12) %}\n  Good Afternoon, {{user}}!\n{% elif (time >= 5) %}\n  Good Morning, {{user}}!\n{% else %}\n  Hello, {{user}}!\n{% endif %}",
+                  "subtitle": "",
+                  "alignment": "start"
                 },
                 {
                   "type": "custom:mushroom-chips-card",
                   "chips": [
-                    {
-                      "type": "weather",
-                      "entity": "weather.calgary",
-                      "show_conditions": true,
-                      "show_temperature": true,
-                      "tap_action": {
-                        "action": "more-info"
-                      }
-                    },
-                    {
-                      "type": "template",
-                      "entity": "sensor.bridlewood_feels_like",
-                      "icon": "mdi:thermometer-high",
-                      "tap_action": {
-                        "action": "more-info"
-                      },
-                      "icon_color": "grey",
-                      "content": "Feels like {{ states('sensor.bridlewood_feels_like')}} °C",
-                      "hold_action": {
-                        "action": "more-info"
-                      }
-                    },
                     {
                       "type": "conditional",
                       "conditions": [
@@ -66,11 +100,29 @@
                       }
                     },
                     {
-                      "type": "action",
-                      "icon": "mdi:home-city-outline",
+                      "type": "template",
+                      "icon": "mdi:volume-off",
                       "tap_action": {
-                        "action": "navigate",
-                        "navigation_path": "city"
+                        "action": "toggle"
+                      },
+                      "entity": "input_boolean.quiet_time",
+                      "icon_color": "{% if is_state('input_boolean.quiet_time', 'on') %}\n  green\n{% elif is_state('input_boolean.quiet_time', 'off') %}\n  grey\n{% endif %}",
+                      "content": "",
+                      "hold_action": {
+                        "action": "more-info"
+                      }
+                    },
+                    {
+                      "type": "template",
+                      "icon": "mdi:sleep",
+                      "tap_action": {
+                        "action": "toggle"
+                      },
+                      "entity": "input_boolean.good_night",
+                      "icon_color": "{% if is_state('input_boolean.good_night', 'on') %}\n  blue\n{% elif is_state('input_boolean.good_night', 'off') %}\n  grey\n{% endif %}",
+                      "content": "",
+                      "hold_action": {
+                        "action": "more-info"
                       }
                     }
                   ],
@@ -79,88 +131,90 @@
               ]
             },
             {
-              "type": "horizontal-stack",
-              "cards": [
-                {
-                  "type": "custom:mushroom-template-card",
-                  "primary": "House",
-                  "icon": "mdi:home-outline",
-                  "icon_color": "blue",
-                  "layout": "vertical",
-                  "tap_action": {
-                    "action": "navigate",
-                    "navigation_path": "house"
-                  }
-                },
-                {
-                  "type": "custom:mushroom-template-card",
-                  "icon": "mdi:thermostat",
-                  "layout": "vertical",
-                  "entity": "climate.thermostat",
-                  "icon_color": "{% if is_state('climate.thermostat', 'heat') %}\n  red\n{% elif is_state('climate.thermostat', 'cool') %}\n  blue\n{% elif is_state('climate.thermostat', 'heat_cool') %}\n green\n{% endif %}",
-                  "primary": "{{ states.climate.thermostat.attributes.current_temperature }} \n",
-                  "tap_action": {
-                    "action": "more-info"
-                  }
-                },
-                {
-                  "type": "custom:mushroom-template-card",
-                  "primary": "Security",
-                  "icon": "mdi:shield-check-outline",
-                  "icon_color": "green",
-                  "layout": "vertical",
-                  "tap_action": {
-                    "action": "navigate",
-                    "navigation_path": "security"
-                  }
-                },
-                {
-                  "type": "custom:mushroom-template-card",
-                  "primary": "Network",
-                  "icon": "mdi:security-network",
-                  "icon_color": "green",
-                  "layout": "vertical",
-                  "tap_action": {
-                    "action": "navigate",
-                    "navigation_path": "network"
-                  }
-                },
-                {
-                  "type": "custom:mushroom-template-card",
-                  "primary": "Rack",
-                  "icon": "mdi:server-network",
-                  "icon_color": "grey",
-                  "layout": "vertical",
-                  "tap_action": {
-                    "action": "navigate",
-                    "navigation_path": "rack"
-                  }
-                }
-              ]
-            },
-            {
-              "type": "horizontal-stack",
-              "cards": [
-                {
-                  "type": "custom:mushroom-person-card",
-                  "entity": "person.paul",
-                  "use_entity_picture": true
-                },
-                {
-                  "type": "custom:mushroom-person-card",
-                  "entity": "person.beth",
-                  "use_entity_picture": true
-                },
-                {
-                  "type": "custom:mushroom-person-card",
-                  "entity": "person.jordan",
-                  "use_entity_picture": true
-                }
-              ]
-            },
-            {
               "type": "vertical-stack",
               "cards": [
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:mushroom-person-card",
+                      "entity": "person.paul",
+                      "icon_type": "entity-picture",
+                      "primary_info": "none",
+                      "secondary_info": "none",
+                      "layout": "horizontal"
+                    },
+                    {
+                      "type": "custom:mushroom-person-card",
+                      "entity": "person.beth",
+                      "primary_info": "none",
+                      "secondary_info": "none",
+                      "icon_type": "entity-picture",
+                      "layout": "horizontal",
+                      "fill_container": false
+                    },
+                    {
+                      "type": "custom:mushroom-person-card",
+                      "entity": "person.jordan",
+                      "layout": "horizontal",
+                      "icon_type": "entity-picture",
+                      "primary_info": "none",
+                      "secondary_info": "none"
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:mushroom-template-card",
+                      "icon": "mdi:thermostat",
+                      "layout": "vertical",
+                      "entity": "climate.thermostat",
+                      "icon_color": "{% if is_state('climate.thermostat', 'heat') %}\n  red\n{% elif is_state('climate.thermostat', 'cool') %}\n  blue\n{% elif is_state('climate.thermostat', 'heat_cool') %}\n green\n{% endif %}",
+                      "primary": "{{ states.climate.thermostat.attributes.current_temperature }}°C",
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "hold_action": {
+                        "action": "more-info"
+                      }
+                    },
+                    {
+                      "type": "custom:mushroom-template-card",
+                      "primary": "Security",
+                      "icon": "mdi:shield-check-outline",
+                      "icon_color": "green",
+                      "layout": "vertical",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "security"
+                      }
+                    },
+                    {
+                      "type": "custom:mushroom-template-card",
+                      "primary": "Network",
+                      "icon": "mdi:security-network",
+                      "icon_color": "green",
+                      "layout": "vertical",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "network"
+                      }
+                    },
+                    {
+                      "type": "custom:mushroom-template-card",
+                      "primary": "Rack",
+                      "icon": "mdi:server-network",
+                      "icon_color": "grey",
+                      "layout": "vertical",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "rack"
+                      }
+                    }
+                  ]
+                },
                 {
                   "type": "horizontal-stack",
                   "cards": [
@@ -227,7 +281,7 @@
                   "cards": [
                     {
                       "type": "custom:mushroom-template-card",
-                      "primary": "Front",
+                      "primary": "Frontyard",
                       "icon": "mdi:lightbulb-variant-outline",
                       "entity": "switch.frontyard_lights",
                       "layout": "vertical",
@@ -257,7 +311,7 @@
                     },
                     {
                       "type": "custom:mushroom-template-card",
-                      "primary": "Back",
+                      "primary": "Backyard",
                       "icon": "mdi:lightbulb-variant-outline",
                       "entity": "switch.backyard_lights",
                       "layout": "vertical",
@@ -286,6 +340,64 @@
                       "fill_container": false
                     }
                   ]
+                },
+                {
+                  "type": "custom:mushroom-title-card",
+                  "title": "Climate"
+                },
+                {
+                  "type": "custom:mini-climate",
+                  "entity": "climate.thermostat",
+                  "hvac_mode": {
+                    "style": "(value, entity) => ({ color: 'black' })",
+                    "source": {
+                      "off": {
+                        "icon": "mdi:power",
+                        "name": "Off"
+                      },
+                      "cool": {
+                        "icon": "mdi:snowflake",
+                        "name": "Cool"
+                      },
+                      "dry": {
+                        "icon": "mdi:water",
+                        "name": "Dry"
+                      },
+                      "auto": {
+                        "icon": "mdi:cached",
+                        "name": "Auto"
+                      },
+                      "fan_only": {
+                        "icon": "mdi:fan",
+                        "name": "Fan Only"
+                      },
+                      "heat": {
+                        "icon": "mdi:weather-sunny",
+                        "name": "Heat"
+                      },
+                      "heat_cool": {
+                        "icon": "mdi:weather-sunny",
+                        "name": "Heat/Cool"
+                      }
+                    },
+                    "change_action": "(selected, entity) => this.call_service('climate', 'set_hvac_mode', { entity_id: entity.entity_id, hvac_mode: selected })\n"
+                  },
+                  "tap_action": {
+                    "action": "more-info"
+                  },
+                  "indicators": {
+                    "humidity": {
+                      "icon": {
+                        "template": "() => 'mdi:water-percent'",
+                        "style": "(value) => (value > 40 ? { color: 'red'} : {})\n"
+                      },
+                      "unit": "%",
+                      "round": 1,
+                      "source": {
+                        "entity": "sensor.thermostat_humidity"
+                      }
+                    }
+                  }
                 },
                 {
                   "type": "vertical-stack",
@@ -414,6 +526,21 @@
               "cards": [
                 {
                   "type": "custom:mushroom-title-card",
+                  "title": ""
+                },
+                {
+                  "type": "custom:mushroom-title-card",
+                  "title": "Forecast",
+                  "subtitle": "Currently, it's {{ states.climate.thermostat.attributes.current_temperature }}°C and feels like {{ states('sensor.bridlewood_feels_like')}}°C. Sunrise at {{ states('sensor.sunrise')}}, sunset at {{ states('sensor.sunset')}}."
+                },
+                {
+                  "type": "custom:hourly-weather",
+                  "entity": "weather.calgary_hourly",
+                  "name": " ",
+                  "icons": false
+                },
+                {
+                  "type": "custom:mushroom-title-card",
                   "title": "Upcoming Events"
                 },
                 {
@@ -486,53 +613,6 @@
                     },
                     {
                       "type": "custom:mushroom-media-player-card",
-                      "entity": "media_player.android_tv_bedroom",
-                      "use_media_info": true,
-                      "media_controls": [
-                        "on_off",
-                        "play_pause_stop"
-                      ],
-                      "volume_controls": [],
-                      "tap_action": {
-                        "action": "more-info"
-                      },
-                      "name": "Bedroom TV",
-                      "icon": "mdi:television",
-                      "layout": "horizontal",
-                      "fill_container": false
-                    },
-                    {
-                      "type": "custom:mushroom-media-player-card",
-                      "entity": "media_player.android_tv_living_room",
-                      "use_media_info": true,
-                      "media_controls": [
-                        "on_off",
-                        "play_pause_stop"
-                      ],
-                      "volume_controls": [],
-                      "tap_action": {
-                        "action": "more-info"
-                      },
-                      "icon": "mdi:television",
-                      "layout": "horizontal"
-                    },
-                    {
-                      "type": "custom:mushroom-media-player-card",
-                      "entity": "media_player.android_tv_guest_bedroom",
-                      "use_media_info": true,
-                      "media_controls": [
-                        "on_off",
-                        "play_pause_stop"
-                      ],
-                      "layout": "horizontal",
-                      "volume_controls": [],
-                      "tap_action": {
-                        "action": "more-info"
-                      },
-                      "icon": "mdi:television"
-                    },
-                    {
-                      "type": "custom:mushroom-media-player-card",
                       "entity": "media_player.office_pod",
                       "use_media_info": true,
                       "media_controls": [
@@ -552,6 +632,68 @@
                       "fill_container": true,
                       "name": "Office Pod",
                       "icon_type": "entity-picture"
+                    },
+                    {
+                      "type": "custom:mushroom-media-player-card",
+                      "entity": "media_player.android_tv_bedroom",
+                      "use_media_info": true,
+                      "media_controls": [
+                        "on_off",
+                        "play_pause_stop"
+                      ],
+                      "volume_controls": [
+                        "volume_mute",
+                        "volume_set",
+                        "volume_buttons"
+                      ],
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "name": "Bedroom TV",
+                      "icon": "mdi:television",
+                      "layout": "horizontal",
+                      "fill_container": false,
+                      "collapsible_controls": true
+                    },
+                    {
+                      "type": "custom:mushroom-media-player-card",
+                      "entity": "media_player.android_tv_living_room",
+                      "use_media_info": true,
+                      "media_controls": [
+                        "on_off",
+                        "play_pause_stop"
+                      ],
+                      "volume_controls": [
+                        "volume_buttons",
+                        "volume_set",
+                        "volume_mute"
+                      ],
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "icon": "mdi:television",
+                      "layout": "horizontal",
+                      "collapsible_controls": true
+                    },
+                    {
+                      "type": "custom:mushroom-media-player-card",
+                      "entity": "media_player.android_tv_guest_bedroom",
+                      "use_media_info": true,
+                      "media_controls": [
+                        "on_off",
+                        "play_pause_stop"
+                      ],
+                      "layout": "horizontal",
+                      "volume_controls": [
+                        "volume_buttons",
+                        "volume_set",
+                        "volume_mute"
+                      ],
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "icon": "mdi:television",
+                      "collapsible_controls": true
                     }
                   ]
                 }
@@ -579,14 +721,6 @@
                     "navigation_path": "https://home.giff.ca/"
                   },
                   "icon": "mdi:view-dashboard-outline"
-                },
-                {
-                  "type": "action",
-                  "icon": "mdi:home-outline",
-                  "tap_action": {
-                    "action": "navigate",
-                    "navigation_path": "house"
-                  }
                 },
                 {
                   "type": "action",
@@ -628,7 +762,8 @@
                     "navigation_path": "city"
                   }
                 }
-              ]
+              ],
+              "alignment": "center"
             },
             {
               "type": "vertical-stack",
@@ -638,14 +773,56 @@
                   "title": "Climate"
                 },
                 {
-                  "type": "custom:simple-thermostat",
+                  "type": "custom:mini-climate",
                   "entity": "climate.thermostat",
-                  "header": false,
-                  "layout": {
-                    "mode": {
-                      "names": true,
-                      "headings": true,
-                      "icons": false
+                  "hvac_mode": {
+                    "style": "(value, entity) => ({ color: 'black' })",
+                    "source": {
+                      "off": {
+                        "icon": "mdi:power",
+                        "name": "Off"
+                      },
+                      "cool": {
+                        "icon": "mdi:snowflake",
+                        "name": "Cool"
+                      },
+                      "dry": {
+                        "icon": "mdi:water",
+                        "name": "Dry"
+                      },
+                      "auto": {
+                        "icon": "mdi:cached",
+                        "name": "Auto"
+                      },
+                      "fan_only": {
+                        "icon": "mdi:fan",
+                        "name": "Fan Only"
+                      },
+                      "heat": {
+                        "icon": "mdi:weather-sunny",
+                        "name": "Heat"
+                      },
+                      "heat_cool": {
+                        "icon": "mdi:weather-sunny",
+                        "name": "Heat/Cool"
+                      }
+                    },
+                    "change_action": "(selected, entity) => this.call_service('climate', 'set_hvac_mode', { entity_id: entity.entity_id, hvac_mode: selected })\n"
+                  },
+                  "tap_action": {
+                    "action": "more-info"
+                  },
+                  "indicators": {
+                    "humidity": {
+                      "icon": {
+                        "template": "() => 'mdi:water-percent'",
+                        "style": "(value) => (value > 40 ? { color: 'red'} : {})\n"
+                      },
+                      "unit": "%",
+                      "round": 1,
+                      "source": {
+                        "entity": "sensor.thermostat_humidity"
+                      }
                     }
                   }
                 },
@@ -688,14 +865,6 @@
                       "graph": "line"
                     }
                   ]
-                },
-                {
-                  "type": "entities",
-                  "entities": [
-                    {
-                      "entity": "binary_sensor.car_wash"
-                    }
-                  ]
                 }
               ]
             },
@@ -716,7 +885,8 @@
                     "action": "toggle"
                   },
                   "show_brightness_control": true,
-                  "show_color_temp_control": true
+                  "show_color_temp_control": true,
+                  "collapsible_controls": true
                 },
                 {
                   "type": "custom:mushroom-light-card",
@@ -726,7 +896,9 @@
                   "show_color_control": false,
                   "tap_action": {
                     "action": "toggle"
-                  }
+                  },
+                  "collapsible_controls": true,
+                  "name": "Office"
                 },
                 {
                   "type": "custom:mushroom-light-card",
@@ -740,11 +912,48 @@
                   },
                   "hold_action": {
                     "action": "more-info"
-                  }
+                  },
+                  "collapsible_controls": true,
+                  "name": "Outdoor"
                 },
                 {
                   "type": "custom:mushroom-light-card",
-                  "entity": "light.living_room_lights"
+                  "entity": "light.living_room_lights",
+                  "collapsible_controls": true
+                }
+              ]
+            },
+            {
+              "type": "custom:mini-graph-card",
+              "aggregate_func": "max",
+              "animate": true,
+              "name": "Furnace Fan Usage",
+              "hours_to_show": 168,
+              "group_by": "date",
+              "show": {
+                "graph": "bar"
+              },
+              "entities": [
+                {
+                  "entity": "sensor.furnace_fan_history_24_hours"
+                }
+              ]
+            },
+            {
+              "type": "custom:apexcharts-card",
+              "header": {
+                "show": true,
+                "title": "Furnace Fan",
+                "show_states": true,
+                "colorize_states": true
+              },
+              "series": [
+                {
+                  "entity": "sensor.furnace_fan_history_24_hours"
+                },
+                {
+                  "entity": "sensor.furnace_fan_history_7_days",
+                  "type": "column"
                 }
               ]
             }
@@ -781,14 +990,6 @@
                 },
                 {
                   "type": "action",
-                  "icon": "mdi:shield-check-outline",
-                  "tap_action": {
-                    "action": "navigate",
-                    "navigation_path": "security"
-                  }
-                },
-                {
-                  "type": "action",
                   "icon": "mdi:countertop-outline",
                   "tap_action": {
                     "action": "navigate",
@@ -819,7 +1020,8 @@
                     "navigation_path": "city"
                   }
                 }
-              ]
+              ],
+              "alignment": "center"
             },
             {
               "camera_view": "auto",
@@ -957,14 +1159,6 @@
                 },
                 {
                   "type": "action",
-                  "icon": "mdi:countertop-outline",
-                  "tap_action": {
-                    "action": "navigate",
-                    "navigation_path": "kitchen"
-                  }
-                },
-                {
-                  "type": "action",
                   "icon": "mdi:server-network",
                   "tap_action": {
                     "action": "navigate",
@@ -987,7 +1181,8 @@
                     "navigation_path": "city"
                   }
                 }
-              ]
+              ],
+              "alignment": "center"
             },
             {
               "type": "vertical-stack",
@@ -1303,14 +1498,6 @@
                     },
                     {
                       "type": "action",
-                      "icon": "mdi:server-network",
-                      "tap_action": {
-                        "action": "navigate",
-                        "navigation_path": "rack"
-                      }
-                    },
-                    {
-                      "type": "action",
                       "icon": "mdi:security-network",
                       "tap_action": {
                         "action": "navigate",
@@ -1325,7 +1512,8 @@
                         "navigation_path": "city"
                       }
                     }
-                  ]
+                  ],
+                  "alignment": "center"
                 },
                 {
                   "type": "custom:mushroom-title-card",
@@ -1410,6 +1598,9 @@
                 {
                   "type": "entities",
                   "entities": [
+                    {
+                      "entity": "input_boolean.automations"
+                    },
                     {
                       "entity": "sensor.hacs"
                     },
@@ -1916,21 +2107,14 @@
                 },
                 {
                   "type": "action",
-                  "icon": "mdi:security-network",
-                  "tap_action": {
-                    "action": "navigate",
-                    "navigation_path": "network"
-                  }
-                },
-                {
-                  "type": "action",
                   "icon": "mdi:home-city-outline",
                   "tap_action": {
                     "action": "navigate",
                     "navigation_path": "city"
                   }
                 }
-              ]
+              ],
+              "alignment": "center"
             },
             {
               "type": "vertical-stack",
@@ -2189,16 +2373,9 @@
                     "action": "navigate",
                     "navigation_path": "network"
                   }
-                },
-                {
-                  "type": "action",
-                  "icon": "mdi:home-city-outline",
-                  "tap_action": {
-                    "action": "navigate",
-                    "navigation_path": "city"
-                  }
                 }
-              ]
+              ],
+              "alignment": "center"
             },
             {
               "type": "vertical-stack",

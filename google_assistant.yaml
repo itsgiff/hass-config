@@ -122,4 +122,8 @@
     switch.main_water_shutoff:
       expose: true
       room: 'Basement'
-      name: 'Water Main'                   
+      name: 'Water Main'
+    input_boolean.quiet_time:
+      expose: true
+      room: 'Bedroom'
+      name: 'Quiet Time'
