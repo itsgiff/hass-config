@@ -1,0 +1,16 @@
+- platform: template
+  sensors: 
+    ups_battery_runtime_min:
+      friendly_name: 'UPS Battery Runtime'
+      unit_of_measurement: m
+      value_template: "{{ (states('sensor.ups_battery_runtime') | float / 60) | round(0) }}"
+      icon_template: mdi:timer-outline
+
+- platform: template
+  sensors: 
+    ups_low_battery_runtime_min:
+      friendly_name: 'UPS Low Battery Runtime'
+      unit_of_measurement: m
+      value_template: "{{ (states('sensor.ups_low_battery_runtime') | float / 60) | round(0) }}"
+      icon_template: mdi:timer-outline
+

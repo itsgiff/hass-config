@@ -1,0 +1,69 @@
+
+mqtt:
+  host: 192.168.1.4
+  user: frigate
+  password: '!secret mqtt_password'
+
+cameras:
+  driveway_frigate:
+    ffmpeg:
+      inputs: 
+        - path: rtsps://192.168.1.1:7441/nCQPKqCkpsuMir4S?enableSrtp
+          roles:
+            - detect
+            - rtmp
+    detect:
+      width: 1920
+      height: 1080
+      fps: 5  
+    motion:
+      mask: 1024,0,1024,233,571,195,0,305,0,0
+    objects:
+      track:
+        - person
+        - dog
+        - car
+        - truck
+        - van
+      mask: 1024,0,1024,233,571,195,0,305,0,0
+    snapshots:
+      enabled: True
+      timestamp: True
+      bounding_box: True 
+      retain:
+        default: 2
+
+
+  front-deck_frigate:
+    ffmpeg:
+      hwaccel_args:
+        - -hwaccel
+        - vaapi
+        - -hwaccel_device
+        - /dev/dri/renderD128
+        - -hwaccel_output_format
+        - yuv420p
+      inputs: 
+        - path: rtsps://192.168.1.1:7441/Cu2jugIrbrqzmZKP?enableSrtp
+          roles:
+            - detect
+            - rtmp
+    detect:
+      width: 1920
+      height: 1080
+      fps: 5  
+    objects:
+      track:
+        - person
+        - dog
+    snapshots:
+      enabled: True
+      timestamp: True 
+      bounding_box: True 
+      retain:
+        default: 2
+
+detectors:
+  coral:
+    type: edgetpu
+    device: usb

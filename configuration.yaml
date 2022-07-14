@@ -1,23 +1,8 @@
-homeassistant:
-  # Name of the location where Home Assistant is running
-  # name: Home
-  # Location required to calculate the time the sun rises and sets
-  # latitude: !secret latitude
-  # longitude: !secret longitude
-  # external_url: "https://home.giff.ca"
-  # Impacts weather/sunrise data
-  # elevation: !secret elevation
-  # 'metric' for the metric system, 'imperial' for the imperial system
-  # unit_system: metric
-  # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-  # time_zone: America/Edmonton
-  # customize must nested within homeassistant entity
-  customize: !include customize.yaml
-  packages: !include_dir_named packages
+#  homeassistant:
+#  customize: !include customize.yaml
+#  packages: !include_dir_named packages
 
-# Enables the frontend
 frontend:
-  javascript_version: latest
   themes: !include_dir_merge_named themes
 
 http:
@@ -34,63 +19,57 @@ sun:
 discovery:
 conversation:
 system_health:
+energy:
 mobile_app:
 logbook:
 recorder:
-  purge_keep_days: 7
+  db_url: !secret mariadb_url
 history:
 logger:
   default: warning
-updater:
-  reporting: false
-  include_used_components: true
 tts:
   - platform: google_translate
-
-# Simple Components
+my:
+usb:
+input_select:
+input_text:
 
 # Includes
 automation: !include automations.yaml
 binary_sensor: !include binary_sensor.yaml
-group: !include group.yaml
 camera: !include camera.yaml
-ios: 
+monitor_docker: !include monitor_docker.yaml
+group: !include group.yaml
+google_assistant: !include google_assistant.yaml
+homekit: !include homekit.yaml
+ios:
+light: !include light.yaml
 notify: !include notify.yaml
 script: !include scripts.yaml
 sensor: !include_dir_merge_list sensor
 zone: !include zones.yaml
 
-# Third Party Platforms
-auto_backup:
-  auto_purge: true
+influxdb:
+  host: a0d7b954-influxdb
+  port: 8086
+  database: !secret influxdb_db
+  username: !secret influxdb_username
+  password: !secret influxdb_password
+  max_retries: 3
+  default_measurement: state
 
-breaking_changes:
-
-dyson:
-  username: !secret dyson_username
-  password: !secret dyson_password
-  language: !secret dyson_language
-  devices:
-    - device_id: !secret dyson_bedroom_serial
-      device_ip: !secret dyson_bedroom_ip
-
-speedtestdotnet:
-  scan_interval:
-    minutes: 90
-  monitored_conditions:
-    - ping
-    - download
-    - upload
-
-fastdotcom:
+pyscript:
+  allow_all_imports: true
+  hass_is_global: true
+  apps:
+    mam:
+      - service_name: get_mam_jsonLoad
+        url: !secret mam_url
+        cookie: !secret mam_cookie
 
 google:
   client_id: !secret google_client_id
   client_secret: !secret google_client_secret
-
-google_assistant: !include google_assistant.yaml
-
-image_processing: !include doods.yaml
 
 media_player:
   - platform: androidtv

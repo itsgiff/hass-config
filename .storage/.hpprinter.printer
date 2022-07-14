@@ -1,5 +1,6 @@
 {
     "version": 1,
+    "minor_version": 1,
     "key": ".hpprinter.printer",
     "data": {
         "Cartridges": {
@@ -9,7 +10,7 @@
                 "Manufactured At": "2020-04-03",
                 "Manufactured By": "HP",
                 "Product Number": "CF500X",
-                "Remaining": "100",
+                "Remaining": "50",
                 "Serial Number": "16978880",
                 "Station": "0",
                 "Type": "Toner",
@@ -21,7 +22,7 @@
                 "Manufactured At": "2020-04-06",
                 "Manufactured By": "HP",
                 "Product Number": "CF501X",
-                "Remaining": "100",
+                "Remaining": "60",
                 "Serial Number": "16979614",
                 "Station": "3",
                 "Type": "Toner",
@@ -33,7 +34,7 @@
                 "Manufactured At": "2020-04-03",
                 "Manufactured By": "HP",
                 "Product Number": "CF503X",
-                "Remaining": "100",
+                "Remaining": "70",
                 "Serial Number": "16988657",
                 "Station": "2",
                 "Type": "Toner",
@@ -45,7 +46,7 @@
                 "Manufactured At": "2020-04-04",
                 "Manufactured By": "HP",
                 "Product Number": "CF502X",
-                "Remaining": "100",
+                "Remaining": "70",
                 "Serial Number": "16983565",
                 "Station": "1",
                 "Type": "Toner",
@@ -55,17 +56,17 @@
         "IsOnline": true,
         "Name": "printer",
         "Printer": {
-            "Total": "1160",
-            "Color": "884",
-            "Monochrome": "276",
+            "Total": "2407",
+            "Color": "1879",
+            "Monochrome": "528",
             "Jams": "0",
             "Cancelled": "N/A"
         },
         "Scanner": {
-            "Total": 61,
-            "ADF": "55",
+            "Total": 153,
+            "ADF": "133",
             "Duplex": "N/A",
-            "Flatbed": "6",
+            "Flatbed": "20",
             "Jams": "0",
             "Mispick": "0"
         },

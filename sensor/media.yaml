@@ -1,69 +1,14 @@
-###########################################
-# Media
-###########################################
-- platform: sonarr_upcoming_media
-  api_key: !secret sonarr_api
-  host: !secret host_address
-  port: 8989
-  days: 7
-  ssl: false
-  max: 5
 
-- platform: radarr_upcoming_media
-  api_key: !secret radarr_api
-  host: !secret host_address
-  port: 7878
-  days: 60
-  ssl: false
-  theaters: true
-  max: 5
 
-###########################################
-# Disk Space for Radarr and Sonarr - no need for yaml, keeping for reference until Radarr is enabled in GUI
-###########################################
-# - platform: sonarr
-# #  name: Televison Storage
-#   api_key: !secret sonarr_api
-#   host: !secret host_address
-#   monitored_conditions:
-#     - upcoming
-#     - commands
-#     - status
-#     - diskspace
-#   include_paths:
-#     - /tv
-#   unit: TB
-
-- platform: radarr
-#  name: Movie Storage
-  api_key: !secret radarr_api
-  host: !secret host_address
+- platform: tautulli
+  api_key: !secret tautulli_api
+  host: !secret nas_address
+  port: 8888
   monitored_conditions:
-    - upcoming
-    - commands
-    - status
-    - diskspace
-  include_paths:
-    - /movies
-  unit: TB
-  days: 5
+    - stream_count
+    - stream_count_direct_play
+    - stream_count_direct_stream
+    - stream_count_transcode
+    - total_bandwidth
+    - wan_bandwidth
 
-###########################################
-# Plex Recently Added
-###########################################
-
-- platform: plex_recently_added
-  name: Recently Added Movies
-  token: !secret plex_token
-  host: !secret media_address
-  port: 32400
-  section_types:
-    - movie
-
-- platform: plex_recently_added
-  name: Recently Added TV
-  token: !secret plex_token
-  host: !secret media_address
-  port: 32400
-  section_types:
-    - show

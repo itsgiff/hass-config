@@ -1,1572 +1,2299 @@
 {
-    "version": 1,
-    "key": "lovelace",
-    "data": {
-        "config": {
-            "title": "Home",
-            "views": [
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace",
+  "data": {
+    "config": {
+      "kiosk_mode": {
+        "hide_header": true
+      },
+      "views": [
+        {
+          "theme": "Mushroom",
+          "title": "Home",
+          "icon": "mdi:view-dashboard-outline",
+          "badges": [],
+          "cards": [
+            {
+              "type": "vertical-stack",
+              "cards": [
                 {
-                    "icon": "mdi:view-dashboard-outline",
-                    "path": "dash",
-                    "title": "dash",
-                    "badges": [
-                        {
-                            "entity": "person.paul"
-                        },
-                        {
-                            "entity": "person.beth"
-                        },
-                        {
-                            "entity": "person.jordan"
-                        },
-                        {
-                            "entity": "person.jack"
-                        },
-                        {
-                            "entity": "person.ralph"
-                        },
-                        {
-                            "entity": "person.frank"
-                        },
-                        {
-                            "entity": "person.ernie"
-                        },
-                        {
-                            "entity": "person.albert"
-                        }
-                    ],
-                    "cards": [
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "picture-glance",
-                                    "entities": [
-                                        {
-                                            "entity": "lock.front_door"
-                                        },
-                                        {
-                                            "entity": "lock.garage_door"
-                                        },
-                                        {
-                                            "entity": "cover.garage_door"
-                                        },
-                                        {
-                                            "entity": "sensor.dark_sky_apparent_temperature"
-                                        },
-                                        {
-                                            "entity": "sensor.front_deck_humidity"
-                                        },
-                                        {
-                                            "entity": "sensor.dark_sky_precip_type"
-                                        },
-                                        {
-                                            "entity": "switch.frontyard_frontyard_lights_switch"
-                                        }
-                                    ],
-                                    "camera_image": "camera.front_door",
-                                    "tap_action": {
-                                        "action": "more-info"
-                                    },
-                                    "camera_view": "live",
-                                    "aspect_ratio": "16:9"
-                                },
-                                {
-                                    "type": "picture-glance",
-                                    "entities": [
-                                        {
-                                            "entity": "switch.backyard_backyard_lights_switch"
-                                        },
-                                        {
-                                            "entity": "switch.backyard_pergola_lights_switch"
-                                        },
-                                        {
-                                            "entity": "switch.backyard_water_fountain_switch"
-                                        },
-                                        {
-                                            "entity": "lock.back_door"
-                                        },
-                                        {
-                                            "entity": "image_processing.doods_back_deck"
-                                        }
-                                    ],
-                                    "camera_image": "camera.back_deck",
-                                    "tap_action": {
-                                        "action": "more-info"
-                                    }
-                                },
-                                {
-                                    "type": "entity-filter",
-                                    "entities": [
-                                        {
-                                            "entity": "switch.kitchen_coffee_light_switch",
-                                            "name": "Coffee"
-                                        },
-                                        {
-                                            "entity": "switch.bedroom_bed_light_switch",
-                                            "name": "Bed"
-                                        },
-                                        {
-                                            "entity": "light.desk"
-                                        },
-                                        {
-                                            "entity": "light.under_desk"
-                                        },
-                                        {
-                                            "entity": "light.office_light"
-                                        },
-                                        {
-                                            "entity": "light.office_lamp",
-                                            "name": "Office Lamp"
-                                        },
-                                        {
-                                            "entity": "switch.bed_light"
-                                        },
-                                        {
-                                            "entity": "switch.backyard_pergola_lights_switch",
-                                            "name": "Pergola"
-                                        },
-                                        {
-                                            "entity": "switch.frontyard_frontyard_lights_switch",
-                                            "name": "Front"
-                                        },
-                                        {
-                                            "entity": "switch.backyard_backyard_lights_switch",
-                                            "name": "Back"
-                                        }
-                                    ],
-                                    "state_filter": [
-                                        "on"
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "picture-glance",
-                                    "entities": [
-                                        {
-                                            "entity": "lock.garage_door"
-                                        },
-                                        {
-                                            "entity": "cover.garage_door"
-                                        },
-                                        {
-                                            "entity": "sensor.dark_sky_apparent_temperature"
-                                        },
-                                        {
-                                            "entity": "image_processing.doods_driveway"
-                                        }
-                                    ],
-                                    "camera_image": "camera.driveway",
-                                    "tap_action": {
-                                        "action": "more-info"
-                                    }
-                                },
-                                {
-                                    "type": "picture-glance",
-                                    "entities": [
-                                        {
-                                            "entity": "lock.back_door"
-                                        },
-                                        {
-                                            "entity": "switch.backyard_pergola_lights_switch"
-                                        },
-                                        {
-                                            "entity": "switch.backyard_water_fountain_switch"
-                                        }
-                                    ],
-                                    "camera_image": "camera.hot_tub",
-                                    "tap_action": {
-                                        "action": "more-info"
-                                    }
-                                }
-                            ]
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "custom:atomic-calendar-revive",
-                                    "name": "Upcoming Events",
-                                    "enableModeChange": true,
-                                    "calShowDescription": true,
-                                    "firstDayOfWeek": 1,
-                                    "maxDaysToShow": 7,
-                                    "showCurrentEventLine": false,
-                                    "showEventIcon": true,
-                                    "entities": [
-                                        "calendar.418_bridlecreek_green_sw_calgary",
-                                        "calendar.homegifford_gmail_com"
-                                    ],
-                                    "showLocation": false,
-                                    "sortByStartTime": true,
-                                    "showWeekDay": true,
-                                    "defaultMode": "Event",
-                                    "showLoader": false,
-                                    "showRelativeTime": true,
-                                    "showDate": true,
-                                    "dateFormat": "ll",
-                                    "noEventsForTodayText": "all clear",
-                                    "untilText": "until",
-                                    "showLastCalendarWeek": false,
-                                    "showMonth": false,
-                                    "dimFinishedEvents": true
-                                }
-                            ]
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "horizontal-stack",
-                                    "cards": [
-                                        {
-                                            "type": "sensor",
-                                            "entity": "sensor.dark_sky_apparent_temperature",
-                                            "graph": "line",
-                                            "detail": 2,
-                                            "hours_to_show": 12
-                                        },
-                                        {
-                                            "type": "sensor",
-                                            "entity": "sensor.wind_chill",
-                                            "graph": "line"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "weather-forecast",
-                                    "entity": "weather.thermostat",
-                                    "secondary_info_attribute": "humidity"
-                                },
-                                {
-                                    "type": "custom:auto-entities",
-                                    "card": {
-                                        "show_header_toggle": false,
-                                        "title": null,
-                                        "type": "entities"
-                                    },
-                                    "entities": [
-                                        "sensor.hacs",
-                                        "sensor.home_assistant_update",
-                                        "sensor.synology_update",
-                                        "sensor.potential_breaking_changes"
-                                    ],
-                                    "filter": {
-                                        "exclude": [
-                                            {
-                                                "state": "0"
-                                            },
-                                            {
-                                                "state": "off"
-                                            },
-                                            {
-                                                "state": "unknown"
-                                            },
-                                            {
-                                                "state": "False"
-                                            },
-                                            {
-                                                "state": "Current Release"
-                                            },
-                                            {
-                                                "state": "No Updates"
-                                            },
-                                            {
-                                                "state": "No Update(s)"
-                                            },
-                                            {
-                                                "state": "unavailable"
-                                            }
-                                        ]
-                                    },
-                                    "show_empty": false
-                                }
-                            ]
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "custom:mini-media-player",
-                                    "hide": {
-                                        "runtime": false,
-                                        "icon": true,
-                                        "volume": true,
-                                        "source": true,
-                                        "power_state": false,
-                                        "artwork_border": false
-                                    },
-                                    "source": "icon",
-                                    "volume_stateless": true,
-                                    "group": false,
-                                    "info": "scroll",
-                                    "artwork": "full-cover",
-                                    "sound_mode": "icon",
-                                    "entity": "media_player.bedroom_tv"
-                                },
-                                {
-                                    "type": "custom:mini-media-player",
-                                    "hide": {
-                                        "runtime": false,
-                                        "icon": true,
-                                        "volume": true,
-                                        "source": true,
-                                        "power_state": false,
-                                        "artwork_border": false
-                                    },
-                                    "artwork": "full-cover",
-                                    "source": "icon",
-                                    "group": false,
-                                    "volume_stateless": true,
-                                    "info": "scroll",
-                                    "sound_mode": "icon",
-                                    "entity": "media_player.living_room_tv"
-                                },
-                                {
-                                    "type": "custom:mini-media-player",
-                                    "artwork": "full-cover",
-                                    "hide": {
-                                        "runtime": false,
-                                        "icon": true,
-                                        "volume": true,
-                                        "source": true,
-                                        "power_state": false,
-                                        "artwork_border": false
-                                    },
-                                    "source": "icon",
-                                    "group": false,
-                                    "volume_stateless": true,
-                                    "info": "scroll",
-                                    "sound_mode": "icon",
-                                    "entity": "media_player.guest_bedroom_tv"
-                                },
-                                {
-                                    "type": "custom:auto-entities",
-                                    "show_empty": false,
-                                    "card": {
-                                        "type": "entities",
-                                        "show_header_toggle": false
-                                    },
-                                    "entities": [
-                                        "sensor.plex_plex"
-                                    ],
-                                    "filter": {
-                                        "include": [
-                                            "sensor.plex_plex"
-                                        ],
-                                        "exclude": [
-                                            {
-                                                "state": "0"
-                                            }
-                                        ],
-                                        "method": "last_changed"
-                                    }
-                                },
-                                {
-                                    "type": "custom:auto-entities",
-                                    "show_empty": false,
-                                    "card": {
-                                        "type": "entities",
-                                        "show_header_toggle": false
-                                    },
-                                    "filter": {
-                                        "include": [
-                                            {
-                                                "domain": "media_player"
-                                            }
-                                        ],
-                                        "exclude": [
-                                            {
-                                                "state": "idle"
-                                            },
-                                            {
-                                                "state": "off"
-                                            },
-                                            {
-                                                "state": "unavailable"
-                                            },
-                                            {
-                                                "state": "standby"
-                                            },
-                                            {
-                                                "entity_id": "media_player.guest_bedroom_tv"
-                                            },
-                                            {
-                                                "entity_id": "media_player.living_room_tv"
-                                            },
-                                            {
-                                                "entity_id": "media_player.bedroom_tv"
-                                            },
-                                            {
-                                                "entity_id": "media_player.plex_plex_*"
-                                            },
-                                            {
-                                                "entity_id": "media_player.*_android_tv"
-                                            }
-                                        ],
-                                        "method": "last_changed"
-                                    }
-                                }
-                            ]
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "picture-entity",
-                                    "entity": "image_processing.doods_driveway",
-                                    "name": "Driveway Detection",
-                                    "camera_image": "camera.driveway_detection",
-                                    "camera_view": "live",
-                                    "aspect_ratio": "50%"
-                                },
-                                {
-                                    "type": "picture-entity",
-                                    "entity": "image_processing.doods_front_deck",
-                                    "name": "Front Deck Detection",
-                                    "camera_image": "camera.front_deck_detection",
-                                    "camera_view": "live",
-                                    "aspect_ratio": "50%"
-                                },
-                                {
-                                    "type": "picture-entity",
-                                    "entity": "image_processing.doods_back_deck",
-                                    "name": "Back Deck Detection",
-                                    "camera_image": "camera.back_deck_detection",
-                                    "camera_view": "live",
-                                    "aspect_ratio": "50%"
-                                }
-                            ]
-                        }
-                    ]
+                  "type": "custom:mushroom-title-card",
+                  "title": "{% set time = now().hour %}\n{% if (time >= 18) %}\n  Good Evening, {{user}}!\n{% elif (time >= 12) %}\n  Good Afternoon, {{user}}!\n{% elif (time >= 5) %}\n  Good Morning, {{user}}!\n{% else %}\n  Hello, {{user}}!\n{% endif %}"
                 },
                 {
-                    "badges": [],
-                    "cards": [
+                  "type": "custom:mushroom-chips-card",
+                  "chips": [
+                    {
+                      "type": "weather",
+                      "entity": "weather.calgary",
+                      "show_conditions": true,
+                      "show_temperature": true,
+                      "tap_action": {
+                        "action": "more-info"
+                      }
+                    },
+                    {
+                      "type": "template",
+                      "entity": "sensor.bridlewood_feels_like",
+                      "icon": "mdi:thermometer-high",
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "icon_color": "grey",
+                      "content": "Feels like {{ states('sensor.bridlewood_feels_like')}} °C",
+                      "hold_action": {
+                        "action": "more-info"
+                      }
+                    },
+                    {
+                      "type": "conditional",
+                      "conditions": [
                         {
-                            "entities": [
-                                {
-                                    "entity": "lock.front_door"
-                                },
-                                {
-                                    "entity": "sensor.front_door"
-                                },
-                                {
-                                    "entity": "sensor.front_deck_thermometer"
-                                },
-                                {
-                                    "entity": "camera.front_gate"
-                                },
-                                {
-                                    "entity": "sensor.front_gate"
-                                },
-                                {
-                                    "entity": "camera.front_deck"
-                                },
-                                {
-                                    "entity": "switch.frontyard_frontyard_lights_switch"
-                                },
-                                {
-                                    "entity": "climate.thermostat"
-                                },
-                                {
-                                    "entity": "cover.garage_door"
-                                }
-                            ],
-                            "image": "/local/house.jpg",
-                            "title": "Home",
-                            "type": "picture-glance"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.office_temperature"
-                                },
-                                {
-                                    "entity": "camera.driveway"
-                                },
-                                {
-                                    "entity": "sensor.garage_door"
-                                },
-                                {
-                                    "entity": "cover.garage_door"
-                                },
-                                {
-                                    "entity": "media_player.garage_speaker"
-                                },
-                                {
-                                    "entity": "lock.garage_door"
-                                }
-                            ],
-                            "hold_action": {
-                                "action": "toggle"
-                            },
-                            "image": "/local/garage.jpg",
-                            "title": "Garage",
-                            "type": "picture-glance",
-                            "camera_image": "camera.garage"
-                        },
-                        {
-                            "aspect_ratio": "0%",
-                            "entities": [
-                                {
-                                    "entity": "fan.bedroom"
-                                },
-                                {
-                                    "entity": "sensor.bedroom_temperature"
-                                },
-                                {
-                                    "entity": "binary_sensor.bedroom_occupancy"
-                                },
-                                {
-                                    "entity": "sensor.bedroom_window"
-                                },
-                                {
-                                    "entity": "media_player.bedroom_tv"
-                                },
-                                {
-                                    "entity": "media_player.bedroom_hub"
-                                },
-                                {
-                                    "entity": "switch.bedroom_bed_light_switch"
-                                },
-                                {
-                                    "entity": "climate.bedroom"
-                                }
-                            ],
-                            "image": "/local/bedroom.jpg",
-                            "theme": "dark_theme",
-                            "title": "Bedroom",
-                            "type": "picture-glance"
-                        },
-                        {
-                            "aspect_ratio": "16:9",
-                            "entities": [
-                                {
-                                    "entity": "sensor.living_room_temperature"
-                                },
-                                {
-                                    "entity": "binary_sensor.living_room_occupancy"
-                                },
-                                {
-                                    "entity": "lock.back_door"
-                                },
-                                {
-                                    "entity": "sensor.back_door"
-                                },
-                                {
-                                    "entity": "media_player.living_room_tv"
-                                },
-                                {
-                                    "entity": "light.paul"
-                                },
-                                {
-                                    "entity": "light.beth"
-                                },
-                                {
-                                    "entity": "light.jordan"
-                                },
-                                {
-                                    "entity": "light.notify"
-                                }
-                            ],
-                            "hold_action": {
-                                "action": "toggle"
-                            },
-                            "image": "/local/living_room.jpg",
-                            "title": "Living",
-                            "type": "picture-glance"
-                        },
-                        {
-                            "aspect_ratio": "0%",
-                            "entities": [
-                                {
-                                    "entity": "sensor.guest_bedroom_temperature"
-                                },
-                                {
-                                    "entity": "sensor.guest_bedroom_window"
-                                },
-                                {
-                                    "entity": "binary_sensor.guest_bedroom_occupancy"
-                                },
-                                {
-                                    "entity": "media_player.guest_bedroom_hub"
-                                },
-                                {
-                                    "entity": "media_player.guest_bedroom_tv"
-                                }
-                            ],
-                            "image": "/local/guest_bedroom.jpg",
-                            "title": "Guest Bedroom",
-                            "type": "picture-glance"
-                        },
-                        {
-                            "aspect_ratio": "16:9",
-                            "entities": [
-                                {
-                                    "entity": "binary_sensor.office_occupancy"
-                                },
-                                {
-                                    "entity": "light.office_lamp"
-                                },
-                                {
-                                    "entity": "light.desk"
-                                },
-                                {
-                                    "entity": "sensor.office_temperature"
-                                },
-                                {
-                                    "entity": "media_player.office_hub"
-                                },
-                                {
-                                    "entity": "sensor.work_meeting"
-                                },
-                                {
-                                    "entity": "sensor.office_window"
-                                },
-                                {
-                                    "entity": "light.under_desk"
-                                }
-                            ],
-                            "hold_action": {
-                                "action": "toggle"
-                            },
-                            "image": "/local/desk.jpg",
-                            "tap_action": {
-                                "action": "more-info"
-                            },
-                            "title": "Office",
-                            "type": "picture-glance"
-                        },
-                        {
-                            "aspect_ratio": "0%",
-                            "entities": [
-                                {
-                                    "entity": "sensor.kitchen_temperature"
-                                },
-                                {
-                                    "entity": "binary_sensor.kitchen_occupancy"
-                                },
-                                {
-                                    "entity": "switch.kitchen_coffee_light_switch"
-                                },
-                                {
-                                    "entity": "sensor.kitchen_window"
-                                },
-                                {
-                                    "entity": "media_player.kitchen_hub"
-                                },
-                                {
-                                    "entity": "sensor.nodeid_18_alarm_water"
-                                }
-                            ],
-                            "hold_action": {
-                                "action": "toggle"
-                            },
-                            "image": "/local/kitchen.jpg",
-                            "title": "Kitchen",
-                            "type": "picture-glance"
-                        },
-                        {
-                            "type": "picture-glance",
-                            "title": "Yard",
-                            "image": "https://demo.home-assistant.io/stub_config/kitchen.png",
-                            "entities": [
-                                {
-                                    "entity": "switch.basement_frontyard_water_switch"
-                                },
-                                {
-                                    "entity": "switch.basement_backyard_water_switch"
-                                },
-                                {
-                                    "entity": "sensor.back_gate"
-                                },
-                                {
-                                    "entity": "sensor.front_gate"
-                                }
-                            ],
-                            "camera_image": "camera.backyard"
+                          "entity": "sensor.home_assistant_update",
+                          "state": "Update Available"
                         }
-                    ],
-                    "icon": "mdi:home-roof",
-                    "panel": false,
-                    "path": "home",
-                    "theme": "Backend-selected",
-                    "title": "home"
-                },
-                {
-                    "badges": [],
-                    "cards": [
-                        {
-                            "cards": [
-                                {
-                                    "aspect_ratio": "50%",
-                                    "camera_image": "camera.front_deck",
-                                    "entities": [
-                                        {
-                                            "entity": "lock.front_door"
-                                        },
-                                        {
-                                            "entity": "sensor.front_door"
-                                        },
-                                        {
-                                            "entity": "switch.frontyard_frontyard_lights_switch"
-                                        },
-                                        {
-                                            "entity": "sensor.front_gate"
-                                        },
-                                        {
-                                            "entity": "binary_sensor.motion_front_deck"
-                                        }
-                                    ],
-                                    "type": "picture-glance"
-                                },
-                                {
-                                    "aspect_ratio": "50%",
-                                    "camera_image": "camera.back_deck",
-                                    "entities": [
-                                        {
-                                            "entity": "lock.back_door"
-                                        },
-                                        {
-                                            "entity": "sensor.back_door"
-                                        },
-                                        {
-                                            "entity": "binary_sensor.motion_back_deck"
-                                        }
-                                    ],
-                                    "type": "picture-glance"
-                                },
-                                {
-                                    "aspect_ratio": "50%",
-                                    "camera_image": "camera.back_side",
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.back_gate"
-                                        },
-                                        {
-                                            "entity": "binary_sensor.motion_back_side"
-                                        },
-                                        {
-                                            "entity": "switch.backyard_water_fountain_switch"
-                                        }
-                                    ],
-                                    "type": "picture-glance"
-                                }
-                            ],
-                            "type": "vertical-stack"
+                      ],
+                      "chip": {
+                        "type": "entity",
+                        "entity": "binary_sensor.latest_version_update_available",
+                        "icon_color": "blue",
+                        "tap_action": {
+                          "action": "navigate",
+                          "navigation_path": "/config/dashboard"
                         },
-                        {
-                            "cards": [
-                                {
-                                    "aspect_ratio": "50%",
-                                    "camera_image": "camera.driveway",
-                                    "entities": [
-                                        {
-                                            "entity": "lock.garage_door"
-                                        },
-                                        {
-                                            "entity": "cover.garage_door"
-                                        },
-                                        {
-                                            "entity": "sensor.garage_door"
-                                        },
-                                        {
-                                            "entity": "binary_sensor.motion_driveway"
-                                        }
-                                    ],
-                                    "type": "picture-glance"
-                                },
-                                {
-                                    "aspect_ratio": "50%",
-                                    "camera_image": "camera.backyard",
-                                    "entities": [
-                                        {
-                                            "entity": "binary_sensor.motion_backyard"
-                                        }
-                                    ],
-                                    "type": "picture-glance"
-                                },
-                                {
-                                    "aspect_ratio": "50%",
-                                    "camera_image": "camera.side_gate",
-                                    "entities": [
-                                        {
-                                            "entity": "binary_sensor.motion_side_gate"
-                                        }
-                                    ],
-                                    "type": "picture-glance"
-                                }
-                            ],
-                            "type": "vertical-stack"
-                        },
-                        {
-                            "cards": [
-                                {
-                                    "aspect_ratio": "50%",
-                                    "camera_image": "camera.front_gate",
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.front_gate"
-                                        },
-                                        {
-                                            "entity": "switch.basement_frontyard_water_switch"
-                                        }
-                                    ],
-                                    "type": "picture-glance"
-                                },
-                                {
-                                    "aspect_ratio": "50%",
-                                    "camera_image": "camera.hot_tub",
-                                    "entities": [
-                                        {
-                                            "entity": "binary_sensor.motion_hot_tub"
-                                        },
-                                        {
-                                            "entity": "switch.backyard_pergola_lights_switch"
-                                        },
-                                        {
-                                            "entity": "switch.backyard_water_fountain_switch"
-                                        }
-                                    ],
-                                    "type": "picture-glance"
-                                },
-                                {
-                                    "aspect_ratio": "50%",
-                                    "camera_image": "camera.garage",
-                                    "entities": [
-                                        {
-                                            "entity": "cover.garage_door"
-                                        },
-                                        {
-                                            "entity": "lock.garage_door"
-                                        },
-                                        {
-                                            "entity": "media_player.garage_speaker"
-                                        },
-                                        {
-                                            "entity": "sensor.garage_door"
-                                        }
-                                    ],
-                                    "hold_action": {
-                                        "action": "toggle"
-                                    },
-                                    "image": "/local/basement.jpg",
-                                    "type": "picture-glance"
-                                }
-                            ],
-                            "type": "vertical-stack"
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "picture-entity",
-                                    "entity": "image_processing.doods_driveway",
-                                    "name": "Driveway Detection",
-                                    "camera_image": "camera.driveway_detection",
-                                    "camera_view": "live",
-                                    "aspect_ratio": "50%"
-                                },
-                                {
-                                    "type": "picture-entity",
-                                    "entity": "image_processing.doods_front_deck",
-                                    "name": "Front Deck Detection",
-                                    "camera_image": "camera.front_deck_detection",
-                                    "camera_view": "live",
-                                    "aspect_ratio": "50%"
-                                },
-                                {
-                                    "type": "picture-entity",
-                                    "entity": "image_processing.doods_back_deck",
-                                    "name": "Back Deck Detection",
-                                    "camera_image": "camera.back_deck_detection",
-                                    "camera_view": "live",
-                                    "aspect_ratio": "50%"
-                                }
-                            ]
-                        }
-                    ],
-                    "icon": "mdi:cctv",
-                    "path": "security",
-                    "title": "security "
-                },
-                {
-                    "icon": "mdi:television-play",
-                    "path": "media",
-                    "badges": [],
-                    "cards": [
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "switch.nzbget_download",
-                                    "name": "Downloads",
-                                    "secondary_info": "last-changed",
-                                    "icon": "mdi:package-down"
-                                },
-                                {
-                                    "entity": "sensor.nzbget_download_paused"
-                                },
-                                {
-                                    "entity": "sensor.nzbget_speed",
-                                    "secondary_info": "last-changed",
-                                    "name": "Speed"
-                                },
-                                {
-                                    "entity": "sensor.nzbget_average_speed",
-                                    "secondary_info": "last-changed",
-                                    "name": "Average Speed"
-                                },
-                                {
-                                    "entity": "sensor.nzbget_queue_size",
-                                    "name": "Queue Size",
-                                    "secondary_info": "last-changed"
-                                },
-                                {
-                                    "entity": "sensor.nzbget_post_processing_jobs",
-                                    "name": "Post Processing",
-                                    "secondary_info": "last-changed",
-                                    "icon": "mdi:progress-download"
-                                },
-                                {
-                                    "entity": "sensor.nzbget_size",
-                                    "name": "Size",
-                                    "secondary_info": "last-changed"
-                                },
-                                {
-                                    "entity": "sensor.nzbget_article_cache",
-                                    "name": "Artical Cache",
-                                    "secondary_info": "last-changed"
-                                },
-                                {
-                                    "entity": "sensor.sonarr_upcoming",
-                                    "secondary_info": "last-changed"
-                                },
-                                {
-                                    "entity": "sensor.radarr_upcoming",
-                                    "secondary_info": "last-changed"
-                                }
-                            ],
-                            "title": "Downloads",
-                            "footer": {
-                                "type": "graph",
-                                "entity": "sensor.nzbget_speed",
-                                "hours_to_show": 24
-                            }
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "custom:upcoming-media-card",
-                                    "entity": "sensor.radarr_upcoming_media",
-                                    "title": "Upcoming Movies",
-                                    "max": 3,
-                                    "image_style": "fanart",
-                                    "all_shadows": false,
-                                    "border_color": "var(--primary-background-color)",
-                                    "accent_color": "var(--secondary-background-color)",
-                                    "title_size": "medium",
-                                    "line1_size": "small",
-                                    "flag_color": "var(--accent-color)",
-                                    "line2_text": "Rating: $rating - Runtime: $runtime - $number",
-                                    "line3_text": "$empty",
-                                    "line4_text": "$empty",
-                                    "title_color": "var(--primary-text-color)",
-                                    "line1_color": "var(--primary-text-color)",
-                                    "line2_color": "var(--primary-text-color)",
-                                    "line3_color": "var(--primary-text-color)",
-                                    "line4_color": "var(--primary-text-color)"
-                                },
-                                {
-                                    "type": "custom:upcoming-media-card",
-                                    "entity": "sensor.sonarr_upcoming_media",
-                                    "title": "Upcoming Television",
-                                    "max": 3,
-                                    "image_style": "fanart",
-                                    "all_shadows": false,
-                                    "border_color": "var(--primary-background-color)",
-                                    "accent_color": "var(--secondary-background-color)",
-                                    "title_size": "medium",
-                                    "line1_size": "small",
-                                    "flag_color": "var(--accent-color)",
-                                    "line4_text": "$empty",
-                                    "title_color": "var(--primary-text-color)",
-                                    "line1_color": "var(--primary-text-color)",
-                                    "line2_color": "var(--primary-text-color)",
-                                    "line3_color": "var(--primary-text-color)",
-                                    "line4_color": "var(--primary-text-color)"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "custom:upcoming-media-card",
-                                    "entity": "sensor.recently_added_movies",
-                                    "title": "Recently Added Movies",
-                                    "max": 3,
-                                    "image_style": "fanart",
-                                    "all_shadows": false,
-                                    "border_color": "var(--primary-background-color)",
-                                    "accent_color": "var(--secondary-background-color)",
-                                    "title_size": "medium",
-                                    "line1_size": "small",
-                                    "flag_color": "var(--accent-color)",
-                                    "line2_text": "Rating: $rating - Runtime: $runtime - $number",
-                                    "line3_text": "$empty",
-                                    "line4_text": "$empty",
-                                    "title_color": "var(--primary-text-color)",
-                                    "line1_color": "var(--primary-text-color)",
-                                    "line2_color": "var(--primary-text-color)",
-                                    "line3_color": "var(--primary-text-color)",
-                                    "line4_color": "var(--primary-text-color)"
-                                },
-                                {
-                                    "type": "custom:upcoming-media-card",
-                                    "entity": "sensor.recently_added_tv",
-                                    "title": "Recently Added Television",
-                                    "max": 3,
-                                    "image_style": "fanart",
-                                    "all_shadows": false,
-                                    "border_color": "var(--primary-background-color)",
-                                    "accent_color": "var(--secondary-background-color)",
-                                    "title_size": "medium",
-                                    "line1_size": "small",
-                                    "flag_color": "var(--accent-color)",
-                                    "line4_text": "$empty",
-                                    "title_color": "var(--primary-text-color)",
-                                    "line1_color": "var(--primary-text-color)",
-                                    "line2_color": "var(--primary-text-color)",
-                                    "line3_color": "var(--primary-text-color)",
-                                    "line4_color": "var(--primary-text-color)"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "badges": [],
-                    "cards": [
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "horizontal-stack",
-                                    "cards": [
-                                        {
-                                            "type": "sensor",
-                                            "entity": "sensor.front_deck_thermometer",
-                                            "graph": "line",
-                                            "name": "Front Deck"
-                                        },
-                                        {
-                                            "type": "sensor",
-                                            "entity": "sensor.dark_sky_apparent_temperature",
-                                            "graph": "line"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "entities",
-                                    "entities": [
-                                        {
-                                            "entity": "climate.thermostat",
-                                            "secondary_info": "last-changed"
-                                        },
-                                        {
-                                            "entity": "climate.bedroom"
-                                        },
-                                        {
-                                            "entity": "sensor.thermostat_humidity",
-                                            "secondary_info": "last-changed",
-                                            "icon": "mdi:air-humidifier"
-                                        },
-                                        {
-                                            "entity": "sensor.sunrise",
-                                            "secondary_info": "last-changed"
-                                        },
-                                        {
-                                            "entity": "sensor.sunset",
-                                            "secondary_info": "last-changed"
-                                        },
-                                        {
-                                            "entity": "sensor.high_temperature",
-                                            "secondary_info": "last-changed"
-                                        },
-                                        {
-                                            "entity": "sensor.low_temperature",
-                                            "secondary_info": "last-changed"
-                                        },
-                                        {
-                                            "entity": "sensor.air_quality_health_index",
-                                            "name": "Air Quality Health Index",
-                                            "icon": "mdi:air-purifier",
-                                            "secondary_info": "last-changed"
-                                        },
-                                        {
-                                            "entity": "sensor.dark_sky_precip_type",
-                                            "secondary_info": "last-changed"
-                                        },
-                                        {
-                                            "entity": "sensor.dark_sky_precip_probability",
-                                            "secondary_info": "last-changed",
-                                            "name": "Chance of Precipitation"
-                                        },
-                                        {
-                                            "entity": "sensor.wind_chill",
-                                            "secondary_info": "last-changed"
-                                        }
-                                    ],
-                                    "show_header_toggle": false
-                                },
-                                {
-                                    "type": "entities",
-                                    "entities": [
-                                        {
-                                            "entity": "fan.bedroom",
-                                            "secondary_info": "last-changed"
-                                        },
-                                        {
-                                            "entity": "sensor.filter_days_remaining",
-                                            "secondary_info": "last-changed"
-                                        },
-                                        {
-                                            "entity": "sensor.bedroom_aqi",
-                                            "name": "Air Quality",
-                                            "secondary_info": "last-changed",
-                                            "icon": "mdi:air-purifier"
-                                        },
-                                        {
-                                            "entity": "sensor.bedroom_dust",
-                                            "secondary_info": "last-changed",
-                                            "name": "Dust",
-                                            "icon": "mdi:blur"
-                                        }
-                                    ],
-                                    "title": "Bedroom Fan"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "entities",
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.dark_sky_daytime_high_temperature_1d",
-                                            "name": "High",
-                                            "secondary_info": "last-changed"
-                                        },
-                                        {
-                                            "entity": "sensor.dark_sky_overnight_low_temperature_1d",
-                                            "name": "Low",
-                                            "secondary_info": "last-changed"
-                                        },
-                                        {
-                                            "entity": "sensor.dark_sky_precip_type_tomorrow",
-                                            "icon": "hass:thermometer",
-                                            "secondary_info": "last-changed"
-                                        },
-                                        {
-                                            "entity": "sensor.dark_sky_precip_probability_tomorrow",
-                                            "secondary_info": "last-changed"
-                                        }
-                                    ],
-                                    "show_header_toggle": false,
-                                    "state_color": false,
-                                    "title": "Forecast"
-                                }
-                            ]
-                        },
-                        {
-                            "cards": [
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.bedroom_humidity",
-                                            "index": 0
-                                        }
-                                    ],
-                                    "font_size": 75,
-                                    "line_color": "#66850c",
-                                    "line_width": 8,
-                                    "type": "custom:mini-graph-card"
-                                },
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.bedroom_aqi",
-                                            "index": 0
-                                        }
-                                    ],
-                                    "font_size": 75,
-                                    "line_color": "#2d3758",
-                                    "line_width": 8,
-                                    "type": "custom:mini-graph-card"
-                                },
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.bedroom_dust",
-                                            "index": 0
-                                        }
-                                    ],
-                                    "font_size": 75,
-                                    "line_color": "#4e6895",
-                                    "line_width": 8,
-                                    "type": "custom:mini-graph-card"
-                                }
-                            ],
-                            "type": "vertical-stack"
-                        },
-                        {
-                            "type": "glance",
-                            "entities": [
-                                {
-                                    "entity": "switch.basement_backyard_water_switch"
-                                },
-                                {
-                                    "entity": "switch.basement_frontyard_water_switch"
-                                },
-                                {
-                                    "entity": "switch.basement_water_heater_switch"
-                                },
-                                {
-                                    "entity": "switch.basement_main_water_switch"
-                                }
-                            ],
-                            "state_color": true,
-                            "show_name": true,
-                            "show_state": false
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "sensor.basement_temperature"
-                                },
-                                {
-                                    "entity": "sensor.bedroom_temperature"
-                                },
-                                {
-                                    "entity": "sensor.bedroom_fan_temperature"
-                                },
-                                {
-                                    "entity": "sensor.guest_bedroom_temperature"
-                                },
-                                {
-                                    "entity": "sensor.office_temperature"
-                                },
-                                {
-                                    "entity": "sensor.kitchen_temperature"
-                                },
-                                {
-                                    "entity": "sensor.jordans_room_temperature"
-                                },
-                                {
-                                    "entity": "sensor.living_room_temperature"
-                                },
-                                {
-                                    "entity": "sensor.spare_room_temperature"
-                                }
-                            ]
-                        }
-                    ],
-                    "icon": "mdi:home-thermometer-outline",
-                    "path": "climate",
-                    "title": "climate"
-                },
-                {
-                    "badges": [],
-                    "cards": [
-                        {
-                            "entity": "camera.162_avenue_shawville_blvd_sw",
-                            "type": "picture-entity"
-                        },
-                        {
-                            "entity": "camera.162_avenue_macleod_trail_s",
-                            "type": "picture-entity"
-                        },
-                        {
-                            "entity": "camera.lake_fraser_gate_macleod_trail_se",
-                            "type": "picture-entity"
-                        },
-                        {
-                            "entity": "camera.southland_drive_macleod_trail_s",
-                            "type": "picture-entity"
-                        }
-                    ],
-                    "icon": "mdi:city-variant-outline",
-                    "path": "city",
-                    "title": "city"
-                },
-                {
-                    "icon": "mdi:information-outline",
-                    "path": "info",
-                    "theme": "Backend-selected",
-                    "title": "info",
-                    "badges": [],
-                    "cards": [
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "sensor",
-                                    "entity": "sensor.public_ip_address",
-                                    "icon": "mdi:dots-horizontal",
-                                    "name": "Shaw Address"
-                                },
-                                {
-                                    "type": "sensor",
-                                    "entity": "sensor.speedtest_ping",
-                                    "detail": 2,
-                                    "graph": "line"
-                                },
-                                {
-                                    "type": "horizontal-stack",
-                                    "cards": [
-                                        {
-                                            "type": "sensor",
-                                            "entity": "sensor.speedtest_download",
-                                            "graph": "line",
-                                            "detail": 2
-                                        },
-                                        {
-                                            "type": "sensor",
-                                            "entity": "sensor.speedtest_upload",
-                                            "graph": "line",
-                                            "detail": 2
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "horizontal-stack",
-                                    "cards": [
-                                        {
-                                            "type": "sensor",
-                                            "entity": "sensor.processor_use",
-                                            "name": "Processor"
-                                        },
-                                        {
-                                            "type": "sensor",
-                                            "entity": "sensor.memory_use_percent",
-                                            "name": "Memory",
-                                            "detail": 1
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "entities",
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.current_version",
-                                            "secondary_info": "last-changed"
-                                        },
-                                        {
-                                            "entity": "sensor.latest_version",
-                                            "secondary_info": "last-changed"
-                                        },
-                                        {
-                                            "entity": "sensor.operating_system"
-                                        },
-                                        {
-                                            "entity": "sensor.hacs",
-                                            "secondary_info": "last-changed"
-                                        },
-                                        {
-                                            "entity": "sensor.glances_containers_active",
-                                            "name": "Containers",
-                                            "secondary_info": "last-changed"
-                                        },
-                                        {
-                                            "entity": "sensor.potential_breaking_changes",
-                                            "secondary_info": "last-changed"
-                                        },
-                                        {
-                                            "entity": "sensor.uptime",
-                                            "secondary_info": "last-changed"
-                                        },
-                                        {
-                                            "entity": "sensor.disk_free_space",
-                                            "secondary_info": "last-changed"
-                                        },
-                                        {
-                                            "entity": "sensor.database_size"
-                                        },
-                                        {
-                                            "entity": "sensor.last_boot",
-                                            "secondary_info": "last-changed"
-                                        },
-                                        {
-                                            "entity": "sensor.cert_expiry_timestamp_home_giff_ca",
-                                            "name": "Cert Expiration",
-                                            "secondary_info": "last-changed"
-                                        },
-                                        {
-                                            "entity": "sensor.connected_clients",
-                                            "secondary_info": "last-changed"
-                                        },
-                                        {
-                                            "entity": "sensor.auto_backup",
-                                            "secondary_info": "last-changed"
-                                        }
-                                    ],
-                                    "show_header_toggle": false
-                                }
-                            ]
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "switch.nzbget_download",
-                                    "name": "Downloads",
-                                    "secondary_info": "last-changed",
-                                    "icon": "mdi:package-down"
-                                },
-                                {
-                                    "entity": "sensor.nzbget_download_paused"
-                                },
-                                {
-                                    "entity": "sensor.nzbget_speed",
-                                    "secondary_info": "last-changed",
-                                    "name": "Speed"
-                                },
-                                {
-                                    "entity": "sensor.nzbget_average_speed",
-                                    "secondary_info": "last-changed",
-                                    "name": "Average Speed"
-                                },
-                                {
-                                    "entity": "sensor.nzbget_queue_size",
-                                    "name": "Queue Size",
-                                    "secondary_info": "last-changed"
-                                },
-                                {
-                                    "entity": "sensor.nzbget_post_processing_jobs",
-                                    "name": "Post Processing",
-                                    "secondary_info": "last-changed",
-                                    "icon": "mdi:progress-download"
-                                },
-                                {
-                                    "entity": "sensor.nzbget_size",
-                                    "name": "Size",
-                                    "secondary_info": "last-changed"
-                                },
-                                {
-                                    "entity": "sensor.nzbget_article_cache",
-                                    "name": "Artical Cache",
-                                    "secondary_info": "last-changed"
-                                },
-                                {
-                                    "entity": "sensor.sonarr_upcoming",
-                                    "secondary_info": "last-changed"
-                                },
-                                {
-                                    "entity": "sensor.radarr_upcoming",
-                                    "secondary_info": "last-changed"
-                                }
-                            ],
-                            "title": "Downloads",
-                            "footer": {
-                                "type": "graph",
-                                "entity": "sensor.nzbget_speed",
-                                "hours_to_show": 24,
-                                "detail": 2
-                            }
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "entities",
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.synology_update",
-                                            "name": "Update(s)",
-                                            "secondary_info": "last-changed"
-                                        },
-                                        {
-                                            "entity": "sensor.nas_cpu_load_total",
-                                            "name": "CPU Load",
-                                            "secondary_info": "last-changed"
-                                        },
-                                        {
-                                            "entity": "sensor.nas_memory_usage_real",
-                                            "name": "Memory Usage",
-                                            "secondary_info": "last-changed"
-                                        },
-                                        {
-                                            "entity": "sensor.nas_network_down",
-                                            "name": "Network Down",
-                                            "secondary_info": "last-changed"
-                                        },
-                                        {
-                                            "entity": "sensor.nas_network_up",
-                                            "name": "Network Up",
-                                            "secondary_info": "last-changed"
-                                        },
-                                        {
-                                            "entity": "sensor.nas_temperature",
-                                            "name": "Temperature",
-                                            "secondary_info": "last-changed"
-                                        },
-                                        {
-                                            "entity": "sensor.nas_volume_1_volume_used",
-                                            "name": "Used",
-                                            "secondary_info": "last-changed"
-                                        },
-                                        {
-                                            "entity": "sensor.nas_volume_1_used_space",
-                                            "name": "Used Space",
-                                            "secondary_info": "last-changed"
-                                        },
-                                        {
-                                            "entity": "sensor.nas_volume_1_status",
-                                            "name": "Volume Status",
-                                            "secondary_info": "last-changed"
-                                        }
-                                    ],
-                                    "show_header_toggle": false,
-                                    "title": "Storage"
-                                },
-                                {
-                                    "type": "horizontal-stack",
-                                    "cards": [
-                                        {
-                                            "type": "sensor",
-                                            "entity": "sensor.nas_cpu_load_total",
-                                            "graph": "line",
-                                            "name": "Storage CPU",
-                                            "detail": 2
-                                        },
-                                        {
-                                            "type": "sensor",
-                                            "entity": "sensor.nas_memory_usage_real",
-                                            "graph": "line",
-                                            "name": "Storage Memory",
-                                            "detail": 2
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
+                        "content_info": "state"
+                      }
+                    },
+                    {
+                      "type": "action",
+                      "icon": "mdi:home-city-outline",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "city"
+                      }
+                    }
+                  ],
+                  "alignment": "center"
                 }
-            ]
+              ]
+            },
+            {
+              "type": "horizontal-stack",
+              "cards": [
+                {
+                  "type": "custom:mushroom-template-card",
+                  "primary": "House",
+                  "icon": "mdi:home-outline",
+                  "icon_color": "blue",
+                  "layout": "vertical",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "house"
+                  }
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "icon": "mdi:thermostat",
+                  "layout": "vertical",
+                  "entity": "climate.thermostat",
+                  "icon_color": "{% if is_state('climate.thermostat', 'heat') %}\n  red\n{% elif is_state('climate.thermostat', 'cool') %}\n  blue\n{% elif is_state('climate.thermostat', 'heat_cool') %}\n green\n{% endif %}",
+                  "primary": "{{ states.climate.thermostat.attributes.current_temperature }} \n",
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "primary": "Security",
+                  "icon": "mdi:shield-check-outline",
+                  "icon_color": "green",
+                  "layout": "vertical",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "security"
+                  }
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "primary": "Network",
+                  "icon": "mdi:security-network",
+                  "icon_color": "green",
+                  "layout": "vertical",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "network"
+                  }
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "primary": "Rack",
+                  "icon": "mdi:server-network",
+                  "icon_color": "grey",
+                  "layout": "vertical",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "rack"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "horizontal-stack",
+              "cards": [
+                {
+                  "type": "custom:mushroom-person-card",
+                  "entity": "person.paul",
+                  "use_entity_picture": true
+                },
+                {
+                  "type": "custom:mushroom-person-card",
+                  "entity": "person.beth",
+                  "use_entity_picture": true
+                },
+                {
+                  "type": "custom:mushroom-person-card",
+                  "entity": "person.jordan",
+                  "use_entity_picture": true
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:mushroom-template-card",
+                      "primary": "Front",
+                      "icon": "mdi:lock-smart",
+                      "entity": "lock.front_door",
+                      "layout": "vertical",
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "icon_color": "{% if is_state('lock.front_door', 'locked') %}\n  green\n{% endif %}",
+                      "hold_action": {
+                        "action": "toggle"
+                      }
+                    },
+                    {
+                      "type": "custom:mushroom-template-card",
+                      "primary": "Back",
+                      "icon": "mdi:lock-smart",
+                      "entity": "lock.back_door",
+                      "layout": "vertical",
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "icon_color": "{% if is_state('lock.back_door', 'locked') %}\n  green\n{% endif %}",
+                      "hold_action": {
+                        "action": "toggle"
+                      }
+                    },
+                    {
+                      "type": "custom:mushroom-template-card",
+                      "primary": "Garage",
+                      "icon": "mdi:lock-smart",
+                      "entity": "lock.garage_door",
+                      "layout": "vertical",
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "icon_color": "{% if is_state('lock.garage_door', 'locked') %}\n  green\n{% endif %}",
+                      "hold_action": {
+                        "action": "toggle"
+                      }
+                    },
+                    {
+                      "type": "custom:mushroom-cover-card",
+                      "entity": "cover.garage",
+                      "layout": "vertical",
+                      "show_buttons_control": false,
+                      "tap_action": {
+                        "action": "toggle"
+                      },
+                      "hold_action": {
+                        "action": "more-info"
+                      },
+                      "hide_state": true,
+                      "show_position_control": false
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:mushroom-template-card",
+                      "primary": "Front",
+                      "icon": "mdi:lightbulb-variant-outline",
+                      "entity": "switch.frontyard_lights",
+                      "layout": "vertical",
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "icon_color": "{% if is_state('switch.frontyard_lights', 'on') %}\n  amber\n{% endif %}",
+                      "hold_action": {
+                        "action": "toggle"
+                      },
+                      "fill_container": false
+                    },
+                    {
+                      "type": "custom:mushroom-template-card",
+                      "primary": "Front",
+                      "icon": "mdi:gradient-vertical",
+                      "entity": "switch.frontyard_fountain",
+                      "layout": "vertical",
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "icon_color": "{% if is_state('switch.frontyard_fountain', 'on') %}\n  blue\n{% endif %}",
+                      "hold_action": {
+                        "action": "toggle"
+                      },
+                      "fill_container": false
+                    },
+                    {
+                      "type": "custom:mushroom-template-card",
+                      "primary": "Back",
+                      "icon": "mdi:lightbulb-variant-outline",
+                      "entity": "switch.backyard_lights",
+                      "layout": "vertical",
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "icon_color": "{% if is_state('switch.backyard_lights', 'on') %}\n  amber\n{% endif %}",
+                      "hold_action": {
+                        "action": "toggle"
+                      },
+                      "fill_container": false
+                    },
+                    {
+                      "type": "custom:mushroom-template-card",
+                      "primary": "Back",
+                      "icon": "mdi:gradient-vertical",
+                      "entity": "switch.backyard_fountain",
+                      "layout": "vertical",
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "icon_color": "{% if is_state('switch.backyard_fountain', 'on') %}\n  blue\n{% endif %}",
+                      "hold_action": {
+                        "action": "toggle"
+                      },
+                      "fill_container": false
+                    }
+                  ]
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "horizontal-stack",
+                      "cards": [
+                        {
+                          "type": "custom:mushroom-template-card",
+                          "icon": "mdi:sofa-outline",
+                          "entity": "light.living_room_lights",
+                          "primary": "Living",
+                          "secondary": "{{ states('sensor.living_room_temperature') }}°C",
+                          "tap_action": {
+                            "action": "navigate",
+                            "navigation_path": "house"
+                          },
+                          "hold_action": {
+                            "action": "toggle"
+                          },
+                          "icon_color": "{% if is_state('group.livingroom_lights', 'on') %}\n  amber\n{% endif %}"
+                        },
+                        {
+                          "type": "custom:mushroom-template-card",
+                          "icon": "mdi:bed-king-outline",
+                          "entity": "Bedroom Bed",
+                          "primary": "Bedroom",
+                          "secondary": "{{ states('sensor.bedroom_temperature') }}°C",
+                          "tap_action": {
+                            "action": "navigate",
+                            "navigation_path": "house"
+                          },
+                          "hold_action": {
+                            "action": "toggle"
+                          },
+                          "icon_color": "{% if is_state('light.bedroom_bed_lights', 'on') %}\n  amber\n{% endif %}"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "horizontal-stack",
+                      "cards": [
+                        {
+                          "type": "custom:mushroom-template-card",
+                          "primary": "Office",
+                          "icon": "mdi:desk",
+                          "entity": "light.office_lights",
+                          "tap_action": {
+                            "action": "navigate",
+                            "navigation_path": "house"
+                          },
+                          "hold_action": {
+                            "action": "toggle"
+                          },
+                          "secondary": "{{ states('sensor.office_temperature') }}°C",
+                          "icon_color": "{% if is_state('light.office_lights', 'on') %}\n  amber\n{% endif %}"
+                        },
+                        {
+                          "type": "custom:mushroom-template-card",
+                          "primary": "Kitchen",
+                          "icon": "mdi:countertop-outline",
+                          "entity": "light.coffee",
+                          "icon_color": "{% if is_state('light.coffee', 'on') %}\n  amber\n{% endif %}",
+                          "tap_action": {
+                            "action": "navigate",
+                            "navigation_path": "kitchen"
+                          },
+                          "hold_action": {
+                            "action": "toggle"
+                          },
+                          "secondary": "{{ states('sensor.kitchen_temperature') }}°C"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "horizontal-stack",
+                      "cards": [
+                        {
+                          "type": "custom:mushroom-template-card",
+                          "primary": "Guest Bedroom",
+                          "secondary": "{{ states('sensor.guest_bedroom_temperature') }}°C",
+                          "icon": "mdi:bed-queen-outline",
+                          "entity": "binary_sensor.guest_bedroom_occupancy",
+                          "icon_color": "{% if is_state('binary_sensor.guest_bedroom_occupancy', 'on') %}\n  amber\n{% endif %}"
+                        },
+                        {
+                          "type": "custom:mushroom-template-card",
+                          "primary": "Jordan's Room",
+                          "secondary": "{{ states('sensor.jordans_room_temperature') }}°C",
+                          "icon": "mdi:bed-queen-outline",
+                          "entity": "binary_sensor.guest_bedroom_occupancy",
+                          "icon_color": "{% if is_state('binary_sensor.jordans_room_occupancy', 'on') %}\n  amber\n{% endif %}"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "horizontal-stack",
+                      "cards": [
+                        {
+                          "type": "custom:mushroom-template-card",
+                          "primary": "Garage",
+                          "icon": "mdi:garage",
+                          "icon_color": "{% if is_state('switch.garage_door_light', 'on') %}\n  amber\n{% elif is_state('switch.garage_door_light', 'off') %}\n  grey\n{% endif %}",
+                          "entity": "camera.garage",
+                          "secondary": "{{ states('sensor.garage_temperature') }}°C",
+                          "tap_action": {
+                            "action": "more-info"
+                          }
+                        },
+                        {
+                          "type": "custom:mushroom-template-card",
+                          "primary": "Basement",
+                          "secondary": "{{ states('sensor.basement_temperature') }}°C",
+                          "icon": "mdi:sofa-outline",
+                          "entity": "binary_sensor.basement_occupancy",
+                          "icon_color": "{% if is_state('binary_sensor.basement_occupancy', 'on') %}\n  amber\n{% endif %}"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "custom:mushroom-title-card",
+                  "title": "Upcoming Events"
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:atomic-calendar-revive",
+                      "enableModeChange": true,
+                      "calShowDescription": false,
+                      "firstDayOfWeek": 1,
+                      "maxDaysToShow": 5,
+                      "showCurrentEventLine": false,
+                      "showEventIcon": false,
+                      "entities": [
+                        "calendar.418_bridlecreek_green_sw_calgary",
+                        "calendar.homegifford_gmail_com"
+                      ],
+                      "showLocation": false,
+                      "sortByStartTime": true,
+                      "showWeekDay": true,
+                      "defaultMode": "Event",
+                      "showLoader": false,
+                      "showRelativeTime": true,
+                      "showDate": false,
+                      "dateFormat": "ll",
+                      "noEventsForTodayText": "all clear",
+                      "untilText": "until",
+                      "showLastCalendarWeek": false,
+                      "showMonth": false,
+                      "dimFinishedEvents": true,
+                      "refreshInterval": 60,
+                      "showDescription": false,
+                      "showProgressBar": true
+                    }
+                  ]
+                },
+                {
+                  "type": "custom:auto-entities",
+                  "card": {
+                    "type": "entities",
+                    "theme": "Mushroom"
+                  },
+                  "filter": {
+                    "include": [
+                      {
+                        "entity_id": "sensor.*_hub_timers"
+                      },
+                      {
+                        "entity_id": "sensor.*_hub_alarms"
+                      }
+                    ],
+                    "exclude": [
+                      {
+                        "state": "off"
+                      },
+                      {
+                        "state": "unavailable"
+                      }
+                    ]
+                  },
+                  "show_empty": false
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:mushroom-title-card",
+                      "subtitle": "Plex is {{ states('sensor.plex') }}, {{ states('sensor.plex_connection') }} with {{ states('sensor.plex_plex') }} watching.",
+                      "title": "Media"
+                    },
+                    {
+                      "type": "custom:mushroom-media-player-card",
+                      "entity": "media_player.android_tv_bedroom",
+                      "use_media_info": true,
+                      "media_controls": [
+                        "on_off",
+                        "play_pause_stop"
+                      ],
+                      "volume_controls": [],
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "name": "Bedroom TV",
+                      "icon": "mdi:television",
+                      "layout": "horizontal",
+                      "fill_container": false
+                    },
+                    {
+                      "type": "custom:mushroom-media-player-card",
+                      "entity": "media_player.android_tv_living_room",
+                      "use_media_info": true,
+                      "media_controls": [
+                        "on_off",
+                        "play_pause_stop"
+                      ],
+                      "volume_controls": [],
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "icon": "mdi:television",
+                      "layout": "horizontal"
+                    },
+                    {
+                      "type": "custom:mushroom-media-player-card",
+                      "entity": "media_player.android_tv_guest_bedroom",
+                      "use_media_info": true,
+                      "media_controls": [
+                        "on_off",
+                        "play_pause_stop"
+                      ],
+                      "layout": "horizontal",
+                      "volume_controls": [],
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "icon": "mdi:television"
+                    },
+                    {
+                      "type": "custom:mushroom-media-player-card",
+                      "entity": "media_player.office_pod",
+                      "use_media_info": true,
+                      "media_controls": [
+                        "on_off",
+                        "previous",
+                        "play_pause_stop",
+                        "next",
+                        "repeat",
+                        "shuffle"
+                      ],
+                      "show_volume_level": false,
+                      "volume_controls": [
+                        "volume_buttons",
+                        "volume_set"
+                      ],
+                      "collapsible_controls": true,
+                      "fill_container": true,
+                      "name": "Office Pod",
+                      "icon_type": "entity-picture"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme": "Mushroom",
+          "title": "House",
+          "path": "house",
+          "icon": "mdi:home-outline",
+          "badges": [],
+          "cards": [
+            {
+              "type": "custom:mushroom-chips-card",
+              "chips": [
+                {
+                  "type": "back"
+                },
+                {
+                  "type": "action",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "https://home.giff.ca/"
+                  },
+                  "icon": "mdi:view-dashboard-outline"
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:home-outline",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "house"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:shield-check-outline",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "security"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:countertop-outline",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "kitchen"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:server-network",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "rack"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:security-network",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "network"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:home-city-outline",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "city"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "custom:mushroom-title-card",
+                  "title": "Climate"
+                },
+                {
+                  "type": "custom:simple-thermostat",
+                  "entity": "climate.thermostat",
+                  "header": false,
+                  "layout": {
+                    "mode": {
+                      "names": true,
+                      "headings": true,
+                      "icons": false
+                    }
+                  }
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "sensor",
+                      "entity": "sensor.bridlewood_feels_like",
+                      "graph": "line",
+                      "detail": 2,
+                      "hours_to_show": 12,
+                      "name": "Feels Like"
+                    },
+                    {
+                      "type": "sensor",
+                      "entity": "sensor.bridlewood_wind_chill",
+                      "graph": "line",
+                      "name": "Wind Chill",
+                      "icon": "mdi:snowflake-alert"
+                    },
+                    {
+                      "type": "sensor",
+                      "entity": "sensor.front_deck_air_temperature",
+                      "graph": "line"
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "sensor",
+                      "entity": "sensor.wind_speed_metric",
+                      "graph": "line"
+                    },
+                    {
+                      "type": "sensor",
+                      "entity": "sensor.wind_gusts_metric",
+                      "graph": "line"
+                    }
+                  ]
+                },
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "binary_sensor.car_wash"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "custom:mushroom-title-card"
+                },
+                {
+                  "type": "custom:mushroom-title-card",
+                  "title": "Lighting"
+                },
+                {
+                  "type": "custom:mushroom-light-card",
+                  "entity": "light.coffee",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "show_brightness_control": true,
+                  "show_color_temp_control": true
+                },
+                {
+                  "type": "custom:mushroom-light-card",
+                  "entity": "light.office_lights",
+                  "show_brightness_control": true,
+                  "use_light_color": false,
+                  "show_color_control": false,
+                  "tap_action": {
+                    "action": "toggle"
+                  }
+                },
+                {
+                  "type": "custom:mushroom-light-card",
+                  "entity": "light.outdoor_lights",
+                  "show_brightness_control": true,
+                  "show_color_control": false,
+                  "use_light_color": true,
+                  "show_color_temp_control": false,
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "hold_action": {
+                    "action": "more-info"
+                  }
+                },
+                {
+                  "type": "custom:mushroom-light-card",
+                  "entity": "light.living_room_lights"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme": "Mushroom",
+          "title": "Security",
+          "path": "security",
+          "icon": "mdi:shield-check-outline",
+          "badges": [],
+          "cards": [
+            {
+              "type": "custom:mushroom-chips-card",
+              "chips": [
+                {
+                  "type": "back"
+                },
+                {
+                  "type": "action",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "https://home.giff.ca/"
+                  },
+                  "icon": "mdi:view-dashboard-outline"
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:home-outline",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "house"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:shield-check-outline",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "security"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:countertop-outline",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "kitchen"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:server-network",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "rack"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:security-network",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "network"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:home-city-outline",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "city"
+                  }
+                }
+              ]
+            },
+            {
+              "camera_view": "auto",
+              "type": "picture-glance",
+              "entities": [
+                {
+                  "entity": "lock.front_door"
+                },
+                {
+                  "entity": "switch.frontyard_lights"
+                }
+              ],
+              "camera_image": "camera.front_door",
+              "tap_action": {
+                "action": "more-info"
+              },
+              "theme": "Mushroom",
+              "aspect_ratio": "16:9"
+            },
+            {
+              "camera_view": "auto",
+              "type": "picture-glance",
+              "entities": [
+                {
+                  "entity": "lock.back_door"
+                },
+                {
+                  "entity": "switch.backyard_lights"
+                }
+              ],
+              "camera_image": "camera.back_deck",
+              "tap_action": {
+                "action": "more-info"
+              },
+              "theme": "Mushroom"
+            },
+            {
+              "type": "custom:mushroom-title-card"
+            },
+            {
+              "camera_view": "auto",
+              "type": "picture-glance",
+              "entities": [
+                {
+                  "entity": "sensor.front_deck_air_temperature"
+                }
+              ],
+              "camera_image": "camera.front_deck"
+            },
+            {
+              "camera_view": "auto",
+              "type": "picture-glance",
+              "entities": [
+                {
+                  "entity": "lock.garage_door"
+                },
+                {
+                  "entity": "cover.garage"
+                }
+              ],
+              "camera_image": "camera.garage",
+              "theme": "Mushroom"
+            },
+            {
+              "type": "custom:mushroom-title-card"
+            },
+            {
+              "camera_view": "auto",
+              "type": "picture-glance",
+              "entities": [
+                {
+                  "entity": "lock.back_door"
+                },
+                {
+                  "entity": "switch.backyard_lights"
+                },
+                {
+                  "entity": "switch.pergola_lights"
+                }
+              ],
+              "camera_image": "camera.hot_tub",
+              "tap_action": {
+                "action": "more-info"
+              },
+              "theme": "Mushroom"
+            },
+            {
+              "camera_view": "auto",
+              "type": "picture-glance",
+              "entities": [],
+              "camera_image": "camera.front_gate_medium",
+              "tap_action": {
+                "action": "more-info"
+              },
+              "theme": "Mushroom"
+            }
+          ]
+        },
+        {
+          "theme": "Mushroom",
+          "title": "Kitchen",
+          "path": "kitchen",
+          "icon": "mdi:countertop-outline",
+          "badges": [],
+          "cards": [
+            {
+              "type": "custom:mushroom-chips-card",
+              "chips": [
+                {
+                  "type": "back"
+                },
+                {
+                  "type": "action",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "https://home.giff.ca/"
+                  },
+                  "icon": "mdi:view-dashboard-outline"
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:home-outline",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "house"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:shield-check-outline",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "security"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:countertop-outline",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "kitchen"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:server-network",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "rack"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:security-network",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "network"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:home-city-outline",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "city"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "custom:mushroom-title-card",
+                  "title": "Oven"
+                },
+                {
+                  "type": "custom:mushroom-chips-card",
+                  "chips": [
+                    {
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "entity": "sensor.oven",
+                          "state_not": "off"
+                        }
+                      ],
+                      "chip": {
+                        "type": "entity",
+                        "entity": "sensor.oven",
+                        "icon_color": "green"
+                      }
+                    },
+                    {
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "entity": "sensor.oven_oven_upper_state",
+                          "state_not": "off"
+                        }
+                      ],
+                      "chip": {
+                        "type": "entity",
+                        "entity": "sensor.oven_oven_upper_state",
+                        "icon_color": "green",
+                        "icon": "mdi:stove"
+                      }
+                    }
+                  ],
+                  "alignment": "center"
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:mushroom-template-card",
+                      "primary": "Left Rear",
+                      "icon": "mdi:circle-slice-8",
+                      "entity": "sensor.oven_cooktop_left_rear_state",
+                      "layout": "vertical",
+                      "icon_color": "{% if is_state('sensor.oven_cooktop_left_rear_state', 'Cooking') %}\n  red\n{% endif %}",
+                      "tap_action": {
+                        "action": "more-info"
+                      }
+                    },
+                    {
+                      "type": "custom:mushroom-template-card",
+                      "primary": "Warming",
+                      "icon": "mdi:circle-double",
+                      "entity": "sensor.oven_cooktop_center_state",
+                      "layout": "vertical",
+                      "icon_color": "{% if is_state('sensor.oven_cooktop_center_state', 'Cooking') %}\n  red\n{% endif %}",
+                      "tap_action": {
+                        "action": "more-info"
+                      }
+                    },
+                    {
+                      "type": "custom:mushroom-template-card",
+                      "primary": "Right Rear",
+                      "icon": "mdi:circle-slice-8",
+                      "entity": "sensor.oven_cooktop_right_rear_state",
+                      "layout": "vertical",
+                      "icon_color": "{% if is_state('sensor.oven_cooktop_right_rear_state', 'Cooking') %}\n  red\n{% endif %}",
+                      "tap_action": {
+                        "action": "more-info"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:mushroom-template-card",
+                      "primary": "Left Front",
+                      "icon": "mdi:circle-slice-8",
+                      "entity": "sensor.oven_cooktop_left_front_state",
+                      "layout": "vertical",
+                      "icon_color": "{% if is_state('sensor.oven_cooktop_left_front_state', 'Cooking') %}\n  red\n{% endif %}",
+                      "tap_action": {
+                        "action": "more-info"
+                      }
+                    },
+                    {
+                      "type": "custom:mushroom-template-card",
+                      "primary": "Right Front",
+                      "icon": "mdi:circle-slice-8",
+                      "entity": "sensor.oven_cooktop_right_front_state",
+                      "layout": "vertical",
+                      "icon_color": "{% if is_state('sensor.oven_cooktop_right_front_state', 'Cooking') %}\n  red\n{% endif %}",
+                      "tap_action": {
+                        "action": "more-info"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "custom:mini-graph-card",
+                  "entities": [
+                    "sensor.oven_oven_upper_current_temperature",
+                    "sensor.oven_oven_upper_target_temperature"
+                  ],
+                  "name": "Oven",
+                  "icon": "mdi:stove"
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "custom:mushroom-title-card"
+                },
+                {
+                  "type": "custom:mushroom-title-card",
+                  "title": "Dishwasher"
+                },
+                {
+                  "type": "custom:mushroom-chips-card",
+                  "chips": [
+                    {
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "entity": "sensor.dishwasher_error_message",
+                          "state_not": "-"
+                        }
+                      ],
+                      "chip": {
+                        "type": "entity",
+                        "entity": "sensor.dishwasher_error_message",
+                        "icon_color": "red"
+                      }
+                    },
+                    {
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "entity": "sensor.dishwasher_current_course",
+                          "state_not": "-"
+                        }
+                      ],
+                      "chip": {
+                        "type": "entity",
+                        "entity": "sensor.dishwasher_current_course",
+                        "icon_color": "blue"
+                      }
+                    },
+                    {
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "entity": "sensor.dishwasher",
+                          "state": "on"
+                        }
+                      ],
+                      "chip": {
+                        "type": "entity",
+                        "entity": "sensor.dishwasher_process_state",
+                        "icon_color": "blue"
+                      }
+                    }
+                  ],
+                  "alignment": "center"
+                },
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "sensor.dishwasher_initial_time",
+                      "secondary_info": "last-changed"
+                    },
+                    {
+                      "entity": "sensor.dishwasher_remaining_time",
+                      "secondary_info": "last-changed"
+                    },
+                    {
+                      "entity": "binary_sensor.dishwasher_rinse_refill",
+                      "secondary_info": "last-changed",
+                      "name": "Rinse refill",
+                      "icon": "mdi:water-opacity"
+                    },
+                    {
+                      "entity": "sensor.dishwasher_tub_clean_counter",
+                      "name": "Washes",
+                      "secondary_info": "last-changed"
+                    }
+                  ],
+                  "show_header_toggle": false,
+                  "theme": "Mushroom"
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "custom:mushroom-title-card"
+                },
+                {
+                  "type": "custom:mushroom-title-card",
+                  "title": "Fridge"
+                },
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "switch.refrigerator_express_mode",
+                      "secondary_info": "last-changed"
+                    },
+                    {
+                      "entity": "binary_sensor.refrigerator_door_open",
+                      "secondary_info": "last-changed"
+                    }
+                  ],
+                  "theme": "Mushroom"
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "hours_to_show": 24,
+                      "graph": "line",
+                      "type": "sensor",
+                      "entity": "sensor.refrigerator_fridge_temp",
+                      "detail": 1,
+                      "name": "Fridge",
+                      "theme": "Mushroom"
+                    },
+                    {
+                      "hours_to_show": 24,
+                      "graph": "line",
+                      "type": "sensor",
+                      "entity": "sensor.refrigerator_freezer_temp",
+                      "detail": 1,
+                      "name": "Freezer",
+                      "theme": "Mushroom"
+                    }
+                  ]
+                },
+                {
+                  "hours_to_show": 24,
+                  "graph": "line",
+                  "type": "sensor",
+                  "entity": "sensor.basement_fridge_temperature",
+                  "detail": 2,
+                  "name": "Basement Freezer",
+                  "theme": "Mushroom"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme": "Mushroom",
+          "title": "Rack",
+          "path": "rack",
+          "icon": "mdi:server-network",
+          "badges": [],
+          "cards": [
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "custom:mushroom-chips-card",
+                  "chips": [
+                    {
+                      "type": "back"
+                    },
+                    {
+                      "type": "action",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "https://home.giff.ca/"
+                      },
+                      "icon": "mdi:view-dashboard-outline"
+                    },
+                    {
+                      "type": "action",
+                      "icon": "mdi:home-outline",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "house"
+                      }
+                    },
+                    {
+                      "type": "action",
+                      "icon": "mdi:shield-check-outline",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "security"
+                      }
+                    },
+                    {
+                      "type": "action",
+                      "icon": "mdi:countertop-outline",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "kitchen"
+                      }
+                    },
+                    {
+                      "type": "action",
+                      "icon": "mdi:server-network",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "rack"
+                      }
+                    },
+                    {
+                      "type": "action",
+                      "icon": "mdi:security-network",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "network"
+                      }
+                    },
+                    {
+                      "type": "action",
+                      "icon": "mdi:home-city-outline",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "city"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "custom:mushroom-title-card",
+                  "title": "Home Assistant "
+                },
+                {
+                  "type": "custom:mushroom-chips-card",
+                  "chips": [
+                    {
+                      "type": "entity",
+                      "entity": "sensor.current_version",
+                      "icon_color": "blue"
+                    },
+                    {
+                      "type": "entity",
+                      "entity": "sensor.haos_current_version",
+                      "icon_color": "blue"
+                    },
+                    {
+                      "type": "entity",
+                      "entity": "binary_sensor.home_assistant"
+                    },
+                    {
+                      "type": "entity",
+                      "entity": "sensor.glances_containers_active",
+                      "icon_color": "blue"
+                    },
+                    {
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "entity": "sensor.home_assistant_update",
+                          "state": "Update Available"
+                        }
+                      ],
+                      "chip": {
+                        "type": "entity",
+                        "entity": "binary_sensor.latest_version_update_available",
+                        "icon_color": "blue",
+                        "tap_action": {
+                          "action": "navigate",
+                          "navigation_path": "/config/dashboard"
+                        },
+                        "content_info": "state"
+                      }
+                    }
+                  ],
+                  "alignment": "center"
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:mushroom-entity-card",
+                      "entity": "sensor.processor_use",
+                      "name": "Processor"
+                    },
+                    {
+                      "type": "custom:mushroom-entity-card",
+                      "entity": "sensor.memory_use_percent",
+                      "name": "Memory"
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:mushroom-entity-card",
+                      "entity": "sensor.disk_use_percent",
+                      "name": "Storage Used",
+                      "icon": "mdi:sd"
+                    },
+                    {
+                      "type": "custom:mushroom-entity-card",
+                      "entity": "sensor.disk_use",
+                      "name": "Used Space",
+                      "icon": "mdi:sd"
+                    }
+                  ]
+                },
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "sensor.hacs"
+                    },
+                    {
+                      "entity": "sensor.uptime"
+                    },
+                    {
+                      "entity": "sensor.last_boot"
+                    },
+                    {
+                      "entity": "sensor.cert_expiry_timestamp_home_giff_ca",
+                      "name": "Cert Expiration"
+                    },
+                    {
+                      "entity": "sensor.connected_clients"
+                    },
+                    {
+                      "entity": "sensor.auto_backup"
+                    },
+                    {
+                      "entity": "sensor.glances_iwlwifi_1_1_temperature",
+                      "name": "Tempurature"
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:mushroom-entity-card",
+                      "entity": "sensor.mariadb_database",
+                      "name": "MariaDB",
+                      "icon": "mdi:database"
+                    },
+                    {
+                      "type": "custom:mushroom-entity-card",
+                      "entity": "sensor.influxdb_database",
+                      "name": "InfluxDB",
+                      "icon": "mdi:database"
+                    }
+                  ]
+                },
+                {
+                  "type": "entity-filter",
+                  "entities": [
+                    {
+                      "entity": "sensor.home_assistant_update",
+                      "name": "Home Assistant"
+                    },
+                    {
+                      "entity": "binary_sensor.home_assistant_operating_system_update_available"
+                    },
+                    {
+                      "entity": "sensor.hacs",
+                      "name": "Community Store"
+                    },
+                    {
+                      "entity": "binary_sensor.check_home_assistant_configuration_update_available"
+                    },
+                    {
+                      "entity": "binary_sensor.frigate_nvr_update_available"
+                    },
+                    {
+                      "entity": "binary_sensor.glances_update_available"
+                    },
+                    {
+                      "entity": "binary_sensor.grafana_update_available"
+                    },
+                    {
+                      "entity": "binary_sensor.home_assistant_google_drive_backup_update_available"
+                    },
+                    {
+                      "entity": "binary_sensor.influxdb_update_available"
+                    },
+                    {
+                      "entity": "binary_sensor.let_s_encrypt_update_available"
+                    },
+                    {
+                      "entity": "binary_sensor.mariadb_update_available"
+                    },
+                    {
+                      "entity": "binary_sensor.mosquitto_broker_update_available"
+                    },
+                    {
+                      "entity": "binary_sensor.network_ups_tools_update_available"
+                    },
+                    {
+                      "entity": "binary_sensor.nginx_home_assistant_ssl_proxy_update_available"
+                    },
+                    {
+                      "entity": "binary_sensor.node_red_update_available"
+                    },
+                    {
+                      "entity": "binary_sensor.samba_share_update_available"
+                    },
+                    {
+                      "entity": "binary_sensor.storage_update_available"
+                    },
+                    {
+                      "entity": "binary_sensor.tailscale_update_available"
+                    },
+                    {
+                      "entity": "binary_sensor.terminal_ssh_update_available"
+                    },
+                    {
+                      "entity": "binary_sensor.visual_studio_code_update_available"
+                    },
+                    {
+                      "entity": "binary_sensor.z_wave_js_to_mqtt_update_available"
+                    },
+                    {
+                      "entity": "sensor.unifi_gateway_firmware_upgradable",
+                      "name": "Unifi Devices"
+                    }
+                  ],
+                  "state_filter": [
+                    "on",
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "Update(s) Available",
+                    "Update Available"
+                  ],
+                  "card": {
+                    "type": "entities"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "custom:mushroom-title-card"
+                },
+                {
+                  "type": "custom:mushroom-title-card",
+                  "title": "Storage"
+                },
+                {
+                  "type": "custom:mushroom-chips-card",
+                  "chips": [
+                    {
+                      "type": "template",
+                      "entity": "sensor.synology_update",
+                      "icon": "{% if is_state('sensor.synology_update', 'No Update(s)') %}\n  mdi:checkbox-marked-circle-outline\n{% else %}\n blue\n{% endif %}",
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "icon_color": "{% if is_state('binary_sensor.disk_station_manager', 'off') %}\n  grey\n{% elif is_state('binary_sensor.disk_station_manager', 'on') %}\n red\n{% endif %}",
+                      "content": "Updates"
+                    },
+                    {
+                      "type": "template",
+                      "entity": "binary_sensor.disk_station_manager",
+                      "icon": "mdi:nas",
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "icon_color": "{% if is_state('binary_sensor.disk_station_manager', 'off') %}\n  grey\n{% elif is_state('binary_sensor.disk_station_manager', 'on') %}\n red\n{% endif %}",
+                      "content": "Disk Station"
+                    },
+                    {
+                      "type": "entity",
+                      "entity": "sensor.storage_containers_active",
+                      "icon_color": "blue"
+                    },
+                    {
+                      "type": "entity",
+                      "entity": "sensor.storage_k10temp_1_temperature",
+                      "name": "Tempurature"
+                    }
+                  ],
+                  "alignment": "center"
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:mushroom-entity-card",
+                      "entity": "sensor.storage_cpu_utilization_total",
+                      "name": "Processor"
+                    },
+                    {
+                      "type": "custom:mushroom-entity-card",
+                      "entity": "sensor.storage_memory_usage_real",
+                      "name": "Memory"
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:mushroom-entity-card",
+                      "entity": "sensor.storage_used_percent",
+                      "name": "Storage Used"
+                    },
+                    {
+                      "type": "custom:mushroom-entity-card",
+                      "entity": "sensor.storage_used_percent",
+                      "name": "Used Space"
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:mushroom-entity-card",
+                      "entity": "sensor.storage_upload_throughput",
+                      "name": "Network Up"
+                    },
+                    {
+                      "type": "custom:mushroom-entity-card",
+                      "entity": "sensor.storage_download_throughput",
+                      "name": "Network Down"
+                    }
+                  ]
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:mushroom-title-card",
+                      "title": "Media"
+                    },
+                    {
+                      "type": "custom:mushroom-chips-card",
+                      "chips": [
+                        {
+                          "type": "entity",
+                          "entity": "binary_sensor.plex"
+                        },
+                        {
+                          "type": "entity",
+                          "entity": "sensor.plex"
+                        },
+                        {
+                          "type": "entity",
+                          "entity": "sensor.media_containers_active",
+                          "icon_color": "blue"
+                        },
+                        {
+                          "type": "conditional",
+                          "conditions": [
+                            {
+                              "entity": "sensor.plex_plex",
+                              "state_not": "0"
+                            }
+                          ],
+                          "chip": {
+                            "type": "entity",
+                            "entity": "sensor.plex_plex",
+                            "icon_color": "orange"
+                          }
+                        }
+                      ],
+                      "alignment": "center"
+                    },
+                    {
+                      "type": "horizontal-stack",
+                      "cards": [
+                        {
+                          "type": "custom:mushroom-entity-card",
+                          "entity": "sensor.media_cpu_used",
+                          "name": "Processor"
+                        },
+                        {
+                          "type": "custom:mushroom-entity-card",
+                          "entity": "sensor.media_ram_used_percent",
+                          "name": "Memory"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "horizontal-stack",
+                      "cards": [
+                        {
+                          "type": "custom:mushroom-entity-card",
+                          "entity": "sensor.glances_media_used_percent",
+                          "name": "Storage Used"
+                        },
+                        {
+                          "type": "custom:mushroom-entity-card",
+                          "entity": "sensor.glances_media_used",
+                          "name": "Used Space"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "horizontal-stack",
+                      "cards": [
+                        {
+                          "type": "custom:mushroom-entity-card",
+                          "entity": "sensor.media_core_0_temperature",
+                          "name": "Processor"
+                        },
+                        {
+                          "type": "custom:mushroom-entity-card",
+                          "entity": "sensor.media_core_1_temperature",
+                          "name": "Processor"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "custom:mushroom-title-card"
+                },
+                {
+                  "type": "custom:mushroom-title-card",
+                  "title": "Rack"
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:mushroom-chips-card",
+                      "chips": [
+                        {
+                          "type": "entity",
+                          "entity": "sensor.ups_battery_runtime_min"
+                        },
+                        {
+                          "type": "entity",
+                          "entity": "sensor.ups_battery_charge"
+                        },
+                        {
+                          "type": "entity",
+                          "entity": "sensor.ups_nominal_battery_voltage"
+                        },
+                        {
+                          "type": "entity",
+                          "entity": "sensor.rack_temperature"
+                        }
+                      ],
+                      "alignment": "center"
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:mushroom-entity-card",
+                      "entity": "sensor.ups_status",
+                      "primary_info": "state",
+                      "secondary_info": "name"
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:mushroom-entity-card",
+                      "entity": "sensor.ups_ups_shutdown_delay",
+                      "name": "Shutdown Delay",
+                      "primary_info": "state",
+                      "secondary_info": "name"
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:mushroom-entity-card",
+                      "entity": "sensor.ups_low_battery_setpoint",
+                      "name": "Low Setpoint",
+                      "primary_info": "state",
+                      "secondary_info": "name"
+                    },
+                    {
+                      "type": "custom:mushroom-entity-card",
+                      "entity": "sensor.ups_low_battery_runtime",
+                      "name": "Low Runtime",
+                      "primary_info": "state",
+                      "secondary_info": "name"
+                    }
+                  ]
+                },
+                {
+                  "type": "custom:mushroom-title-card",
+                  "title": "Power Consumption"
+                },
+                {
+                  "type": "custom:mushroom-chips-card",
+                  "chips": [
+                    {
+                      "type": "entity",
+                      "entity": "sensor.server_rack_node_status"
+                    }
+                  ],
+                  "alignment": "center"
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:mushroom-entity-card",
+                      "entity": "sensor.server_rack_electric_consumption_a",
+                      "name": "AMPs",
+                      "primary_info": "state",
+                      "secondary_info": "none"
+                    },
+                    {
+                      "type": "custom:mushroom-entity-card",
+                      "entity": "sensor.server_rack_electric_consumption_kwh",
+                      "name": "kWh",
+                      "primary_info": "state",
+                      "secondary_info": "none"
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:mushroom-entity-card",
+                      "entity": "sensor.server_rack_electric_consumption_v",
+                      "name": "Voltage",
+                      "primary_info": "state",
+                      "secondary_info": "none"
+                    },
+                    {
+                      "type": "custom:mushroom-entity-card",
+                      "entity": "sensor.server_rack_electric_consumption_w",
+                      "name": "Wattage",
+                      "primary_info": "state",
+                      "secondary_info": "none"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme": "Mushroom",
+          "title": "Network",
+          "path": "network",
+          "icon": "mdi:security-network",
+          "badges": [],
+          "cards": [
+            {
+              "type": "custom:mushroom-chips-card",
+              "chips": [
+                {
+                  "type": "back"
+                },
+                {
+                  "type": "action",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "https://home.giff.ca/"
+                  },
+                  "icon": "mdi:view-dashboard-outline"
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:home-outline",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "house"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:shield-check-outline",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "security"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:countertop-outline",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "kitchen"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:server-network",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "rack"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:security-network",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "network"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:home-city-outline",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "city"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "sensor",
+                      "entity": "sensor.adguard_average_processing_speed",
+                      "graph": "line",
+                      "name": "AdGuard Speed"
+                    },
+                    {
+                      "type": "sensor",
+                      "entity": "sensor.adguard_dns_queries_blocked_ratio",
+                      "graph": "line",
+                      "name": "AdGuard Block Ratio"
+                    }
+                  ]
+                },
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "sensor.adguard_dns_queries"
+                    },
+                    {
+                      "entity": "sensor.adguard_safe_browsing_blocked"
+                    },
+                    {
+                      "entity": "sensor.adguard_safe_searches_enforced"
+                    }
+                  ]
+                },
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "switch.adguard_filtering"
+                    },
+                    {
+                      "entity": "switch.adguard_protection"
+                    },
+                    {
+                      "entity": "switch.adguard_parental_control"
+                    },
+                    {
+                      "entity": "switch.adguard_safe_browsing"
+                    },
+                    {
+                      "entity": "switch.adguard_safe_search"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "custom:mushroom-title-card"
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "entity",
+                      "entity": "binary_sensor.shaw_connection"
+                    },
+                    {
+                      "type": "entity",
+                      "entity": "sensor.public_ip_address",
+                      "icon": "mdi:dots-horizontal"
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "sensor",
+                      "entity": "sensor.speedtest_ping",
+                      "graph": "line"
+                    },
+                    {
+                      "type": "entity",
+                      "entity": "binary_sensor.ssl"
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "entity",
+                      "entity": "binary_sensor.backup",
+                      "icon": "mdi:backup-restore"
+                    },
+                    {
+                      "type": "entity",
+                      "entity": "binary_sensor.offsite_backup",
+                      "icon": "mdi:cloud-upload-outline"
+                    }
+                  ]
+                },
+                {
+                  "type": "custom:apexcharts-card",
+                  "graph_span": "7d",
+                  "header": {
+                    "title": "Shaw Performance History",
+                    "show": true,
+                    "show_states": true,
+                    "colorize_states": true
+                  },
+                  "all_series_config": {
+                    "stroke_width": 2,
+                    "opacity": 0.3,
+                    "type": "area"
+                  },
+                  "series": [
+                    {
+                      "entity": "sensor.speedtest_download"
+                    },
+                    {
+                      "entity": "sensor.speedtest_upload",
+                      "invert": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "custom:mushroom-title-card"
+                },
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "sensor.unifi_gateway_lan"
+                    },
+                    {
+                      "entity": "sensor.unifi_gateway_wan"
+                    },
+                    {
+                      "entity": "sensor.unifi_gateway_wlan"
+                    },
+                    {
+                      "entity": "sensor.unifi_gateway_www"
+                    },
+                    {
+                      "entity": "sensor.unifi_gateway_uptime"
+                    },
+                    {
+                      "entity": "sensor.unifi_gateway_firmware_upgradable"
+                    }
+                  ],
+                  "title": "Unifi"
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "sensor",
+                      "entity": "sensor.unifi_gateway_cpu",
+                      "graph": "line",
+                      "name": "Processor"
+                    },
+                    {
+                      "type": "sensor",
+                      "entity": "sensor.unifi_gateway_mem",
+                      "graph": "line",
+                      "name": "Memory"
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "sensor",
+                      "entity": "sensor.unifi_gateway_latency",
+                      "graph": "line"
+                    },
+                    {
+                      "type": "sensor",
+                      "entity": "sensor.unifi_gateway_availability",
+                      "graph": "line"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme": "Mushroom",
+          "title": "City",
+          "path": "city",
+          "icon": "mdi:home-city-outline",
+          "badges": [],
+          "cards": [
+            {
+              "type": "custom:mushroom-chips-card",
+              "chips": [
+                {
+                  "type": "back"
+                },
+                {
+                  "type": "action",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "https://home.giff.ca/"
+                  },
+                  "icon": "mdi:view-dashboard-outline"
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:home-outline",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "house"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:shield-check-outline",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "security"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:countertop-outline",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "kitchen"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:server-network",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "rack"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:security-network",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "network"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:home-city-outline",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "city"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "show_state": false,
+                  "show_name": false,
+                  "camera_view": "auto",
+                  "type": "picture-entity",
+                  "entity": "camera.162_avenue_james_mckevitt_road_sw",
+                  "camera_image": "camera.162_avenue_james_mckevitt_road_sw",
+                  "theme": "Mushroom",
+                  "name": "162 Avenue & James McKevitt Road SW"
+                },
+                {
+                  "show_state": false,
+                  "show_name": false,
+                  "camera_view": "auto",
+                  "type": "picture-entity",
+                  "entity": "camera.162_avenue_macleod_trail_s",
+                  "camera_image": "camera.162_avenue_macleod_trail_s",
+                  "theme": "Mushroom",
+                  "name": "162 Avenue & Macleod Trail S"
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "custom:mushroom-title-card"
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "show_state": false,
+                      "show_name": false,
+                      "camera_view": "auto",
+                      "type": "picture-entity",
+                      "entity": "camera.162_avenue_shawville_blvd_sw",
+                      "camera_image": "camera.162_avenue_shawville_blvd_sw",
+                      "theme": "Mushroom",
+                      "name": "162 Avenue & Shawville Blvd SW"
+                    },
+                    {
+                      "show_state": false,
+                      "show_name": false,
+                      "camera_view": "auto",
+                      "type": "picture-entity",
+                      "entity": "camera.lake_fraser_gate_macleod_trail_se",
+                      "camera_image": "camera.lake_fraser_gate_macleod_trail_se",
+                      "theme": "Mushroom",
+                      "name": "Lake Fraser Gate & Macleod Trail SE"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "custom:mushroom-title-card"
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "show_state": false,
+                      "show_name": false,
+                      "camera_view": "auto",
+                      "type": "picture-entity",
+                      "entity": "camera.heritage_drive_macleod_trail_s",
+                      "camera_image": "camera.heritage_drive_macleod_trail_s",
+                      "theme": "Mushroom",
+                      "name": "Heritage Drive & Macleod Trail S"
+                    },
+                    {
+                      "show_state": false,
+                      "show_name": false,
+                      "camera_view": "auto",
+                      "type": "picture-entity",
+                      "entity": "camera.southland_drive_macleod_trail_s",
+                      "camera_image": "camera.southland_drive_macleod_trail_s",
+                      "theme": "Mushroom",
+                      "name": "Southland Drive & Macleod Trail S"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
+      ]
     }
+  }
 }

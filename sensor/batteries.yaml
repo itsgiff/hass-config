@@ -4,33 +4,33 @@
 # Door Batteries
 ###########################################
 
-- platform: template
-  sensors:
-    front_door_battery:
-      friendly_name: 'Front Door'
-      unit_of_measurement: '%'
-      icon_template: 'mdi:door'
-      entity_id: 'zwave.front_door'
-      value_template: "{{  states.zwave.front_door.attributes.battery_level | round(0) }}"
+# - platform: template
+#   sensors:
+#     front_door_battery:
+#       friendly_name: 'Front Door'
+#       unit_of_measurement: '%'
+#       icon_template: 'mdi:door'
+#       entity_id: 'zwave.front_door'
+#       value_template: "{{  states.zwave.front_door.attributes.battery_level | round(0) }}"
 
-- platform: template
-  sensors:
-    back_door_battery:
-      friendly_name: 'Back Door'
-      unit_of_measurement: '%'
-      icon_template: 'mdi:door'
-      entity_id: 'zwave.back_door'
-      value_template: "{{  states.zwave.back_door.attributes.battery_level | round(0) }}"
+# - platform: template
+#   sensors:
+#     back_door_battery:
+#       friendly_name: 'Back Door'
+#       unit_of_measurement: '%'
+#       icon_template: 'mdi:door'
+#       entity_id: 'zwave.back_door'
+#       value_template: "{{  states.zwave.back_door.attributes.battery_level | round(0) }}"
 
 
-- platform: template
-  sensors:
-    garage_door_battery:
-      friendly_name: 'Garage Door'
-      unit_of_measurement: '%'
-      icon_template: 'mdi:door'
-      entity_id: 'zwave.garage_door'
-      value_template: "{{  states.zwave.garage_door.attributes.battery_level | round(0) }}"
+# - platform: template
+#   sensors:
+#     garage_door_battery:
+#       friendly_name: 'Garage Door'
+#       unit_of_measurement: '%'
+#       icon_template: 'mdi:door'
+#       entity_id: 'zwave.garage_door'
+#       value_template: "{{  states.zwave.garage_door.attributes.battery_level | round(0) }}"
 
 
 #- platform: template
@@ -55,93 +55,93 @@
 # Window Batteries
 ###########################################
 
-- platform: template
-  sensors:
-    office_window_battery:
-      friendly_name: 'Office Window'
-      unit_of_measurement: '%'
-      icon_template: 'mdi:window-closed'
-      entity_id: 'zwave.office_window'
-      value_template: "{{  states.zwave.office_window.attributes.battery_level | round(0) }}"
+# - platform: template
+#   sensors:
+#     office_window_battery:
+#       friendly_name: 'Office Window'
+#       unit_of_measurement: '%'
+#       icon_template: 'mdi:window-closed'
+#       entity_id: 'zwave.office_window'
+#       value_template: "{{  states.zwave.office_window.attributes.battery_level | round(0) }}"
 
-- platform: template
-  sensors:
-    living_room_window_battery:
-      friendly_name: 'Living Room Window'
-      unit_of_measurement: '%'
-      icon_template: 'mdi:window-closed'
-      entity_id: 'zwave.living_room_window'
-      value_template: "{{  states.zwave.living_room_window.attributes.battery_level | round(0) }}"
+# - platform: template
+#   sensors:
+#     living_room_window_battery:
+#       friendly_name: 'Living Room Window'
+#       unit_of_measurement: '%'
+#       icon_template: 'mdi:window-closed'
+#       entity_id: 'zwave.living_room_window'
+#       value_template: "{{  states.zwave.living_room_window.attributes.battery_level | round(0) }}"
 
-- platform: template
-  sensors:
-    kitchen_window_battery:
-      friendly_name: 'Kitchen Window'
-      unit_of_measurement: '%'
-      icon_template: 'mdi:window-closed'
-      entity_id: 'zwave.kitchen_window'
-      value_template: "{{  states.zwave.kitchen_window.attributes.battery_level | round(0) }}"
+# - platform: template
+#   sensors:
+#     kitchen_window_battery:
+#       friendly_name: 'Kitchen Window'
+#       unit_of_measurement: '%'
+#       icon_template: 'mdi:window-closed'
+#       entity_id: 'zwave.kitchen_window'
+#       value_template: "{{  states.zwave.kitchen_window.attributes.battery_level | round(0) }}"
 
-- platform: template
-  sensors:
-    guest_bedroom_window_battery:
-      friendly_name: 'Guest Bedroom Window'
-      unit_of_measurement: '%'
-      icon_template: 'mdi:window-closed'
-      entity_id: 'zwave.guest_bedroom_window'
-      value_template: "{{  states.zwave.guest_bedroom_window.attributes.battery_level | round(0) }}"
+# - platform: template
+#   sensors:
+#     guest_bedroom_window_battery:
+#       friendly_name: 'Guest Bedroom Window'
+#       unit_of_measurement: '%'
+#       icon_template: 'mdi:window-closed'
+#       entity_id: 'zwave.guest_bedroom_window'
+#       value_template: "{{  states.zwave.guest_bedroom_window.attributes.battery_level | round(0) }}"
 
-- platform: template
-  sensors:
-    bedroom_window_battery:
-      friendly_name: 'Bedroom Window'
-      unit_of_measurement: '%'
-      icon_template: 'mdi:window-closed'
-      entity_id: 'zwave.bedroom_window'
-      value_template: "{{  states.zwave.bedroom_window.attributes.battery_level | round(0) }}"
+# - platform: template
+#   sensors:
+#     bedroom_window_battery:
+#       friendly_name: 'Bedroom Window'
+#       unit_of_measurement: '%'
+#       icon_template: 'mdi:window-closed'
+#       entity_id: 'zwave.bedroom_window'
+#       value_template: "{{  states.zwave.bedroom_window.attributes.battery_level | round(0) }}"
 
-###########################################
-# Nest Protect Batteries
-###########################################
+# ###########################################
+# # Nest Protect Batteries
+# ###########################################
 
-- platform: template
-  sensors:
-    main_floor_nest_protect_battery:
-      friendly_name: 'Main Floor Nest Protect'
-      icon_template: 'mdi:smoke-detector'
-      value_template: >-
-          {%- if is_state("sensor.main_floor_nest_protect_battery_health", "Ok") %}
-              Good
-          {%- elif is_state("sensor.main_floor_nest_protect_battery_health", "Bad") %}
-              Warning
-          {%- else %}
-              Warning
-          {%- endif %}
+# - platform: template
+#   sensors:
+#     main_floor_nest_protect_battery:
+#       friendly_name: 'Main Floor Nest Protect'
+#       icon_template: 'mdi:smoke-detector'
+#       value_template: >-
+#           {%- if is_state("sensor.main_floor_nest_protect_battery_health", "Ok") %}
+#               Good
+#           {%- elif is_state("sensor.main_floor_nest_protect_battery_health", "Bad") %}
+#               Warning
+#           {%- else %}
+#               Warning
+#           {%- endif %}
 
-- platform: template
-  sensors:
-    basement_nest_protect_battery:
-      friendly_name: 'Basement Nest Protect'
-      icon_template: 'mdi:smoke-detector'
-      value_template: >-
-          {%- if is_state("sensor.basement_nest_protect_battery_health", "Ok") %}
-              Good
-          {%- elif is_state("sensor.basement_nest_protect_battery_health", "Bad") %}
-              Warning
-          {%- else %}
-              Warning
-          {%- endif %}
+# - platform: template
+#   sensors:
+#     basement_nest_protect_battery:
+#       friendly_name: 'Basement Nest Protect'
+#       icon_template: 'mdi:smoke-detector'
+#       value_template: >-
+#           {%- if is_state("sensor.basement_nest_protect_battery_health", "Ok") %}
+#               Good
+#           {%- elif is_state("sensor.basement_nest_protect_battery_health", "Bad") %}
+#               Warning
+#           {%- else %}
+#               Warning
+#           {%- endif %}
 
-- platform: template
-  sensors:
-    garage_nest_protect_battery:
-      friendly_name: 'Garage Nest Protect'
-      icon_template: 'mdi:smoke-detector'
-      value_template: >-
-          {%- if is_state("sensor.garage_nest_protect_battery_health", "Ok") %}
-              Good
-          {%- elif is_state("sensor.garage_nest_protect_battery_health", "Bad") %}
-              Warning
-          {%- else %}
-              Warning
-          {%- endif %}
+# - platform: template
+#   sensors:
+#     garage_nest_protect_battery:
+#       friendly_name: 'Garage Nest Protect'
+#       icon_template: 'mdi:smoke-detector'
+#       value_template: >-
+#           {%- if is_state("sensor.garage_nest_protect_battery_health", "Ok") %}
+#               Good
+#           {%- elif is_state("sensor.garage_nest_protect_battery_health", "Bad") %}
+#               Warning
+#           {%- else %}
+#               Warning
+#           {%- endif %}

@@ -4,4 +4,42 @@
 
 - platform: ping
   host:  1.1.1.1
+  name: ping
   count: 2
+
+- platform: ping
+  host:  192.168.1.240
+  name: ap-downstairs
+  count: 2
+
+- platform: ping
+  host:  192.168.1.241
+  name: ap-upstairs
+  count: 2
+
+- platform: command_line
+  name: NGINX Proxy Manager
+  command: response=$(curl -LIk -m 3 http://192.168.1.2:8181/ -o /dev/null -w "%{http_code}\n" -s); test "$response" -eq 200 && echo "OFF" || echo "ON"
+  scan_interval: 60
+  value_template: '{{ value }}'
+  device_class: 'problem'
+
+- platform: command_line
+  name: Disk Station Manager
+  command: response=$(curl -LIk -m 3 http://192.168.1.2:5000/ -o /dev/null -w "%{http_code}\n" -s); test "$response" -eq 200 && echo "OFF" || echo "ON"
+  scan_interval: 60
+  value_template: '{{ value }}'
+  device_class: 'problem'
+
+- platform: command_line
+  name: NZBGET
+  command: response=$(curl -LIk -m 3 https://192.168.1.2:6789/ -o /dev/null -w "%{http_code}\n" -s); test "$response" -eq 200 && echo "OFF" || echo "ON"
+  scan_interval: 60
+  value_template: '{{ value }}'
+  device_class: 'problem'
+
+- platform: snowtire
+  weather: weather.calgary
+  
+- platform: car_wash
+  weather: weather.calgary  

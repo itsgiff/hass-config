@@ -6,63 +6,28 @@
   still_image_url: https://radblast.wunderground.com/cgi-bin/radar/WUNIDS_map?station=XSM&brand=wui&num=10&delay=100&type=C0R&frame=0&scale=1.000&noclutter=0&showstorms=5&mapx=400&mapy=240&centerx=400&centery=240&transx=0&transy=0&showlabels=1&severe=0&rainsnow=1&lightning=0&smooth=1&rand=24740140&lat=0&lon=0&label=you
   name: 'YYC Doppler'
 
-###########################################
-# Enviornment Canada
-###########################################
-- platform: environment_canada
-
-- platform: combined
-  base_address: https://home.giff.ca
-  entities:
-      - camera.back_deck
-      - camera.backyard
-      - camera.basement
-      - camera.driveway
-      - camera.front_deck
-      - camera.front_gate
-      - camera.hot_tub
-      - camera.side_gate
-      - camera.back_side
-      - camer.doorbell
-      - camera.garage
-
-###########################################
-# Doods
-###########################################
-      
-- platform: generic
-  still_image_url: https://home.giff.ca/local/doods/driveway_latest.jpg
-  name: 'Driveway Detection'
-
-- platform: generic
-  still_image_url: https://home.giff.ca/local/doods/front_deck_latest.jpg
-  name: 'Front Deck Detection'
-
-- platform: generic
-  still_image_url: https://home.giff.ca/local/doods/back_deck_latest.jpg
-  name: 'Back Deck Detection'
-
 
 ###########################################
 # City of Calgary
 ###########################################
 - platform: generic
-  still_image_url: http://trafficcam.calgary.ca/loc116.jpg
+  still_image_url: https://trafficcam.calgary.ca/loc116.jpg
   name: '162 Avenue & Shawville Blvd SW'
 - platform: generic
-  still_image_url: http://trafficcam.calgary.ca/loc101.jpg
+  still_image_url: https://trafficcam.calgary.ca/loc101.jpg
   name: '162 Avenue & Macleod Trail S'
 - platform: generic
-  still_image_url: http://trafficcam.calgary.ca/loc88.jpg
+  still_image_url: https://trafficcam.calgary.ca/loc88.jpg
   name: 'Lake Fraser Gate & Macleod Trail SE'
 - platform: generic
-  still_image_url: http://trafficcam.calgary.ca/loc15.jpg
+  still_image_url: https://trafficcam.calgary.ca/loc15.jpg
   name: 'Glenmore Trail & Crowchild Trail SW'
 - platform: generic
-  still_image_url: http://trafficcam.calgary.ca/loc48.jpg
+  still_image_url: https://trafficcam.calgary.ca/loc48.jpg
   name: 'Southland Drive & Macleod Trail S'
 - platform: generic
-  still_image_url: http://trafficcam.calgary.ca/loc8.jpg
+  still_image_url: https://trafficcam.calgary.ca/loc8.jpg
   name: 'Heritage Drive & Macleod Trail S'
-
-
+- platform: generic
+  still_image_url: https://trafficcam.calgary.ca/loc139.jpg
+  name: '162 Avenue & James McKevitt Road SW'

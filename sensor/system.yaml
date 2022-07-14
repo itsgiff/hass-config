@@ -4,28 +4,21 @@
 - platform: websocket_api
 
 - platform: version
-  source: hassio
-
-- platform: version
   source: local
 
-- platform: authenticated
-  enable_notification: false
-  exclude:
-    - 172.30.32.2
-    - 172.30.33.0
-    - 172.30.33.1
-    - 172.30.33.2
-    - 172.30.33.3
-    - 172.30.33.4
-    - 172.30.33.5
+- platform: version
+  source: supervisor
 
-- platform: template
-  sensors:
-    last_successful_authentication_hostname:
-      value_template: '{{ states.sensor.last_successful_authentication.attributes.hostname }}'
-    last_successful_authentication_username:
-      value_template: '{{ states.sensor.last_successful_authentication.attributes.username }}'
+# - platform: authenticated
+#   enable_notification: false
+#   exclude:
+#     - 172.30.32.2
+#     - 172.30.33.0
+#     - 172.30.33.1
+#     - 172.30.33.2
+#     - 172.30.33.3
+#     - 172.30.33.4
+#     - 172.30.33.5
 
 
 - platform: template
@@ -57,28 +50,49 @@
   sensors:
     synology_update:
         value_template: >-
-          {%- if is_state("binary_sensor.nas_update_available", "on") %}
+          {%- if is_state("binary_sensor.storage_update_available", "on") %}
               Update(s) Available
-          {%- elif is_state("binary_sensor.nas_update_available", "off") %}
+          {%- elif is_state("binary_sensor.storage_update_available", "off") %}
               No Update(s)
           {%- else %}
               Error
           {%- endif %}
         friendly_name: 'Synology Update'
         icon_template: >-
-            {%- if is_state('binary_sensor.nas_update_available', 'off') %}
+            {%- if is_state('binary_sensor.storage_update_available', 'off') %}
             mdi:checkbox-marked-circle-outline
-            {%- elif is_state('binary_sensor.nas_update_available', 'on') %}
+            {%- elif is_state('binary_sensor.storage_update_available', 'on') %}
             mdi:package-down
             {% else %}
             mdi:alert-circle-outline
             {% endif %}   
 
+- platform: template
+  sensors:
+    plex_connection:
+        value_template: >-
+          {%- if is_state("binary_sensor.plex", "on") %}
+              connected
+          {%- elif is_state("binary_sensor.plex", "off") %}
+              disconnected
+          {%- else %}
+              error
+          {%- endif %}
+        friendly_name: 'Plex'
+        icon_template: >-
+            {%- if is_state('binary_sensor.plex', 'on') %}
+            mdi:check-network-outline
+            {%- elif is_state('binary_sensor.plex', 'off') %}
+            mdi:close-network-outline
+            {% else %}
+            mdi:help-network-outline
+            {% endif %}   
+
+
 - platform: rest
   resource: https://api.github.com/repos/home-assistant/home-assistant/releases/latest
   username: !secret email_account
   password: !secret github_access_token
-#  authentication: basic
   value_template: '{{ value_json.tag_name }}'
   name: 'Home Assistant Release'
   headers:
@@ -95,10 +109,6 @@
   name: "Disk Free Space"
   scan_interval: 60
 
-- platform: command_line
-  command: "du -h /config/home-assistant_v2.db | awk '{print $1}'"
-  name: "Database Size"
-  scan_interval: 60
 
 - platform: command_line
   command: "cat /sys/class/thermal/thermal_zone0/temp"
@@ -120,16 +130,145 @@
     - type: swap_use
     - type: processor_use
 
+
+- platform: command_line
+  name: external access
+  command: response=$(curl -LIk -m 3 https://home.giff.ca -o /dev/null -w "%{http_code}\n" -s); test "$response" -eq 200 && echo "ON" || echo "OFF"
+  scan_interval: 300
+  value_template: '{{ value }}'
+
+- platform: sql
+  db_url: !secret mariadb_url
+  queries:
+    - name: MariaDB Database
+      query: 'SELECT table_schema "database", Round(Sum(data_length + index_length) / 1024 / 1024 / 1024, 1) "value" FROM information_schema.tables WHERE table_schema="homeassistant" GROUP BY table_schema;'
+      column: "value"
+      unit_of_measurement: GB
+
+- platform: influxdb
+  host: a0d7b954-influxdb
+  port: 8086
+  database: !secret influxdb_db
+  username: !secret influxdb_username
+  password: !secret influxdb_password
+  queries:
+    - name: InfluxDB Database
+      unit_of_measurement: MB
+      value_template: '{{ (value | float / 1024 /1024) | round(1) }}'
+      group_function: mean
+      measurement: '"monitor"."shard"'
+      database: _internal
+      where: 'time > now() - 1m AND "database"=''homeassistant'''
+      field: diskBytes
+
+- platform: unifigateway
+  host: !secret unifi_ip
+  username: !secret unifi_username
+  password: !secret unifi_password
+  port: 443
+  version: UDMP-unifiOS
+  monitored_conditions:
+    - www
+    - wlan
+#    - alerts
+    - firmware
+    - wan
+    - lan
+
+- platform: template
+  sensors:
+      unifi_gateway_cpu:
+        friendly_name: 'Unifi CPU'
+        value_template: "{{ states.sensor.unifi_gateway_wan.attributes['gw_system-stats']['cpu'] }}"
+        icon_template: mdi:cpu-64-bit
+
+      unifi_gateway_mem:
+        friendly_name: 'Unifi Memory'
+        value_template: "{{ states.sensor.unifi_gateway_wan.attributes['gw_system-stats']['mem'] }}"
+        icon_template: mdi:memory
+
+      unifi_gateway_wan_ip:
+        friendly_name: 'WAN IP'
+        value_template: '{{ states.sensor.unifi_gateway_wan.attributes.wan_ip }}'
+        icon_template: mdi:wan
+
+      unifi_gateway_wired_clients:
+        friendly_name: 'Wired Clients'
+        value_template: "{{ states.sensor.unifi_gateway_lan.attributes.num_user }}"
+        icon_template: mdi:lan
+
+      unifi_gateway_wireless_clients:
+        friendly_name: 'Wireless Clients'
+        value_template: "{{ states.sensor.unifi_gateway_wlan.attributes.num_user }}"
+        icon_template: mdi:wifi
+
+      unifi_gateway_www_xput_up:
+        friendly_name: 'Upload'
+        unit_of_measurement: Mbps
+        value_template: "{{ states.sensor.unifi_gateway_www.attributes.xput_up }}"
+        icon_template: mdi:upload
+
+      unifi_gateway_www_xput_down:
+        friendly_name: 'Download'
+        unit_of_measurement: Mbps
+        value_template: "{{ states.sensor.unifi_gateway_www.attributes.xput_down }}"
+        icon_template: mdi:download
+
+      unifi_gateway_www_speedtest_ping:
+        friendly_name: 'Ping'
+        unit_of_measurement: ms
+        value_template: "{{ states.sensor.unifi_gateway_www.attributes.speedtest_ping }}"
+        icon_template: mdi:dots-horizontal
+
+      unifi_gateway_firmware:
+        friendly_name: 'Unifi Firmware Version'
+        value_template: "{{ states.sensor.unifi_gateway_wan.attributes.gw_version }}"
+        icon_template: mdi:counter
+
+      unifi_gateway_latency:
+        friendly_name: 'Latency'
+        unit_of_measurement: ms
+        value_template: "{{ states.sensor.unifi_gateway_wan.attributes['uptime_stats']['WAN']['latency_average'] }}"
+        icon_template: mdi:rotate-right
+
+      unifi_gateway_availability:
+        friendly_name: 'Availability'
+        unit_of_measurement: '%'
+        value_template: "{{ states.sensor.unifi_gateway_wan.attributes['uptime_stats']['WAN']['availability'] }}"
+        icon_template: mdi:arrow-up-circle-outline
+
+- platform: template
+  sensors:
+    unifi_gateway_uptime:
+        icon_template: mdi:av-timer
+        friendly_name: Uptime
+        value_template: >-
+              {% set time = (states.sensor.unifi_gateway_wan.attributes['gw_system-stats']['uptime'] | int) | int %}
+              {% set minutes = ((time % 3600) / 60) | int %}
+              {% set hours = ((time % 86400) / 3600) | int %}
+              {% set days = (time / 86400) | int %}
+
+              {%- if time < 60 -%}
+                Less than a minute
+                {%- else -%}
+                {%- if days > 0 -%}
+                  {{ days }}d
+                {%- endif -%}
+                {%- if hours > 0 -%}
+                  {%- if days > 0 -%}
+                    {{ ' ' }}
+                  {%- endif -%}
+                  {{ hours }}h
+                 {%- endif -%}
+                 {%- if minutes > 0 -%}
+                   {%- if days > 0 or hours > 0 -%}
+                     {{ ' ' }}
+                   {%- endif -%}
+                   {{ minutes }}m
+                 {%- endif -%}
+               {%- endif -%}
+
+
 - platform: uptime
   name: "Uptime"
-  unit_of_measurement: hours
 
-- platform: mqtt
-  name: "Zwave Controller Status"
-  state_topic: "homeassistant/zwave_stick/status"
-  value_template: "{{ value_json.status }}"
-
-- platform: mqtt
-  name: "Zwave Controller Last Activity"
-  state_topic: "homeassistant/zwave_stick/status"
-  value_template: "{{ value_json.time | multiply(0.001) | round(0) | timestamp_local }}"

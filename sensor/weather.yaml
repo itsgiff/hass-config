@@ -49,6 +49,55 @@
 
 - platform: season
 
-- platform: environment_canada
-  latitude: !secret latitude
-  longitude: !secret longitude
+- platform: template
+  sensors:
+    bridlewood_wind_direction:
+      friendly_name: 'Wind Direction'
+      value_template: >-
+        {%if states.sensor.bridlewood_wind_dir.state | float<=11 %}North
+        {% elif states.sensor.bridlewood_wind_dir.state | float>348 %}North
+        {% elif states.sensor.bridlewood_wind_dir.state | float<=34 | float>11 %}North North East
+        {% elif states.sensor.bridlewood_wind_dir.state | float<=56 | float>34 %}North East
+        {% elif states.sensor.bridlewood_wind_dir.state | float<=79 | float>56 %}East North East
+        {% elif states.sensor.bridlewood_wind_dir.state | float<=101 | float>79 %}East
+        {% elif states.sensor.bridlewood_wind_dir.state | float<=124 | float>101 %}East South East
+        {% elif states.sensor.bridlewood_wind_dir.state | float<=146 | float>124 %}South East
+        {% elif states.sensor.bridlewood_wind_dir.state | float<=169 | float>146 %}South South East
+        {% elif states.sensor.bridlewood_wind_dir.state | float<=191 | float>169 %}South
+        {% elif states.sensor.bridlewood_wind_dir.state | float<=236 | float>214 %}South West
+        {% elif states.sensor.bridlewood_wind_dir.state | float<=259 | float>236 %}West South West
+        {% elif states.sensor.bridlewood_wind_dir.state | float<=281 | float>259 %}West
+        {% elif states.sensor.bridlewood_wind_dir.state | float<=304 | float>281 %}West North West
+        {% elif states.sensor.bridlewood_wind_dir.state | float<=326 | float>304 %}West North West
+        {% elif states.sensor.bridlewood_wind_dir.state | float<=348 | float>326 %}North North West
+        {%- endif %}
+
+- platform: template
+  sensors: 
+    wind_speed_metric:
+      friendly_name: 'Wind Speed'
+      unit_of_measurement: km/h
+      value_template: "{{ states('sensor.bridlewood_wind_speed')|float * 1.609 | round(0) }}"
+      icon_template: mdi:weather-windy
+
+- platform: template
+  sensors: 
+    wind_gusts_metric:
+      friendly_name: 'Wind Gusts'
+      unit_of_measurement: km/h
+      value_template: "{{ states('sensor.bridlewood_wind_gust')|float * 1.609 | round(0) }}"
+      icon_template: mdi:weather-windy      
+
+
+- platform: template
+  sensors:
+    bridlewood_wind_chill:
+      friendly_name: 'Wind Chill'
+      unit_of_measurement: °C   
+      icon_template: mdi:snowflake-alert 
+      value_template: >-
+        {%- if is_state('sensor.wind_chill', 'unknown') %}
+        0
+        {% else %}
+        {{ states('sensor.wind_chill') }}
+        {%- endif %} 

@@ -1,0 +1,20 @@
+ip_address: !secret ha_address
+advertise_ip: !secret ha_address
+name: Home Assistant Bridge
+filter:
+  include_entities:
+    light.desk_key_light:
+    switch.work_light:
+    switch.coffee_light:
+    switch.garage_door_light:
+    switch.pergola_lights:
+    switch.backyard_lights:
+    switch.frontyard_lights:
+    switch.outdoor_lights:  
+    switch.backyard_fountain:
+      name: Backyard Fountain
+    switch.frontyard_fountain:
+      name: Frontyard Fountain
+      lock.garage_door:
+    lock.front_door:
+    lock.back_door:  

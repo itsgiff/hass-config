@@ -1,0 +1,6 @@
+mam:
+  alias: MAM
+  sequence:
+  - service: pyscript.get_mam_jsonload
+  mode: single
+  icon: mdi:rodent

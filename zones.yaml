@@ -1,6 +1,4 @@
-###########################################
 # Zones
-###########################################
 
 - name: Downtown
   latitude: 51.048518
@@ -12,7 +10,7 @@
   latitude: 51.125630
   longitude: -114.016975
   radius: 1500
-  icon: mdi:airplane-takeoff
+  icon: mdi:airport
 
 - name: Peter Lougheed Hospital
   latitude: 51.078994

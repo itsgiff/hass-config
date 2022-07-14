@@ -7,38 +7,50 @@
    - camera
   report_state: true
   entity_config:
-    light.office_light:
+    light.office_lights:
       expose: true
       room: 'Office'
-      name: 'Office Light Switch'
-    light.desk:
+      name: 'Office Lights'
+    light.desk_key_light:
       expose: true
       room: 'Office'
-      name: 'Desk'
-    switch.kitchen_coffee_light_switch:
+      name: 'Desk Key Light'
+    switch.work_light:
+      expose: true
+      room: 'Office'
+      name: 'Work Light'
+    switch.coffee_light:
       expose: true
       room: 'Kitchen'
       name: 'Coffee Lights'
-    switch.bedroom_bed_light_switch:
-      expose: true
-      room: 'Bedroom'
-      name: 'Bed Light'
-    switch.backyard_pergola_lights_switch:
+    switch.pergola_lights:
       expose: true
       room: 'Backyard'
       name: 'Pergola Lights'
-    switch.backyard_backyard_lights_switch:
+    switch.backyard_lights:
       expose: true
       room: 'Backyard'
       name: 'Backyard Lights'
-    switch.frontyard_frontyard_lights_switch:
+    switch.frontyard_lights:
       expose: true
       room: 'Frontyard'
       name: 'Frontyard Lights'
-    switch.backyard_water_fountain_switch:
+    group.outdoor_lights:
+      expose: true
+      room: 'Outside'
+      name: 'Outdoor Lights'      
+    switch.backyard_fountain:
       expose: true
       room: 'Backyard'
-      name: 'Water Fountain'
+      name: 'Backyard Fountain'
+    switch.frontyard_fountain:
+      expose: true
+      room: 'Frontyard'
+      name: 'Frontyard Fountain'
+    switch.garage_door_light:
+      expose: true
+      room: 'Garage'
+      name: 'Garage Door Light'
     camera.doorbelll:
       expose: true
       room: 'Front Door'
@@ -79,10 +91,6 @@
       expose: true
       room: 'Backyard'
       name: 'Back Side Camera'
-    cover.garage_door:
-      expose: true
-      room: 'Garage'
-      name: 'Garage Door'
     lock.garage_door:
       expose: true
       room: 'Garage Door'
@@ -99,19 +107,19 @@
       expose: true
       room: 'Bedroom'
       name: 'Bedroom Fan'
-    switch.basement_backyard_water_switch:
+    switch.backyard_water:
       expose: true
-      room: 'Backyard'
-      name: 'Backyard Water'
-    switch.basement_frontyard_water_switch:
+      room: 'Basement'
+      name: 'Outdoor Water West'
+    switch.frontyard_water:
       expose: true
-      room: 'Frontyard'
-      name: 'Frontyard Water'
-    switch.basement_water_heater_switch:
+      room: 'Basement'
+      name: 'Outdoor Water East'
+    switch.water_heater_shut_off:
       expose: true
       room: 'Basement'
       name: 'Water Heater'
-    switch.basement_main_water_switch:
+    switch.main_water_shutoff:
       expose: true
       room: 'Basement'
       name: 'Water Main'                   
