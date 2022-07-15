@@ -2,28 +2,6 @@
 # Home Assistant Configuration
 [Home Assistant](https://home-assistant.io/) on a Intel NUC i7 with hassio.
 
-## Change Log:
-=======
-* v.3.6 - add corona virus and GDACS
-* v.3.5 - fix speedtest and add fast.com
-* v.3.4 - google assistant update, authenticated sensor, speedtest
-* v.3.3 - add attributes to hass update sensor
-* v.3.2.2 - updated secrets and ignore
-* v3.2 - hassio update sensors & notifications
-* v3.1 - cleanup, hassio version sensors, updates for 0.105.0
-* v3.0 - hassio migration + massive cleanup + alro purge
-* v2.5 - add unifi UVC-G3-Flex
-* v2.4 - upgrade schlages to zwp, add coffee light
-* v2.3 - cleaning house + the great wink purge
-* v2.2 - move from google cloud to Google Assistant, add zwave stick to prep for wink purge
-* v2.1 - enable google cloud, fix glances and add person sensors
-* v2.0 - complete re-write with lovelace
-
-=======
-
-## Issues
-* spaces Paul, not tabs...
-
 ## To Do
 * [issues](https://github.com/itsgiff/hass-config/issues)
 ## Acknowledgments

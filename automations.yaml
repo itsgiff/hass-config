@@ -972,3 +972,43 @@
           entity_id: all
     default: []
   mode: single
+- id: '1657854895982'
+  alias: Fridge Door Alert
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.refrigerator_door_open
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  condition:
+  - condition: state
+    entity_id: binary_sensor.refrigerator_door_open
+    state: 'on'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  action:
+  - service: media_player.play_media
+    target:
+      entity_id: media_player.kitchen_hub
+    data:
+      media_content_id: media-source://tts/google_translate?message=The+Fridge+door+has+been+open+for+over+5+minutes%2C+please+close+the+door.+++Thank+you.
+      media_content_type: provider
+    metadata:
+      title: The Fridge door has been open for over 5 minutes, please close the door.   Thank
+        you.
+      thumbnail: https://brands.home-assistant.io/_/google_translate/logo.png
+      media_class: app
+      children_media_class:
+      navigateIds:
+      - {}
+      - media_content_type: app
+        media_content_id: media-source://tts
+      - media_content_type: provider
+        media_content_id: media-source://tts/google_translate?message=The+Fridge+door+has+been+open+for+over+5+minutes%2C+please+close+the+door.+++Thank+you.
+  mode: single

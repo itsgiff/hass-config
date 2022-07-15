@@ -100,6 +100,26 @@
                       }
                     },
                     {
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "entity": "update.storage_dsm_update",
+                          "state": "on"
+                        }
+                      ],
+                      "chip": {
+                        "type": "entity",
+                        "entity": "update.storage_dsm_update",
+                        "icon_color": "blue",
+                        "tap_action": {
+                          "action": "url",
+                          "url_path": "http://192.168.1.2:5000/"
+                        },
+                        "content_info": "name",
+                        "name": "Storage Update"
+                      }
+                    },
+                    {
                       "type": "template",
                       "icon": "mdi:volume-off",
                       "tap_action": {
@@ -631,7 +651,8 @@
                       "collapsible_controls": true,
                       "fill_container": true,
                       "name": "Office Pod",
-                      "icon_type": "entity-picture"
+                      "icon_type": "entity-picture",
+                      "icon": "phu:homepod-mini"
                     },
                     {
                       "type": "custom:mushroom-media-player-card",
@@ -1525,7 +1546,8 @@
                     {
                       "type": "entity",
                       "entity": "sensor.current_version",
-                      "icon_color": "blue"
+                      "icon_color": "blue",
+                      "icon": "mdi:home-assistant"
                     },
                     {
                       "type": "entity",
@@ -1751,14 +1773,24 @@
                   "type": "custom:mushroom-chips-card",
                   "chips": [
                     {
-                      "type": "template",
-                      "entity": "sensor.synology_update",
-                      "icon": "{% if is_state('sensor.synology_update', 'No Update(s)') %}\n  mdi:checkbox-marked-circle-outline\n{% else %}\n blue\n{% endif %}",
-                      "tap_action": {
-                        "action": "more-info"
-                      },
-                      "icon_color": "{% if is_state('binary_sensor.disk_station_manager', 'off') %}\n  grey\n{% elif is_state('binary_sensor.disk_station_manager', 'on') %}\n red\n{% endif %}",
-                      "content": "Updates"
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "entity": "update.storage_dsm_update",
+                          "state": "on"
+                        }
+                      ],
+                      "chip": {
+                        "type": "entity",
+                        "entity": "update.storage_dsm_update",
+                        "icon_color": "blue",
+                        "tap_action": {
+                          "action": "url",
+                          "url_path": "http://192.168.1.2:5000/"
+                        },
+                        "content_info": "name",
+                        "name": "Storage Update"
+                      }
                     },
                     {
                       "type": "template",
