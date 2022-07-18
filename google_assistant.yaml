@@ -127,3 +127,7 @@
       expose: true
       room: 'Bedroom'
       name: 'Quiet Time'
+    media_player.upstairs_speakers:
+      expose: true
+      room: Main Floor
+      name: Upstairs

@@ -8,6 +8,8 @@
 * Hat tip to [jtscott](https://github.com/jtscott/hass-config)
 * All the [Home Assistant examples](https://home-assistant.io/cookbook/) and contributors.
 
+![image](https://user-images.githubusercontent.com/10437630/179513511-21e5b474-44f3-42bf-ae87-4ab000be8972.png)
+
 ## Devices / Technology
 - Intel NUC i7
 - Schlage (Allegion) BE469ZP Connect Smart Deadbolt (3)

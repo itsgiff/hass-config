@@ -250,6 +250,10 @@
         data: {}
         target:
           entity_id: lock.locks
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.quiet_time
     - conditions:
       - condition: state
         entity_id: input_boolean.good_night
@@ -665,11 +669,13 @@
   description: ''
   trigger:
   - platform: state
-    entity_id: binary_sensor.mac_camera_in_use
+    entity_id:
+    - binary_sensor.pgifford_a03_camera_in_use
     from: 'on'
     to: 'off'
   - platform: state
-    entity_id: binary_sensor.mac_microphone_in_use
+    entity_id:
+    - binary_sensor.pgifford_a03_audio_input_in_use
     from: 'on'
     to: 'off'
   condition:
@@ -680,27 +686,45 @@
   - service: switch.turn_off
     target:
       entity_id: switch.work_light
+    data: {}
+  - service: input_boolean.turn_off
+    data: {}
+    target:
+      entity_id: input_boolean.in_meeting
   mode: single
 - id: '1634500504193'
   alias: Work Meeting - In Meeting
   description: ''
   trigger:
   - platform: state
-    entity_id: binary_sensor.mac_camera_in_use
+    entity_id:
+    - binary_sensor.pgifford_a03_camera_in_use
     from: 'off'
     to: 'on'
   - platform: state
-    entity_id: binary_sensor.mac_microphone_in_use
+    entity_id:
+    - binary_sensor.pgifford_a03_audio_input_in_use
     from: 'off'
     to: 'on'
   condition:
   - condition: state
     entity_id: binary_sensor.workday_sensor
     state: 'on'
+  - condition: state
+    entity_id: binary_sensor.pgifford_a03_camera_in_use
+    state: 'on'
+  - condition: state
+    entity_id: binary_sensor.pgifford_a03_audio_input_in_use
+    state: 'on'
   action:
   - service: switch.turn_on
     target:
       entity_id: switch.work_light
+    data: {}
+  - service: input_boolean.turn_on
+    data: {}
+    target:
+      entity_id: input_boolean.in_meeting
   mode: single
 - id: '1635794178627'
   alias: MyAnonaMouse Stats
@@ -904,12 +928,6 @@
         entity_id: input_boolean.quiet_time
         state: 'on'
       sequence:
-      - service: media_player.volume_set
-        data:
-          volume_level: 0.1
-        target:
-          entity_id:
-          - media_player.hubs
       - device_id: fb3415a4265f3f481e20a92fe622420c
         domain: select
         entity_id: select.front_door_doorbell_text
@@ -925,11 +943,6 @@
         entity_id: input_boolean.quiet_time
         state: 'off'
       sequence:
-      - service: media_player.volume_set
-        data:
-          volume_level: 0.6
-        target:
-          entity_id: media_player.hubs
       - device_id: fb3415a4265f3f481e20a92fe622420c
         domain: select
         entity_id: select.front_door_doorbell_text
@@ -1012,3 +1025,116 @@
       - media_content_type: provider
         media_content_id: media-source://tts/google_translate?message=The+Fridge+door+has+been+open+for+over+5+minutes%2C+please+close+the+door.+++Thank+you.
   mode: single
+- id: '1658079559260'
+  alias: In Meeting
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - input_boolean.in_meeting
+  condition:
+  - condition: state
+    entity_id: input_boolean.automations
+    state: 'on'
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.in_meeting
+        state: 'on'
+      sequence:
+      - device_id: fb3415a4265f3f481e20a92fe622420c
+        domain: select
+        entity_id: select.front_door_doorbell_text
+        type: select_option
+        option: DO NOT DISTURB
+      - device_id: fb3415a4265f3f481e20a92fe622420c
+        domain: select
+        entity_id: select.front_door_chime_type
+        type: select_option
+        option: None
+      - service: switch.turn_on
+        data: {}
+        target:
+          entity_id: switch.work_light
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.in_meeting
+        state: 'off'
+      sequence:
+      - device_id: fb3415a4265f3f481e20a92fe622420c
+        domain: select
+        entity_id: select.front_door_doorbell_text
+        type: select_option
+        option: LEAVE PACKAGE AT DOOR
+      - device_id: fb3415a4265f3f481e20a92fe622420c
+        domain: select
+        entity_id: select.front_door_chime_type
+        type: select_option
+        option: Mechanical
+      - service: switch.turn_off
+        data: {}
+        target:
+          entity_id: switch.work_light
+    default: []
+  mode: single
+- id: '1658080273222'
+  alias: Work
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.pgifford_a03_camera_in_use
+    from: 'on'
+    to: 'off'
+  - platform: state
+    entity_id:
+    - binary_sensor.pgifford_a03_audio_input_in_use
+    from: 'on'
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: input_boolean.automations
+    state: 'on'
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.workday_sensor
+        state: 'on'
+      sequence:
+      - service: input_boolean.turn_on
+        data: {}
+        target:
+          entity_id: input_boolean.in_meeting
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.workday_sensor
+        state: 'off'
+      sequence:
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.in_meeting
+    default: []
+  mode: single
+- id: '1658080583891'
+  alias: Update Integrations
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - input_button.upgrade_integrations
+  condition:
+  - condition: state
+    entity_id: input_boolean.automations
+    state: 'on'
+  action:
+  - service: hassio.addon_update
+    data: {}
+  mode: single
+- id: '1658088390926'
+  alias: Home Assistant Auto-Update
+  description: ''
+  use_blueprint:
+    path: EdwardTFN/auto-update-home-assistant.yaml

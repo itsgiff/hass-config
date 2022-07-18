@@ -144,6 +144,19 @@
                       "hold_action": {
                         "action": "more-info"
                       }
+                    },
+                    {
+                      "type": "template",
+                      "icon": "mdi:calendar-check-outline",
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "entity": "input_boolean.in_meeting",
+                      "icon_color": "{% if is_state('input_boolean.in_meeting', 'on') %}\n  green\n{% elif is_state('input_boolean.in_meeting', 'off') %}\n  grey\n{% endif %}",
+                      "content": "",
+                      "hold_action": {
+                        "action": "more-info"
+                      }
                     }
                   ],
                   "alignment": "center"
@@ -366,57 +379,20 @@
                   "title": "Climate"
                 },
                 {
-                  "type": "custom:mini-climate",
+                  "type": "custom:mushroom-climate-card",
                   "entity": "climate.thermostat",
-                  "hvac_mode": {
-                    "style": "(value, entity) => ({ color: 'black' })",
-                    "source": {
-                      "off": {
-                        "icon": "mdi:power",
-                        "name": "Off"
-                      },
-                      "cool": {
-                        "icon": "mdi:snowflake",
-                        "name": "Cool"
-                      },
-                      "dry": {
-                        "icon": "mdi:water",
-                        "name": "Dry"
-                      },
-                      "auto": {
-                        "icon": "mdi:cached",
-                        "name": "Auto"
-                      },
-                      "fan_only": {
-                        "icon": "mdi:fan",
-                        "name": "Fan Only"
-                      },
-                      "heat": {
-                        "icon": "mdi:weather-sunny",
-                        "name": "Heat"
-                      },
-                      "heat_cool": {
-                        "icon": "mdi:weather-sunny",
-                        "name": "Heat/Cool"
-                      }
-                    },
-                    "change_action": "(selected, entity) => this.call_service('climate', 'set_hvac_mode', { entity_id: entity.entity_id, hvac_mode: selected })\n"
-                  },
+                  "show_temperature_control": true,
+                  "layout": "horizontal",
+                  "hvac_modes": [
+                    "auto",
+                    "heat_cool",
+                    "heat",
+                    "cool"
+                  ],
+                  "collapsible_controls": false,
+                  "fill_container": false,
                   "tap_action": {
                     "action": "more-info"
-                  },
-                  "indicators": {
-                    "humidity": {
-                      "icon": {
-                        "template": "() => 'mdi:water-percent'",
-                        "style": "(value) => (value > 40 ? { color: 'red'} : {})\n"
-                      },
-                      "unit": "%",
-                      "round": 1,
-                      "source": {
-                        "entity": "sensor.thermostat_humidity"
-                      }
-                    }
                   }
                 },
                 {
@@ -598,30 +574,46 @@
                   ]
                 },
                 {
-                  "type": "custom:auto-entities",
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "entity": "sensor.*_hub_timers",
+                      "state": "unavailable"
+                    },
+                    {
+                      "entity": "sensor.*_hub_alarms",
+                      "state": "unavailable"
+                    }
+                  ],
                   "card": {
-                    "type": "entities",
-                    "theme": "Mushroom"
-                  },
-                  "filter": {
-                    "include": [
-                      {
-                        "entity_id": "sensor.*_hub_timers"
-                      },
-                      {
-                        "entity_id": "sensor.*_hub_alarms"
-                      }
-                    ],
-                    "exclude": [
-                      {
-                        "state": "off"
-                      },
-                      {
-                        "state": "unavailable"
-                      }
-                    ]
-                  },
-                  "show_empty": false
+                    "type": "custom:auto-entities",
+                    "card": {
+                      "type": "entities",
+                      "theme": "Mushroom"
+                    },
+                    "filter": {
+                      "include": [
+                        {
+                          "entity_id": "sensor.*_hub_timers"
+                        },
+                        {
+                          "entity_id": "sensor.*_hub_alarms"
+                        }
+                      ],
+                      "exclude": [
+                        {
+                          "state": "off"
+                        },
+                        {
+                          "state": "unavailable"
+                        },
+                        {
+                          "state": "unknown"
+                        }
+                      ]
+                    },
+                    "show_empty": false
+                  }
                 },
                 {
                   "type": "vertical-stack",
@@ -632,27 +624,80 @@
                       "title": "Media"
                     },
                     {
-                      "type": "custom:mushroom-media-player-card",
-                      "entity": "media_player.office_pod",
-                      "use_media_info": true,
-                      "media_controls": [
-                        "on_off",
-                        "previous",
-                        "play_pause_stop",
-                        "next",
-                        "repeat",
-                        "shuffle"
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "entity": "media_player.office_pod",
+                          "state": "playing"
+                        },
+                        {
+                          "entity": "media_player.office_pod",
+                          "state_not": "paused"
+                        }
                       ],
-                      "show_volume_level": false,
-                      "volume_controls": [
-                        "volume_buttons",
-                        "volume_set"
+                      "card": {
+                        "type": "custom:mushroom-media-player-card",
+                        "entity": "media_player.office_pod",
+                        "use_media_info": true,
+                        "media_controls": [
+                          "on_off",
+                          "previous",
+                          "play_pause_stop",
+                          "next",
+                          "repeat",
+                          "shuffle"
+                        ],
+                        "show_volume_level": false,
+                        "volume_controls": [
+                          "volume_buttons",
+                          "volume_set"
+                        ],
+                        "collapsible_controls": true,
+                        "fill_container": true,
+                        "name": "Office Pod",
+                        "icon_type": "entity-picture",
+                        "icon": "phu:homepod-mini"
+                      }
+                    },
+                    {
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "entity": "media_player.spotify_paul_gifford",
+                          "state": "playing"
+                        },
+                        {
+                          "entity": "media_player.spotify_paul_gifford",
+                          "state_not": "paused"
+                        },
+                        {
+                          "entity": "media_player.spotify_paul_gifford",
+                          "state": "idle"
+                        }
                       ],
-                      "collapsible_controls": true,
-                      "fill_container": true,
-                      "name": "Office Pod",
-                      "icon_type": "entity-picture",
-                      "icon": "phu:homepod-mini"
+                      "card": {
+                        "type": "custom:mushroom-media-player-card",
+                        "entity": "media_player.spotify_paul_gifford",
+                        "use_media_info": true,
+                        "media_controls": [
+                          "on_off",
+                          "previous",
+                          "play_pause_stop",
+                          "next",
+                          "repeat",
+                          "shuffle"
+                        ],
+                        "show_volume_level": false,
+                        "volume_controls": [
+                          "volume_buttons",
+                          "volume_set"
+                        ],
+                        "collapsible_controls": true,
+                        "fill_container": true,
+                        "name": "Spotify",
+                        "icon_type": "entity-picture",
+                        "icon": ""
+                      }
                     },
                     {
                       "type": "custom:mushroom-media-player-card",
@@ -794,57 +839,20 @@
                   "title": "Climate"
                 },
                 {
-                  "type": "custom:mini-climate",
+                  "type": "custom:mushroom-climate-card",
                   "entity": "climate.thermostat",
-                  "hvac_mode": {
-                    "style": "(value, entity) => ({ color: 'black' })",
-                    "source": {
-                      "off": {
-                        "icon": "mdi:power",
-                        "name": "Off"
-                      },
-                      "cool": {
-                        "icon": "mdi:snowflake",
-                        "name": "Cool"
-                      },
-                      "dry": {
-                        "icon": "mdi:water",
-                        "name": "Dry"
-                      },
-                      "auto": {
-                        "icon": "mdi:cached",
-                        "name": "Auto"
-                      },
-                      "fan_only": {
-                        "icon": "mdi:fan",
-                        "name": "Fan Only"
-                      },
-                      "heat": {
-                        "icon": "mdi:weather-sunny",
-                        "name": "Heat"
-                      },
-                      "heat_cool": {
-                        "icon": "mdi:weather-sunny",
-                        "name": "Heat/Cool"
-                      }
-                    },
-                    "change_action": "(selected, entity) => this.call_service('climate', 'set_hvac_mode', { entity_id: entity.entity_id, hvac_mode: selected })\n"
-                  },
+                  "show_temperature_control": true,
+                  "layout": "horizontal",
+                  "hvac_modes": [
+                    "auto",
+                    "heat_cool",
+                    "heat",
+                    "cool"
+                  ],
+                  "collapsible_controls": false,
+                  "fill_container": false,
                   "tap_action": {
                     "action": "more-info"
-                  },
-                  "indicators": {
-                    "humidity": {
-                      "icon": {
-                        "template": "() => 'mdi:water-percent'",
-                        "style": "(value) => (value > 40 ? { color: 'red'} : {})\n"
-                      },
-                      "unit": "%",
-                      "round": 1,
-                      "source": {
-                        "entity": "sensor.thermostat_humidity"
-                      }
-                    }
                   }
                 },
                 {
@@ -988,156 +996,155 @@
           "badges": [],
           "cards": [
             {
-              "type": "custom:mushroom-chips-card",
-              "chips": [
+              "type": "vertical-stack",
+              "cards": [
                 {
-                  "type": "back"
+                  "type": "custom:mushroom-chips-card",
+                  "chips": [
+                    {
+                      "type": "back"
+                    },
+                    {
+                      "type": "action",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "https://home.giff.ca/"
+                      },
+                      "icon": "mdi:view-dashboard-outline"
+                    },
+                    {
+                      "type": "action",
+                      "icon": "mdi:home-outline",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "house"
+                      }
+                    },
+                    {
+                      "type": "action",
+                      "icon": "mdi:countertop-outline",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "kitchen"
+                      }
+                    },
+                    {
+                      "type": "action",
+                      "icon": "mdi:server-network",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "rack"
+                      }
+                    },
+                    {
+                      "type": "action",
+                      "icon": "mdi:security-network",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "network"
+                      }
+                    },
+                    {
+                      "type": "action",
+                      "icon": "mdi:home-city-outline",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "city"
+                      }
+                    }
+                  ],
+                  "alignment": "center"
                 },
                 {
-                  "type": "action",
-                  "tap_action": {
-                    "action": "navigate",
-                    "navigation_path": "https://home.giff.ca/"
-                  },
-                  "icon": "mdi:view-dashboard-outline"
+                  "camera_view": "auto",
+                  "type": "picture-glance",
+                  "entities": [],
+                  "camera_image": "camera.driveway",
+                  "theme": "Mushroom"
                 },
                 {
-                  "type": "action",
-                  "icon": "mdi:home-outline",
-                  "tap_action": {
-                    "action": "navigate",
-                    "navigation_path": "house"
-                  }
+                  "camera_view": "auto",
+                  "type": "picture-glance",
+                  "entities": [],
+                  "camera_image": "camera.front_side",
+                  "theme": "Mushroom"
                 },
                 {
-                  "type": "action",
-                  "icon": "mdi:countertop-outline",
-                  "tap_action": {
-                    "action": "navigate",
-                    "navigation_path": "kitchen"
-                  }
-                },
-                {
-                  "type": "action",
-                  "icon": "mdi:server-network",
-                  "tap_action": {
-                    "action": "navigate",
-                    "navigation_path": "rack"
-                  }
-                },
-                {
-                  "type": "action",
-                  "icon": "mdi:security-network",
-                  "tap_action": {
-                    "action": "navigate",
-                    "navigation_path": "network"
-                  }
-                },
-                {
-                  "type": "action",
-                  "icon": "mdi:home-city-outline",
-                  "tap_action": {
-                    "action": "navigate",
-                    "navigation_path": "city"
-                  }
+                  "camera_view": "auto",
+                  "type": "picture-glance",
+                  "entities": [],
+                  "camera_image": "camera.back_side",
+                  "theme": "Mushroom"
                 }
-              ],
-              "alignment": "center"
+              ]
             },
             {
-              "camera_view": "auto",
-              "type": "picture-glance",
-              "entities": [
+              "type": "vertical-stack",
+              "cards": [
                 {
-                  "entity": "lock.front_door"
+                  "type": "custom:mushroom-title-card",
+                  "title": ""
                 },
                 {
-                  "entity": "switch.frontyard_lights"
-                }
-              ],
-              "camera_image": "camera.front_door",
-              "tap_action": {
-                "action": "more-info"
-              },
-              "theme": "Mushroom",
-              "aspect_ratio": "16:9"
-            },
-            {
-              "camera_view": "auto",
-              "type": "picture-glance",
-              "entities": [
-                {
-                  "entity": "lock.back_door"
+                  "camera_view": "auto",
+                  "type": "picture-glance",
+                  "entities": [],
+                  "camera_image": "camera.front_door",
+                  "theme": "Mushroom",
+                  "aspect_ratio": "16:9"
                 },
                 {
-                  "entity": "switch.backyard_lights"
-                }
-              ],
-              "camera_image": "camera.back_deck",
-              "tap_action": {
-                "action": "more-info"
-              },
-              "theme": "Mushroom"
-            },
-            {
-              "type": "custom:mushroom-title-card"
-            },
-            {
-              "camera_view": "auto",
-              "type": "picture-glance",
-              "entities": [
-                {
-                  "entity": "sensor.front_deck_air_temperature"
-                }
-              ],
-              "camera_image": "camera.front_deck"
-            },
-            {
-              "camera_view": "auto",
-              "type": "picture-glance",
-              "entities": [
-                {
-                  "entity": "lock.garage_door"
+                  "camera_view": "auto",
+                  "type": "picture-glance",
+                  "entities": [],
+                  "camera_image": "camera.front_deck",
+                  "theme": "Mushroom"
                 },
                 {
-                  "entity": "cover.garage"
-                }
-              ],
-              "camera_image": "camera.garage",
-              "theme": "Mushroom"
-            },
-            {
-              "type": "custom:mushroom-title-card"
-            },
-            {
-              "camera_view": "auto",
-              "type": "picture-glance",
-              "entities": [
-                {
-                  "entity": "lock.back_door"
+                  "camera_view": "auto",
+                  "type": "picture-glance",
+                  "entities": [],
+                  "camera_image": "camera.backyard",
+                  "theme": "Mushroom"
                 },
                 {
-                  "entity": "switch.backyard_lights"
-                },
-                {
-                  "entity": "switch.pergola_lights"
+                  "camera_view": "auto",
+                  "type": "picture-glance",
+                  "entities": [],
+                  "camera_image": "camera.garage",
+                  "theme": "Mushroom"
                 }
-              ],
-              "camera_image": "camera.hot_tub",
-              "tap_action": {
-                "action": "more-info"
-              },
-              "theme": "Mushroom"
+              ]
             },
             {
-              "camera_view": "auto",
-              "type": "picture-glance",
-              "entities": [],
-              "camera_image": "camera.front_gate_medium",
-              "tap_action": {
-                "action": "more-info"
-              },
-              "theme": "Mushroom"
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "custom:mushroom-title-card",
+                  "title": ""
+                },
+                {
+                  "camera_view": "auto",
+                  "type": "picture-glance",
+                  "entities": [],
+                  "camera_image": "camera.back_deck",
+                  "theme": "Mushroom"
+                },
+                {
+                  "camera_view": "auto",
+                  "type": "picture-glance",
+                  "entities": [],
+                  "camera_image": "camera.backyard",
+                  "theme": "Mushroom"
+                },
+                {
+                  "camera_view": "auto",
+                  "type": "picture-glance",
+                  "entities": [],
+                  "camera_image": "camera.hot_tub",
+                  "theme": "Mushroom"
+                }
+              ]
             }
           ]
         },
@@ -1455,15 +1462,6 @@
                       "theme": "Mushroom"
                     }
                   ]
-                },
-                {
-                  "hours_to_show": 24,
-                  "graph": "line",
-                  "type": "sensor",
-                  "entity": "sensor.basement_fridge_temperature",
-                  "detail": 2,
-                  "name": "Basement Freezer",
-                  "theme": "Mushroom"
                 }
               ]
             }

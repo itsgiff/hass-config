@@ -4,3 +4,16 @@ mam:
   - service: pyscript.get_mam_jsonload
   mode: single
   icon: mdi:rodent
+'1658110849102':
+  description: Notify Paul Devices
+  fields:
+    title:
+      description: The Title of the notification
+      example: Example text
+    message:
+      description: The content
+      example: Example text
+  sequence: []
+  mode: single
+  alias: Notify All
+  icon: mdi:square-rounded-badge-outline

@@ -11,8 +11,8 @@
       "192.168.1.2",
       "172.30.33.0"
     ],
-    "login_attempts_threshold": -1,
     "server_port": 8123,
+    "login_attempts_threshold": -1,
     "ssl_profile": "modern",
     "ip_ban_enabled": true
   }

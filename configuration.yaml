@@ -38,8 +38,6 @@ usb:
 automation: !include automations.yaml
 binary_sensor: !include binary_sensor.yaml
 camera: !include camera.yaml
-monitor_docker: !include monitor_docker.yaml
-group: !include group.yaml
 google_assistant: !include google_assistant.yaml
 homekit: !include homekit.yaml
 ios:
@@ -70,6 +68,11 @@ pyscript:
 google:
   client_id: !secret google_client_id
   client_secret: !secret google_client_secret
+
+spotify:
+  client_id: !secret spotify_id
+
+  client_secret: !secret spotify_secret
 
 media_player:
   - platform: androidtv
