@@ -35,7 +35,7 @@
       expose: true
       room: 'Frontyard'
       name: 'Frontyard Lights'
-    group.outdoor_lights:
+    light.outdoor_lights:
       expose: true
       room: 'Outside'
       name: 'Outdoor Lights'      
@@ -51,7 +51,7 @@
       expose: true
       room: 'Garage'
       name: 'Garage Door Light'
-    camera.doorbelll:
+    camera.front_door:
       expose: true
       room: 'Front Door'
       name: 'Doorbell'
@@ -79,18 +79,14 @@
       expose: true
       room: 'Frontyard'
       name: 'Front Gate Camera'
-    camera.back_gate:
+    camera.back_side:
       expose: true
       room: 'Backyard'
-      name: 'Back Gate Camera'
+      name: 'Backyard Side Camera'
     camera.hot_tub:
       expose: true
       room: 'Backyard'
       name: 'Hot Tub Camera'
-    camera.back_side:
-      expose: true
-      room: 'Backyard'
-      name: 'Back Side Camera'
     lock.garage_door:
       expose: true
       room: 'Garage Door'
@@ -103,10 +99,6 @@
       expose: true
       room: 'Back Door'
       name: 'Back Door Lock'
-    fan.bedroom:
-      expose: true
-      room: 'Bedroom'
-      name: 'Bedroom Fan'
     switch.backyard_water:
       expose: true
       room: 'Basement'
@@ -119,7 +111,7 @@
       expose: true
       room: 'Basement'
       name: 'Water Heater'
-    switch.main_water_shutoff:
+    switch.main_water:
       expose: true
       room: 'Basement'
       name: 'Water Main'

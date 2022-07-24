@@ -18,11 +18,6 @@
     data: {}
   - service: light.turn_off
     data: {}
-    target:
-      entity_id:
-      - light.bed_light_beth
-      - light.bed_light_paul
-      - light.bedroom_bed_lights
   - service: switch.turn_on
     data: {}
     target:
@@ -37,13 +32,9 @@
   condition: []
   action:
   - service: light.turn_off
+    data: {}
     target:
-      device_id:
-      - ac97ff2acab876a5dae7b6c89f438822
-      - 6de40d18e30798bf6f96c68268c3fff3
-      - 4713ea82aa86cbb1d2cff6e6ebe5539b
-      - dbccee62fc1511eab2a48372032a4829
-      - dbccee62fc1511eab2a48372032a4829
+      entity_id: light.office_lights
   mode: single
 - id: '1558218116963'
   alias: Sunset
@@ -65,10 +56,6 @@
       - switch.coffee_light
   - service: light.turn_on
     data: {}
-    target:
-      entity_id:
-      - light.bed_light_beth
-      - light.bed_light_paul
   - service: switch.turn_off
     data: {}
   mode: single
@@ -115,21 +102,6 @@
       - lock.back_door
       - lock.front_door
   mode: single
-- id: '1569672724355'
-  alias: Startup - HomeKit
-  trigger:
-  - event_data: {}
-    event_type: zwave.network_ready
-    platform: event
-  - event_data: {}
-    event_type: zwave.network_complete
-    platform: event
-  - event_data: {}
-    event_type: zwave.network_complete_some_dead
-    platform: event
-  condition: []
-  action:
-  - service: homekit.start
 - id: '1580003362412'
   alias: Notification - Home Assistant Update
   description: ''
@@ -200,7 +172,6 @@
       brightness: 50
     service: light.turn_on
     target:
-      area_id: f759776e04e54c5ab53f6218525d3c85
       entity_id: light.office_lights
   mode: single
 - id: '1603110760010'
@@ -276,7 +247,7 @@
   description: Doorbell Notification
   trigger:
   - platform: state
-    entity_id: binary_sensor.doorbell_front_door
+    entity_id: binary_sensor.front_door_doorbell
     from: 'off'
     to: 'on'
   condition:
@@ -377,100 +348,13 @@
   - service: tts.clear_cache
     data: {}
   mode: single
-- id: '1603986314847'
-  alias: Driveway
-  description: Driveway Notifications
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.driveway_frigate_car_motion
-    from: 'off'
-    to: 'on'
-  condition: []
-  action:
-  - service: notify.mobile_app_mobile
-    data:
-      message: A vehicle is in the driveway
-      data:
-        attachment:
-          content-type: jpeg
-        push:
-          category: camera
-        entity_id: camera.driveway
-      title: Driveway
-  - service: notify.mobile_app_tablet
-    data:
-      message: A vehicle is in the driveway
-      data:
-        attachment:
-          content-type: jpeg
-        push:
-          category: camera
-        entity_id: camera.driveway
-      title: Driveway
-  - service: notify.living_room_tv
-    data:
-      title: Driveway
-      message: A vehicle is in the driveway
-      data:
-        file:
-          url: '"http://localhost:5000/api/events/{{trigger.payload_json[''after''][''id'']}}/thumbnail.jpg"'
-  - service: notify.guest_bedroom_tv
-    data:
-      message: A vehicle is in the driveway
-      title: Driveway
-      data:
-        file:
-          url: '"http://localhost:5000/api/events/{{trigger.payload_json[''after''][''id'']}}/thumbnail.jpg"'
-  - service: notify.bedroom_tv
-    data:
-      message: A vehicle is in the driveway
-      title: Driveway
-      data:
-        file:
-          url: '"http://localhost:5000/api/events/{{trigger.payload_json[''after''][''id'']}}/thumbnail.jpg"'
-  mode: single
-- id: '1606840874562'
-  alias: 'Reminder: Dyson Filter Reminder'
-  description: Dyson Filter Reminder
-  trigger:
-  - platform: numeric_state
-    entity_id: sensor.filter_days_remaining
-    below: '30'
-  condition: []
-  action:
-  - service: notify.mobile_app_mobile
-    data:
-      message: Please order a new filter for the Dyson Fan, the filter has {{ states('sensor.filter_days_remaining')
-        }} days remaining.
-  - service: notify.mobile_app_tablet
-    data:
-      message: Please order a new filter for the Dyson Fan, the filter has {{ states('sensor.filter_days_remaining')
-        }} days remaining.
-  mode: single
-- id: '1606842109568'
-  alias: 'Alert: Dyson Filter Reminder'
-  description: Dyson Filter Alert
-  trigger:
-  - platform: numeric_state
-    entity_id: sensor.filter_days_remaining
-    below: '30'
-  condition: []
-  action:
-  - service: notify.mobile_app_mobile
-    data:
-      message: Please change the Dyson Fan, the filter has {{ states('sensor.filter_days_remaining')
-        }} days remaining.
-  - service: notify.mobile_app_tablet
-    data:
-      message: Please change the Dyson Fan, the filter has {{ states('sensor.filter_days_remaining')
-        }} days remaining.
-  mode: single
 - id: '1612122228169'
   alias: Garage Light - On
   description: ''
   trigger:
   - platform: state
-    entity_id: binary_sensor.motion_garage
+    entity_id:
+    - binary_sensor.garage_motion
     from: 'off'
     to: 'on'
   condition: []
@@ -485,10 +369,14 @@
   description: ''
   trigger:
   - platform: state
-    entity_id: binary_sensor.motion_garage
+    entity_id:
+    - binary_sensor.garage_motion
     from: 'on'
     to: 'off'
-    for: '5'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
   condition: []
   action:
   - service: switch.turn_off
@@ -509,86 +397,6 @@
     data: {}
     entity_id: light.bedroom_bed_lights
   mode: single
-- id: '1618836893385'
-  alias: Lock Batteries
-  description: ''
-  trigger: []
-  condition:
-  - condition: or
-    conditions:
-    - condition: numeric_state
-      entity_id: sensor.garage_door_lock_battery
-      below: '25'
-    - condition: numeric_state
-      entity_id: sensor.back_door_lock_battery
-      below: '25'
-    - condition: numeric_state
-      entity_id: sensor.front_door_lock_battery
-      below: '25'
-  action:
-  - service: notify.mobile_app_mobile
-    data:
-      message: One or more of the battery packs on the door locks is under 20%, please
-        change the batteries soon.
-      title: Door Lock Batteries
-  - service: notify.mobile_app_tablet
-    data:
-      message: One or more of the battery packs on the door locks is under 20%, please
-        change the batteries soon.
-      title: Door Lock Batteries
-  mode: single
-- id: '1619922596991'
-  alias: Front Deck
-  description: Front Deck Notifications
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.front_deck_frigate_person_motion
-    from: 'off'
-    to: 'on'
-  condition: []
-  action:
-  - service: notify.mobile_app_mobile
-    data:
-      message: Someone is on the front deck
-      data:
-        attachment:
-          content-type: jpeg
-        push:
-          category: camera
-        entity_id: camera.front_deck
-      title: Front Deck
-  - service: notify.mobile_app_tablet
-    data:
-      message: Someone is on the front deck
-      data:
-        attachment:
-          content-type: jpeg
-        push:
-          category: camera
-        entity_id: camera.front_deck
-      title: Front Deck
-  - service: notify.living_room_tv
-    data:
-      message: Someone is on the front deck
-      title: Front Deck
-      data:
-        file:
-          url: '"http://localhost:5000/api/events/{{trigger.payload_json[''after''][''id'']}}/thumbnail.jpg"'
-  - service: notify.bedroom_tv
-    data:
-      title: Front Deck
-      message: Someone is on the front deck
-      data:
-        file:
-          url: '"http://localhost:5000/api/events/{{trigger.payload_json[''after''][''id'']}}/thumbnail.jpg"'
-  - service: notify.guest_bedroom_tv
-    data:
-      message: Someone is on the front deck
-      title: Front Deck
-      data:
-        file:
-          url: '"http://localhost:5000/api/events/{{trigger.payload_json[''after''][''id'']}}/thumbnail.jpg"'
-  mode: single
 - id: '1620674655093'
   alias: Lighting - Work (EOD)
   description: Afternoon work automation for lights in the office
@@ -601,12 +409,8 @@
     state: 'on'
   action:
   - service: light.turn_off
+    data: {}
     target:
-      device_id:
-      - dbccee62fc1511eab2a48372032a4829
-      - ac97ff2acab876a5dae7b6c89f438822
-      - 4713ea82aa86cbb1d2cff6e6ebe5539b
-      - 6de40d18e30798bf6f96c68268c3fff3
       entity_id: light.office_lights
   mode: single
 - id: '1622327043294'
@@ -692,40 +496,6 @@
     target:
       entity_id: input_boolean.in_meeting
   mode: single
-- id: '1634500504193'
-  alias: Work Meeting - In Meeting
-  description: ''
-  trigger:
-  - platform: state
-    entity_id:
-    - binary_sensor.pgifford_a03_camera_in_use
-    from: 'off'
-    to: 'on'
-  - platform: state
-    entity_id:
-    - binary_sensor.pgifford_a03_audio_input_in_use
-    from: 'off'
-    to: 'on'
-  condition:
-  - condition: state
-    entity_id: binary_sensor.workday_sensor
-    state: 'on'
-  - condition: state
-    entity_id: binary_sensor.pgifford_a03_camera_in_use
-    state: 'on'
-  - condition: state
-    entity_id: binary_sensor.pgifford_a03_audio_input_in_use
-    state: 'on'
-  action:
-  - service: switch.turn_on
-    target:
-      entity_id: switch.work_light
-    data: {}
-  - service: input_boolean.turn_on
-    data: {}
-    target:
-      entity_id: input_boolean.in_meeting
-  mode: single
 - id: '1635794178627'
   alias: MyAnonaMouse Stats
   description: ''
@@ -745,6 +515,12 @@
   condition: []
   action:
   - service: pyscript.get_mam_jsonload
+    data: {}
+  - service: watchman.report
+    data:
+      create_file: true
+      data:
+        parse_mode: html
   mode: single
 - id: '1635957847236'
   alias: Notification - Z-Wave-2-MQTT Update
@@ -1010,11 +786,11 @@
     target:
       entity_id: media_player.kitchen_hub
     data:
-      media_content_id: media-source://tts/google_translate?message=The+Fridge+door+has+been+open+for+over+5+minutes%2C+please+close+the+door.+++Thank+you.
+      media_content_id: media-source://tts/google_translate?message=Beth%2C+the+Fridge+door+has+been+open+for+over+5+minutes%2C+please+close+the+door.+++Thank+you.
       media_content_type: provider
     metadata:
-      title: The Fridge door has been open for over 5 minutes, please close the door.   Thank
-        you.
+      title: Beth, the Fridge door has been open for over 5 minutes, please close
+        the door.   Thank you.
       thumbnail: https://brands.home-assistant.io/_/google_translate/logo.png
       media_class: app
       children_media_class:
@@ -1023,7 +799,7 @@
       - media_content_type: app
         media_content_id: media-source://tts
       - media_content_type: provider
-        media_content_id: media-source://tts/google_translate?message=The+Fridge+door+has+been+open+for+over+5+minutes%2C+please+close+the+door.+++Thank+you.
+        media_content_id: media-source://tts/google_translate?message=Beth%2C+the+Fridge+door+has+been+open+for+over+5+minutes%2C+please+close+the+door.+++Thank+you.
   mode: single
 - id: '1658079559260'
   alias: In Meeting
@@ -1085,22 +861,24 @@
   - platform: state
     entity_id:
     - binary_sensor.pgifford_a03_camera_in_use
-    from: 'on'
-    to: 'off'
-  - platform: state
-    entity_id:
-    - binary_sensor.pgifford_a03_audio_input_in_use
-    from: 'on'
-    to: 'off'
   condition:
   - condition: state
     entity_id: input_boolean.automations
+    state: 'on'
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
     state: 'on'
   action:
   - choose:
     - conditions:
       - condition: state
         entity_id: binary_sensor.workday_sensor
+        state: 'on'
+      - condition: state
+        entity_id: binary_sensor.pgifford_a03_camera_in_use
+        state: 'on'
+      - condition: state
+        entity_id: binary_sensor.pgifford_a03_audio_input_in_use
         state: 'on'
       sequence:
       - service: input_boolean.turn_on
@@ -1111,6 +889,12 @@
       - condition: state
         entity_id: binary_sensor.workday_sensor
         state: 'off'
+      - condition: state
+        entity_id: binary_sensor.pgifford_a03_camera_in_use
+        state: 'off'
+      - condition: state
+        entity_id: binary_sensor.pgifford_a03_audio_input_in_use
+        state: 'off'
       sequence:
       - service: input_boolean.turn_off
         data: {}
@@ -1118,23 +902,29 @@
           entity_id: input_boolean.in_meeting
     default: []
   mode: single
-- id: '1658080583891'
-  alias: Update Integrations
+- id: '1658408884461'
+  alias: Run Watchmen Report
   description: ''
   trigger:
+  - platform: time_pattern
+    hours: '1'
   - platform: state
     entity_id:
-    - input_button.upgrade_integrations
+    - input_button.update_watchmen_report
   condition:
   - condition: state
     entity_id: input_boolean.automations
     state: 'on'
   action:
-  - service: hassio.addon_update
+  - service: automation.reload
     data: {}
+  - service: group.reload
+    data: {}
+  - service: homeassistant.reload_core_config
+    data: {}
+  - service: watchman.report
+    data:
+      create_file: true
+      data:
+        parse_mode: html
   mode: single
-- id: '1658088390926'
-  alias: Home Assistant Auto-Update
-  description: ''
-  use_blueprint:
-    path: EdwardTFN/auto-update-home-assistant.yaml

@@ -103,6 +103,27 @@
                       "type": "conditional",
                       "conditions": [
                         {
+                          "entity": "sensor.hacs",
+                          "state_not": "0"
+                        }
+                      ],
+                      "chip": {
+                        "type": "entity",
+                        "entity": "sensor.hacs",
+                        "icon_color": "blue",
+                        "tap_action": {
+                          "action": "navigate",
+                          "navigation_path": "/config/dashboard"
+                        },
+                        "content_info": "state",
+                        "use_entity_picture": false,
+                        "icon": "mdi:package-variant-closed-plus"
+                      }
+                    },
+                    {
+                      "type": "conditional",
+                      "conditions": [
+                        {
                           "entity": "update.storage_dsm_update",
                           "state": "on"
                         }
@@ -149,13 +170,28 @@
                       "type": "template",
                       "icon": "mdi:calendar-check-outline",
                       "tap_action": {
-                        "action": "more-info"
+                        "action": "toggle"
                       },
                       "entity": "input_boolean.in_meeting",
                       "icon_color": "{% if is_state('input_boolean.in_meeting', 'on') %}\n  green\n{% elif is_state('input_boolean.in_meeting', 'off') %}\n  grey\n{% endif %}",
                       "content": "",
                       "hold_action": {
                         "action": "more-info"
+                      }
+                    },
+                    {
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "entity": "sensor.oven_oven_upper_state",
+                          "state_not": "off"
+                        }
+                      ],
+                      "chip": {
+                        "type": "entity",
+                        "entity": "sensor.oven_oven_upper_state",
+                        "icon_color": "green",
+                        "icon": "mdi:stove"
                       }
                     }
                   ],
@@ -381,10 +417,9 @@
                 {
                   "type": "custom:mushroom-climate-card",
                   "entity": "climate.thermostat",
-                  "show_temperature_control": true,
+                  "show_temperature_control": false,
                   "layout": "horizontal",
                   "hvac_modes": [
-                    "auto",
                     "heat_cool",
                     "heat",
                     "cool"
@@ -414,7 +449,7 @@
                           "hold_action": {
                             "action": "toggle"
                           },
-                          "icon_color": "{% if is_state('group.livingroom_lights', 'on') %}\n  amber\n{% endif %}"
+                          "icon_color": "{% if is_state('light.livingroom_lights', 'on') %}\n  amber\n{% endif %}"
                         },
                         {
                           "type": "custom:mushroom-template-card",
@@ -841,10 +876,9 @@
                 {
                   "type": "custom:mushroom-climate-card",
                   "entity": "climate.thermostat",
-                  "show_temperature_control": true,
+                  "show_temperature_control": false,
                   "layout": "horizontal",
                   "hvac_modes": [
-                    "auto",
                     "heat_cool",
                     "heat",
                     "cool"
@@ -892,6 +926,22 @@
                       "type": "sensor",
                       "entity": "sensor.wind_gusts_metric",
                       "graph": "line"
+                    }
+                  ]
+                },
+                {
+                  "type": "custom:mini-graph-card",
+                  "aggregate_func": "max",
+                  "animate": true,
+                  "name": "Furnace Fan Usage",
+                  "hours_to_show": 168,
+                  "group_by": "date",
+                  "show": {
+                    "graph": "bar"
+                  },
+                  "entities": [
+                    {
+                      "entity": "sensor.furnace_fan_history_24_hours"
                     }
                   ]
                 }
@@ -949,40 +999,19 @@
                   "type": "custom:mushroom-light-card",
                   "entity": "light.living_room_lights",
                   "collapsible_controls": true
-                }
-              ]
-            },
-            {
-              "type": "custom:mini-graph-card",
-              "aggregate_func": "max",
-              "animate": true,
-              "name": "Furnace Fan Usage",
-              "hours_to_show": 168,
-              "group_by": "date",
-              "show": {
-                "graph": "bar"
-              },
-              "entities": [
-                {
-                  "entity": "sensor.furnace_fan_history_24_hours"
-                }
-              ]
-            },
-            {
-              "type": "custom:apexcharts-card",
-              "header": {
-                "show": true,
-                "title": "Furnace Fan",
-                "show_states": true,
-                "colorize_states": true
-              },
-              "series": [
-                {
-                  "entity": "sensor.furnace_fan_history_24_hours"
                 },
                 {
-                  "entity": "sensor.furnace_fan_history_7_days",
-                  "type": "column"
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:mushroom-title-card",
+                      "title": "Litter Boxes"
+                    },
+                    {
+                      "type": "horizontal-stack",
+                      "cards": []
+                    }
+                  ]
                 }
               ]
             }
@@ -1098,13 +1127,6 @@
                   "type": "picture-glance",
                   "entities": [],
                   "camera_image": "camera.front_deck",
-                  "theme": "Mushroom"
-                },
-                {
-                  "camera_view": "auto",
-                  "type": "picture-glance",
-                  "entities": [],
-                  "camera_image": "camera.backyard",
                   "theme": "Mushroom"
                 },
                 {
@@ -1616,6 +1638,37 @@
                   ]
                 },
                 {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "show_name": true,
+                      "show_icon": true,
+                      "type": "button",
+                      "tap_action": {
+                        "action": "toggle"
+                      },
+                      "entity": "input_button.update_watchmen_report",
+                      "icon_height": "32px",
+                      "theme": "Mushroom",
+                      "name": "Watchman Report"
+                    },
+                    {
+                      "show_name": true,
+                      "show_icon": true,
+                      "type": "button",
+                      "tap_action": {
+                        "action": "toggle"
+                      },
+                      "entity": "button.synchronize_devices",
+                      "icon": "mdi:google-assistant",
+                      "icon_height": "32px",
+                      "theme": "Mushroom",
+                      "show_state": false,
+                      "name": "Sync Google Devices"
+                    }
+                  ]
+                },
+                {
                   "type": "entities",
                   "entities": [
                     {
@@ -1643,6 +1696,18 @@
                     {
                       "entity": "sensor.glances_iwlwifi_1_1_temperature",
                       "name": "Tempurature"
+                    },
+                    {
+                      "entity": "sensor.watchman_missing_entities",
+                      "name": "Watchman Missing Entities"
+                    },
+                    {
+                      "entity": "sensor.watchman_missing_services",
+                      "name": "Watchman Missing Services"
+                    },
+                    {
+                      "entity": "sensor.watchman_last_updated",
+                      "name": "Watchman - Last Updated"
                     }
                   ]
                 },
@@ -1678,9 +1743,6 @@
                       "name": "Community Store"
                     },
                     {
-                      "entity": "binary_sensor.check_home_assistant_configuration_update_available"
-                    },
-                    {
                       "entity": "binary_sensor.frigate_nvr_update_available"
                     },
                     {
@@ -1709,9 +1771,6 @@
                     },
                     {
                       "entity": "binary_sensor.nginx_home_assistant_ssl_proxy_update_available"
-                    },
-                    {
-                      "entity": "binary_sensor.node_red_update_available"
                     },
                     {
                       "entity": "binary_sensor.samba_share_update_available"

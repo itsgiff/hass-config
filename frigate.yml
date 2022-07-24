@@ -8,7 +8,7 @@ cameras:
   driveway_frigate:
     ffmpeg:
       inputs: 
-        - path: rtsps://192.168.1.1:7441/nCQPKqCkpsuMir4S?enableSrtp
+        - path: rtsps://192.168.1.1:7441/GtItAyeni0zhjfCu?enableSrtp
           roles:
             - detect
             - rtmp
@@ -44,7 +44,7 @@ cameras:
         - -hwaccel_output_format
         - yuv420p
       inputs: 
-        - path: rtsps://192.168.1.1:7441/Cu2jugIrbrqzmZKP?enableSrtp
+        - path: rtsps://192.168.1.1:7441/FHxfPeL4Eg2QnBdW?enableSrtp
           roles:
             - detect
             - rtmp

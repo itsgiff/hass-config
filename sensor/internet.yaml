@@ -1,12 +1,3 @@
-- platform: template
-  sensors:
-    ping:
-      friendly_name: 'Ping'
-      unit_of_measurement: 'ms'
-      icon_template: 'mdi:dots-horizontal'
-      value_template: "{{ state_attr('binary_sensor.ping_binary_sensor', 'round_trip_time_avg') }}"
-
-
 - platform: command_line
   name: Public IP Address
   command: "curl icanhazip.com"

@@ -2,27 +2,6 @@
 
 # Door Sensors
 
-- platform: template
-  sensors:
-    front_door:
-        value_template: >-
-          {%- if is_state("binary_sensor.front_door", "on") %}
-              Open
-          {%- elif is_state("binary_sensor.front_door", "off") %}
-              Closed
-          {%- else %}
-              Error
-          {%- endif %}
-        friendly_name: 'Front Door'
-        icon_template: >-
-            {%- if is_state('binary_sensor.front_door', 'off') %}
-            mdi:door
-            {%- elif is_state('binary_sensor.front_door', 'on') %}
-            mdi:door-open
-            {% else %}
-            mdi:door
-            {% endif %}   
-
 
 - platform: template
   sensors:
@@ -36,26 +15,6 @@
               Error
           {%- endif %}
 
-- platform: template
-  sensors:
-    back_door:
-        value_template: >-
-          {%- if is_state("binary_sensor.back_door", "on") %}
-              Open
-          {%- elif is_state("binary_sensor.back_door", "off") %}
-              Closed
-          {%- else %}
-              Error
-          {%- endif %}
-        friendly_name: 'Back Door'
-        icon_template: >-
-            {%- if is_state('binary_sensor.back_door', 'off') %}
-            mdi:door
-            {%- elif is_state('binary_sensor.back_door', 'on') %}
-            mdi:door-open
-            {% else %}
-            mdi:door
-            {% endif %}   
 
 - platform: template
   sensors:
@@ -72,21 +31,12 @@
 
 - platform: template
   sensors:
-    garage_door:
+    garage_door_lock:
         value_template: >-
-          {%- if is_state("binary_sensor.garage_door", "on") %}
-              Open
-          {%- elif is_state("binary_sensor.garage_door", "off") %}
-              Closed
+          {%- if is_state("lock.garage_door", "locked") %}
+              Locked
+          {%- elif is_state("lock.garage_door", "unlocked") %}
+              Unlocked
           {%- else %}
               Error
           {%- endif %}
-        friendly_name: 'Garage Door'
-        icon_template: >-
-            {%- if is_state('binary_sensor.garage_door', 'off') %}
-            mdi:door
-            {%- elif is_state('binary_sensor.garage_door', 'on') %}
-            mdi:door-open
-            {% else %}
-            mdi:door
-            {% endif %} 

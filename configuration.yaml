@@ -41,7 +41,6 @@ camera: !include camera.yaml
 google_assistant: !include google_assistant.yaml
 homekit: !include homekit.yaml
 ios:
-light: !include light.yaml
 notify: !include notify.yaml
 script: !include scripts.yaml
 sensor: !include_dir_merge_list sensor
@@ -64,6 +63,13 @@ pyscript:
       - service_name: get_mam_jsonLoad
         url: !secret mam_url
         cookie: !secret mam_cookie
+    petscoop:
+      - service_name: scoopfree_devices      
+        email: !secret email_account
+        tokenId: !secret petscoop_token
+        refreshToken: !secret petscoop_refresh_token
+        accessToken: !secret petscoop_access_token
+
 
 google:
   client_id: !secret google_client_id
