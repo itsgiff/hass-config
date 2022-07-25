@@ -63,17 +63,6 @@ pyscript:
       - service_name: get_mam_jsonLoad
         url: !secret mam_url
         cookie: !secret mam_cookie
-    petscoop:
-      - service_name: scoopfree_devices      
-        email: !secret email_account
-        tokenId: !secret petscoop_token
-        refreshToken: !secret petscoop_refresh_token
-        accessToken: !secret petscoop_access_token
-
-
-google:
-  client_id: !secret google_client_id
-  client_secret: !secret google_client_secret
 
 spotify:
   client_id: !secret spotify_id

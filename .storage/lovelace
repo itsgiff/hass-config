@@ -449,7 +449,7 @@
                           "hold_action": {
                             "action": "toggle"
                           },
-                          "icon_color": "{% if is_state('light.livingroom_lights', 'on') %}\n  amber\n{% endif %}"
+                          "icon_color": "{% if is_state('light.living_room_lights', 'on') %}\n  amber\n{% endif %}"
                         },
                         {
                           "type": "custom:mushroom-template-card",
@@ -464,7 +464,7 @@
                           "hold_action": {
                             "action": "toggle"
                           },
-                          "icon_color": "{% if is_state('light.bedroom_bed_lights', 'on') %}\n  amber\n{% endif %}"
+                          "icon_color": "{% if is_state('light.bed_lights', 'on') %}\n  amber\n{% endif %}"
                         }
                       ]
                     },
@@ -649,6 +649,59 @@
                     },
                     "show_empty": false
                   }
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:mushroom-title-card",
+                      "title": "Lighting",
+                      "subtitle": ""
+                    },
+                    {
+                      "type": "horizontal-stack",
+                      "cards": [
+                        {
+                          "type": "custom:mushroom-light-card",
+                          "entity": "light.coffee",
+                          "layout": "horizontal",
+                          "primary_info": "none",
+                          "secondary_info": "none"
+                        },
+                        {
+                          "type": "custom:mushroom-light-card",
+                          "entity": "light.office_lights",
+                          "layout": "horizontal",
+                          "primary_info": "none",
+                          "secondary_info": "none"
+                        },
+                        {
+                          "type": "custom:mushroom-light-card",
+                          "entity": "light.outdoor_lights",
+                          "primary_info": "none",
+                          "secondary_info": "none",
+                          "layout": "horizontal",
+                          "icon": "phu:light-string"
+                        },
+                        {
+                          "type": "custom:mushroom-light-card",
+                          "entity": "light.bed_lights",
+                          "icon": "mdi:bed-king-outline",
+                          "primary_info": "none",
+                          "secondary_info": "none",
+                          "layout": "horizontal"
+                        },
+                        {
+                          "type": "custom:mushroom-light-card",
+                          "entity": "light.living_room_lights",
+                          "layout": "horizontal",
+                          "primary_info": "none",
+                          "secondary_info": "none",
+                          "icon": "mdi:sofa-outline"
+                        }
+                      ]
+                    }
+                  ]
                 },
                 {
                   "type": "vertical-stack",
@@ -969,6 +1022,14 @@
                 },
                 {
                   "type": "custom:mushroom-light-card",
+                  "entity": "light.bed_lights",
+                  "collapsible_controls": true,
+                  "show_brightness_control": true,
+                  "use_light_color": true,
+                  "icon": "mdi:bed-king-outline"
+                },
+                {
+                  "type": "custom:mushroom-light-card",
                   "entity": "light.office_lights",
                   "show_brightness_control": true,
                   "use_light_color": false,
@@ -993,12 +1054,14 @@
                     "action": "more-info"
                   },
                   "collapsible_controls": true,
-                  "name": "Outdoor"
+                  "name": "Outdoor",
+                  "icon": "phu:light-string"
                 },
                 {
                   "type": "custom:mushroom-light-card",
                   "entity": "light.living_room_lights",
-                  "collapsible_controls": true
+                  "collapsible_controls": true,
+                  "icon": "mdi:sofa-outline"
                 },
                 {
                   "type": "vertical-stack",
@@ -1009,7 +1072,34 @@
                     },
                     {
                       "type": "horizontal-stack",
-                      "cards": []
+                      "cards": [
+                        {
+                          "type": "custom:mushroom-template-card",
+                          "primary": "Left Litter Box",
+                          "secondary": "{{ state_attr('sensor.scoopfree_left', 'Rake Count') }} Rakes",
+                          "icon": "mdi:inbox-arrow-down-outline",
+                          "entity": "sensor.scoopfree_left",
+                          "badge_icon": "mdi:cat",
+                          "badge_color": "{% if is_state('sensor.scoopfree_left_connection', 'online') %}\n  green\n{% elif is_state('sensor.scoopfree_left_connection', 'offline') %}\n  red\n{% elif is_state('sensor.scoopfree_left_connection', 'unknown') %}\n  grey\n{% endif %}",
+                          "icon_color": "",
+                          "tap_action": {
+                            "action": "more-info"
+                          }
+                        },
+                        {
+                          "type": "custom:mushroom-template-card",
+                          "primary": "Right Litter Box",
+                          "secondary": "{{ state_attr('sensor.scoopfree_right', 'Rake Count') }} Rakes",
+                          "icon": "mdi:inbox-arrow-down-outline",
+                          "entity": "sensor.scoopfree_right",
+                          "badge_icon": "mdi:cat",
+                          "badge_color": "{% if is_state('sensor.scoopfree_right_connection', 'online') %}\n  green\n{% elif is_state('sensor.scoopfree_right_connection', 'offline') %}\n  red\n{% elif is_state('sensor.scoopfree_right_connection', 'unknown') %}\n  grey\n{% endif %}",
+                          "icon_color": "",
+                          "tap_action": {
+                            "action": "more-info"
+                          }
+                        }
+                      ]
                     }
                   ]
                 }
@@ -1688,7 +1778,8 @@
                       "name": "Cert Expiration"
                     },
                     {
-                      "entity": "sensor.connected_clients"
+                      "entity": "sensor.connected_clients",
+                      "icon": "mdi:connection"
                     },
                     {
                       "entity": "sensor.auto_backup"

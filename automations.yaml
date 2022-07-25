@@ -375,7 +375,7 @@
     to: 'off'
     for:
       hours: 0
-      minutes: 5
+      minutes: 0
       seconds: 0
   condition: []
   action:
@@ -395,7 +395,7 @@
   action:
   - service: light.turn_off
     data: {}
-    entity_id: light.bedroom_bed_lights
+    entity_id: light.bed_lights
   mode: single
 - id: '1620674655093'
   alias: Lighting - Work (EOD)
@@ -436,19 +436,6 @@
       title: Garage door
       message: The garage door is opening
   mode: single
-- id: '1622403396061'
-  alias: Renew Let's Encrypt Certification
-  description: ''
-  use_blueprint:
-    path: mcnovy/renew_ssl_cert_homeassistant.yaml
-    input:
-      send_notification: true
-      renew_date: 12
-      time_to_check_cert: 05:00:00
-      notification_title: Let's Encrypt
-      notification_message: Let's Encrypt certificate has been renewed
-      cert_expiry_sensor: sensor.cert_expiry_timestamp_home_giff_ca
-      notification_device: 97c1b2b046a210bbd361da6ab841061d
 - id: '1632014805739'
   alias: External Connectivity
   description: Uptime Robot monitoring home.giff.ca
@@ -907,7 +894,7 @@
   description: ''
   trigger:
   - platform: time_pattern
-    hours: '1'
+    hours: '6'
   - platform: state
     entity_id:
     - input_button.update_watchmen_report

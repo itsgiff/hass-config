@@ -1,0 +1,38 @@
+###########################################
+# Litter Box Sensors
+###########################################
+
+- platform: template
+  sensors:
+    scoopfree_left_rake_count:
+      friendly_name: 'Rake Count'
+      icon_template: 'mdi:rake'
+      value_template: "{{ state_attr('sensor.scoopfree_left', 'Rake Count') }}"
+
+    scoopfree_right_rake_count:
+      friendly_name: 'Rake Count'
+      icon_template: 'mdi:rake'
+      value_template: "{{ state_attr('sensor.scoopfree_right', 'Rake Count') }}"
+
+    scoopfree_left_connection:
+      friendly_name: 'Connection Status'
+      icon_template: 'mdi:check-network-outline'
+      value_template: "{{ state_attr('sensor.scoopfree_left', 'Connection Status') }}"
+
+    scoopfree_right_connection:
+      friendly_name: 'Connection Status'
+      icon_template: 'mdi:check-network-outline'
+      value_template: "{{ state_attr('sensor.scoopfree_right', 'Connection Status') }}"
+
+    scoopfree_left_rake_delay:
+      friendly_name: 'Rake Delay'
+      icon_template: 'mdi:rake'
+      unit_of_measurement: "Minutes"
+      value_template: "{{ state_attr('sensor.scoopfree_left', 'Rake Delay Time Min') }}"
+
+    scoopfree_right_rake_delay:
+      friendly_name: 'Rake Delay'
+      icon_template: 'mdi:rake'
+      unit_of_measurement: "Minutes"
+      value_template: "{{ state_attr('sensor.scoopfree_right', 'Rake Delay Time Min') }}"
+
