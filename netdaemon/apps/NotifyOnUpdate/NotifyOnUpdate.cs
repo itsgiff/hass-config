@@ -24,6 +24,7 @@ public class NotifyOnUpdateConfig
   public string? NotifyTitle { get; set; }
   public string? NotifyId { get; set; }
   public bool? PersistentNotification { get; set; }
+  public IEnumerable<string>? GetUpdatesFor { get; set; }
   public IEnumerable<string>? MobileNotifyServices { get; set; }
 }
 
@@ -40,6 +41,7 @@ public class NotifyOnUpdateApp : IAsyncInitializable
   private string mServiceDataTitle;
   private string mServiceDataId;
   private bool mPersistentNotification;
+  private IEnumerable<string> mGetUpdatesFor;
   private IEnumerable<string> mMobileNotifyServices;
   private IEnumerable<UpdateText> mHassUpdates = new List<UpdateText>();
   private IEnumerable<UpdateText> mHacsUpdates = new List<UpdateText>();
@@ -52,7 +54,7 @@ public class NotifyOnUpdateApp : IAsyncInitializable
       if (value != null && (!IsEqual(mHassUpdates, value)))
       {
         mHassUpdates = value;
-        mLogger.LogInformation("Supervisor update list changed.");
+        mLogger.LogInformation("Home Assistant update list changed.");
         SetPersistentNotification();
       }
     }
@@ -75,7 +77,7 @@ public class NotifyOnUpdateApp : IAsyncInitializable
   public async Task InitializeAsync(CancellationToken cancellationToken)
   {
     // Check if user defined notify services are valid
-    mMobileNotifyServices = await GetAvailableServices("notify", mMobileNotifyServices);
+    mMobileNotifyServices = await GetServicesOfType("notify", mMobileNotifyServices);
 
     // Get Home Assistant Updates once at startup;
     HassUpdates = await GetHassUpdates();
@@ -93,40 +95,46 @@ public class NotifyOnUpdateApp : IAsyncInitializable
     mHaConnection = haConnection;
     mLogger = logger;
 
-    // Check against null and set a default value if true
+    // Check options against null and set a default value if true
     mServiceDataTitle = config.Value.NotifyTitle ?? "Updates pending in Home Assistant";
     mServiceDataId = config.Value.NotifyId ?? "updates_available";
     mPersistentNotification = config.Value.PersistentNotification ?? true;
+    mGetUpdatesFor = config.Value.GetUpdatesFor ?? new List<string>();
     mMobileNotifyServices = config.Value.MobileNotifyServices ?? new List<string>();
     var updateTime = config.Value.UpdateTimeInSec ?? 30;
 
-    // Check against empty/invalid values and set a default value if true
+    // Check options against empty/invalid values and set a default value if true
     if (String.IsNullOrEmpty(config.Value.NotifyTitle))
     {
-      mLogger.LogWarning("Default value 'Updates pending in Home Assistant' is used for NotifyTitle.");
+      mLogger.LogWarning("Default value 'Updates pending in Home Assistant' is used for Option 'NotifyTitle'.");
       mServiceDataTitle = "Updates pending in Home Assistant";
     }
     if (String.IsNullOrEmpty(config.Value.NotifyId))
     {
-      mLogger.LogWarning("Default value 'updates_available' is used for NotifyId.");
+      mLogger.LogWarning("Default value 'updates_available' is used for Option 'NotifyId'.");
       mServiceDataId = "updates_available";
     }
     if (config.Value.PersistentNotification == null)
     {
-      mLogger.LogWarning("Default value 'true' is used for PersistentNotification.");
+      mLogger.LogWarning("Default value 'true' is used for Option 'PersistentNotification'.");
+    }
+    if (config.Value.GetUpdatesFor == null || !config.Value.GetUpdatesFor.Any())
+    {
+      mLogger.LogWarning("Default values 'Core, OS, Supervisor, HACS' are used for Option 'GetUpdatesFor'.");
+      mGetUpdatesFor = new List<string>() { "Core", "OS", "Supervisor", "HACS" };
     }
     if (config.Value.UpdateTimeInSec == null || config.Value.UpdateTimeInSec <= 0)
     {
-      mLogger.LogWarning("Default value '30' is used for UpdateTimeInSec.");
+      mLogger.LogWarning("Default value '30' is used for Option 'UpdateTimeInSec'.");
     }
 
     // Get Home Assistant Updates cyclic
     try
     {
       scheduler.RunEvery(TimeSpan.FromSeconds(updateTime), async() =>
-      {
+        {
           HassUpdates = await GetHassUpdates();
-      });
+        });
     }
     catch (Exception e)
     {
@@ -137,29 +145,29 @@ public class NotifyOnUpdateApp : IAsyncInitializable
     var hacs = new NumericEntity<HacsAttributes>(mHaContext, "sensor.hacs");
     hacs.StateAllChanges().Subscribe(s =>
       {
-        HacsUpdates = GetHacsUpdates();
+        HacsUpdates = GetHacsUpdates(s.New);
       });
   }
 
-  private async Task<IEnumerable<string>> GetAvailableServices(string serviceType, IEnumerable<string> definedServices)
+  private async Task<IEnumerable<string>> GetServicesOfType(string serviceType, IEnumerable<string> definedServices)
   {
     var availableServices = new List<string>();
 
     mLogger.LogInformation($"{definedServices.Count()} notify service(s) defined.");
-    if(definedServices.Count() < 1) return availableServices;
+    if (definedServices.Count() < 1) return availableServices;
 
     var allServices = await mHaConnection.GetServicesAsync(CancellationToken.None).ConfigureAwait(false);
     var notifyService = new JsonElement();
     allServices.GetValueOrDefault().TryGetProperty(serviceType, out notifyService);
     var filteredServices = JsonSerializer.Deserialize<Dictionary<string, object>>(notifyService) ?? new Dictionary<string, object>();
-    foreach(var definedService in definedServices)
+    foreach (var definedService in definedServices)
     {
       var service = definedService;
       // If notifyService starts with "notify." then remove this part
-      if(service.StartsWith("notify."))
+      if (service.StartsWith("notify."))
         service = service.Substring(7);
 
-      if(filteredServices.ContainsKey(service))
+      if (filteredServices.ContainsKey(service))
       {
         availableServices.Add(service);
         mLogger.LogInformation($"- Service '{service}' is available");
@@ -169,7 +177,6 @@ public class NotifyOnUpdateApp : IAsyncInitializable
         mLogger.LogInformation($"- Service '{service}' is NOT available");
       }
     }
-    mLogger.LogInformation($"{availableServices.Count()} notify service(s) available.");
 
     return availableServices;
   }
@@ -187,14 +194,19 @@ public class NotifyOnUpdateApp : IAsyncInitializable
   /// <summary>
   /// Get HACS update informations from the hacs sensor
   /// </summary>
-  private IEnumerable<UpdateText> GetHacsUpdates()
+  private IEnumerable<UpdateText> GetHacsUpdates(NumericEntityState<HacsAttributes>? hacs = null)
   {
     var updates = new List<UpdateText>();
-    var hacs = new NumericEntity<HacsAttributes>(mHaContext, "sensor.hacs").EntityState;
-    var hacsState = hacs?.State;
-    var hacsRepos = hacs?.Attributes?.repositories;
+    if (!mGetUpdatesFor.Contains("HACS")) return updates;
 
-    if (hacsState > 0 && (hacsRepos?.Any() ?? false))
+    if (hacs == null)
+    {
+      hacs = new NumericEntity<HacsAttributes>(mHaContext, "sensor.hacs").EntityState;
+    }
+    var hacsState = hacs?.State ?? 0;
+    var hacsRepos = hacs?.Attributes?.repositories ?? new List<HacsRepositories>();
+
+    if (hacsState > 0 && hacsRepos.Any())
     {
       foreach (var repo in hacsRepos)
       {
@@ -211,9 +223,9 @@ public class NotifyOnUpdateApp : IAsyncInitializable
   private async Task<IEnumerable<UpdateText>> GetHassUpdates()
   {
     var updates = new List<UpdateText>();
-    updates.AddRange(await GetVersionsByCurl("Core"));
-    updates.AddRange(await GetVersionsByCurl("OS"));
-    updates.AddRange(await GetVersionsByCurl("Supervisor"));
+    if (mGetUpdatesFor.Contains("Core")) updates.AddRange(await GetVersionsByCurl("Core"));
+    if (mGetUpdatesFor.Contains("OS")) updates.AddRange(await GetVersionsByCurl("OS"));
+    if (mGetUpdatesFor.Contains("Supervisor")) updates.AddRange(await GetVersionsByCurl("Supervisor"));
 
     return updates;
   }
@@ -297,7 +309,7 @@ public class NotifyOnUpdateApp : IAsyncInitializable
     {
       persistentMessage += "[Home Assistant](/config/dashboard)\n\n";
       companionMessage += "Home Assistant\n";
-      foreach(var update in hassUpdates)
+      foreach (var update in hassUpdates)
       {
         persistentMessage += $"* **{update.Name}**: {update.CurrentVersion} \u27A1 {update.NewVersion}\n";
         companionMessage += $"- {update.Name}: {update.CurrentVersion} \u27A1 {update.NewVersion}\n";
@@ -306,8 +318,8 @@ public class NotifyOnUpdateApp : IAsyncInitializable
     if (addonUpdates.Any())
     {
       persistentMessage += $"\n\n[Add-ons](/config/dashboard)\n\n";
-      companionMessage += "\nAdd-ons\n";
-      foreach(var update in addonUpdates)
+      companionMessage += "Add-ons\n";
+      foreach (var update in addonUpdates)
       {
         persistentMessage += $"* [**{update.Name}**]({update.Path}): {update.CurrentVersion} \u27A1 {update.NewVersion}\n";
         companionMessage += $"- {update.Name}: {update.CurrentVersion} \u27A1 {update.NewVersion}\n";
@@ -316,7 +328,7 @@ public class NotifyOnUpdateApp : IAsyncInitializable
     if (HacsUpdates.Any())
     {
       persistentMessage += "\n\n[HACS](/hacs)\n\n";
-      companionMessage += "\nHACS\n";
+      companionMessage += "HACS\n";
       foreach(var update in HacsUpdates)
       {
         persistentMessage += $"* **{update.Name}**: {update.CurrentVersion} \u27A1 {update.NewVersion}\n";
@@ -327,7 +339,7 @@ public class NotifyOnUpdateApp : IAsyncInitializable
     if (!String.IsNullOrEmpty(persistentMessage))
     {
       // persistent notification
-      if(mPersistentNotification)
+      if (mPersistentNotification)
       {
         mHaContext.CallService("persistent_notification", "create", data: new
           {
@@ -345,7 +357,24 @@ public class NotifyOnUpdateApp : IAsyncInitializable
           message = companionMessage,
           data = new
           {
-            tag = mServiceDataId
+            tag = mServiceDataId,
+            url = "/config/dashboard",          // iOS URL
+            clickAction = "/config/dashboard",  // Android URL
+            actions = new List<object>
+            {
+              new
+              {
+                action = "URI",
+                title = "Open Addons",
+                uri = "/hassio/dashboard"
+              },
+              new
+              {
+                action = "URI",
+                title = "Open HACS",
+                uri = "/hacs"
+              },
+            }
           }
         });
       }
@@ -353,7 +382,7 @@ public class NotifyOnUpdateApp : IAsyncInitializable
     else
     {
       // persistent notification
-      if(mPersistentNotification)
+      if (mPersistentNotification)
       {
         mHaContext.CallService("persistent_notification", "dismiss", data: new
           {

@@ -51,6 +51,14 @@
                 },
                 {
                   "type": "action",
+                  "icon": "mdi:progress-download",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "downloads"
+                  }
+                },
+                {
+                  "type": "action",
                   "icon": "mdi:security-network",
                   "tap_action": {
                     "action": "navigate",
@@ -192,6 +200,21 @@
                         "entity": "sensor.oven_oven_upper_state",
                         "icon_color": "green",
                         "icon": "mdi:stove"
+                      }
+                    },
+                    {
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "entity": "sensor.mam_inactunsat",
+                          "state_not": "0"
+                        }
+                      ],
+                      "chip": {
+                        "type": "entity",
+                        "entity": "sensor.mam_inactunsat",
+                        "icon_color": "red",
+                        "icon": "mdi:seed-off-outline"
                       }
                     }
                   ],
@@ -902,6 +925,14 @@
                 },
                 {
                   "type": "action",
+                  "icon": "mdi:progress-download",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "downloads"
+                  }
+                },
+                {
+                  "type": "action",
                   "icon": "mdi:security-network",
                   "tap_action": {
                     "action": "navigate",
@@ -1004,64 +1035,61 @@
               "type": "vertical-stack",
               "cards": [
                 {
-                  "type": "custom:mushroom-title-card"
-                },
-                {
                   "type": "custom:mushroom-title-card",
-                  "title": "Lighting"
+                  "title": ""
                 },
                 {
-                  "type": "custom:mushroom-light-card",
-                  "entity": "light.coffee",
-                  "tap_action": {
-                    "action": "toggle"
-                  },
-                  "show_brightness_control": true,
-                  "show_color_temp_control": true,
-                  "collapsible_controls": true
-                },
-                {
-                  "type": "custom:mushroom-light-card",
-                  "entity": "light.bed_lights",
-                  "collapsible_controls": true,
-                  "show_brightness_control": true,
-                  "use_light_color": true,
-                  "icon": "mdi:bed-king-outline"
-                },
-                {
-                  "type": "custom:mushroom-light-card",
-                  "entity": "light.office_lights",
-                  "show_brightness_control": true,
-                  "use_light_color": false,
-                  "show_color_control": false,
-                  "tap_action": {
-                    "action": "toggle"
-                  },
-                  "collapsible_controls": true,
-                  "name": "Office"
-                },
-                {
-                  "type": "custom:mushroom-light-card",
-                  "entity": "light.outdoor_lights",
-                  "show_brightness_control": true,
-                  "show_color_control": false,
-                  "use_light_color": true,
-                  "show_color_temp_control": false,
-                  "tap_action": {
-                    "action": "toggle"
-                  },
-                  "hold_action": {
-                    "action": "more-info"
-                  },
-                  "collapsible_controls": true,
-                  "name": "Outdoor",
-                  "icon": "phu:light-string"
-                },
-                {
-                  "type": "custom:mushroom-light-card",
-                  "entity": "light.living_room_lights",
-                  "collapsible_controls": true,
-                  "icon": "mdi:sofa-outline"
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:mushroom-title-card",
+                      "title": "Lighting",
+                      "subtitle": ""
+                    },
+                    {
+                      "type": "horizontal-stack",
+                      "cards": [
+                        {
+                          "type": "custom:mushroom-light-card",
+                          "entity": "light.coffee",
+                          "layout": "horizontal",
+                          "primary_info": "none",
+                          "secondary_info": "none"
+                        },
+                        {
+                          "type": "custom:mushroom-light-card",
+                          "entity": "light.office_lights",
+                          "layout": "horizontal",
+                          "primary_info": "none",
+                          "secondary_info": "none"
+                        },
+                        {
+                          "type": "custom:mushroom-light-card",
+                          "entity": "light.outdoor_lights",
+                          "primary_info": "none",
+                          "secondary_info": "none",
+                          "layout": "horizontal",
+                          "icon": "phu:light-string"
+                        },
+                        {
+                          "type": "custom:mushroom-light-card",
+                          "entity": "light.bed_lights",
+                          "icon": "mdi:bed-king-outline",
+                          "primary_info": "none",
+                          "secondary_info": "none",
+                          "layout": "horizontal"
+                        },
+                        {
+                          "type": "custom:mushroom-light-card",
+                          "entity": "light.living_room_lights",
+                          "layout": "horizontal",
+                          "primary_info": "none",
+                          "secondary_info": "none",
+                          "icon": "mdi:sofa-outline"
+                        }
+                      ]
+                    }
+                  ]
                 },
                 {
                   "type": "vertical-stack",
@@ -1071,35 +1099,88 @@
                       "title": "Litter Boxes"
                     },
                     {
-                      "type": "horizontal-stack",
-                      "cards": [
+                      "type": "entities",
+                      "entities": [
                         {
-                          "type": "custom:mushroom-template-card",
-                          "primary": "Left Litter Box",
-                          "secondary": "{{ state_attr('sensor.scoopfree_left', 'Rake Count') }} Rakes",
-                          "icon": "mdi:inbox-arrow-down-outline",
                           "entity": "sensor.scoopfree_left",
-                          "badge_icon": "mdi:cat",
-                          "badge_color": "{% if is_state('sensor.scoopfree_left_connection', 'online') %}\n  green\n{% elif is_state('sensor.scoopfree_left_connection', 'offline') %}\n  red\n{% elif is_state('sensor.scoopfree_left_connection', 'unknown') %}\n  grey\n{% endif %}",
-                          "icon_color": "",
-                          "tap_action": {
-                            "action": "more-info"
-                          }
+                          "type": "custom:multiple-entity-row",
+                          "name": "Left Litter Box",
+                          "show_state": false,
+                          "entities": [
+                            {
+                              "entity": "sensor.scoopfree_left_rake_count",
+                              "name": false,
+                              "styles": {
+                                "width": "80px"
+                              }
+                            },
+                            {
+                              "icon": "mdi:rake",
+                              "tap_action": {
+                                "action": "call-service",
+                                "service": "button.press",
+                                "service_data": {
+                                  "entity_id": "button.left_rake"
+                                }
+                              }
+                            },
+                            {
+                              "icon": "mdi:undo-variant",
+                              "tap_action": {
+                                "action": "call-service",
+                                "service": "button.press",
+                                "service_data": {
+                                  "entity_id": "button.left_reset"
+                                },
+                                "confirmation": {
+                                  "text": "Are you sure you want to reset the counter?"
+                                }
+                              }
+                            }
+                          ]
                         },
                         {
-                          "type": "custom:mushroom-template-card",
-                          "primary": "Right Litter Box",
-                          "secondary": "{{ state_attr('sensor.scoopfree_right', 'Rake Count') }} Rakes",
-                          "icon": "mdi:inbox-arrow-down-outline",
                           "entity": "sensor.scoopfree_right",
-                          "badge_icon": "mdi:cat",
-                          "badge_color": "{% if is_state('sensor.scoopfree_right_connection', 'online') %}\n  green\n{% elif is_state('sensor.scoopfree_right_connection', 'offline') %}\n  red\n{% elif is_state('sensor.scoopfree_right_connection', 'unknown') %}\n  grey\n{% endif %}",
-                          "icon_color": "",
-                          "tap_action": {
-                            "action": "more-info"
-                          }
+                          "type": "custom:multiple-entity-row",
+                          "name": "Right Litter Box",
+                          "show_state": false,
+                          "entities": [
+                            {
+                              "entity": "sensor.scoopfree_right_rake_count",
+                              "name": false,
+                              "styles": {
+                                "width": "80px"
+                              }
+                            },
+                            {
+                              "icon": "mdi:rake",
+                              "tap_action": {
+                                "action": "call-service",
+                                "service": "button.press",
+                                "service_data": {
+                                  "entity_id": "button.right_rake"
+                                }
+                              }
+                            },
+                            {
+                              "icon": "mdi:undo-variant",
+                              "tap_action": {
+                                "action": "call-service",
+                                "service": "button.press",
+                                "service_data": {
+                                  "entity_id": "button.right_reset"
+                                },
+                                "confirmation": {
+                                  "text": "Are you sure you want to reset the counter?"
+                                }
+                              }
+                            }
+                          ]
                         }
-                      ]
+                      ],
+                      "theme": "Mushroom",
+                      "show_header_toggle": false,
+                      "state_color": false
                     }
                   ]
                 }
@@ -1153,6 +1234,14 @@
                       "tap_action": {
                         "action": "navigate",
                         "navigation_path": "rack"
+                      }
+                    },
+                    {
+                      "type": "action",
+                      "icon": "mdi:progress-download",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "downloads"
                       }
                     },
                     {
@@ -1303,6 +1392,14 @@
                   "tap_action": {
                     "action": "navigate",
                     "navigation_path": "rack"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:progress-download",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "downloads"
                   }
                 },
                 {
@@ -1625,6 +1722,14 @@
                       "tap_action": {
                         "action": "navigate",
                         "navigation_path": "kitchen"
+                      }
+                    },
+                    {
+                      "type": "action",
+                      "icon": "mdi:progress-download",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "downloads"
                       }
                     },
                     {
@@ -1988,7 +2093,7 @@
                     },
                     {
                       "type": "custom:mushroom-entity-card",
-                      "entity": "sensor.storage_used_percent",
+                      "entity": "sensor.storage_used",
                       "name": "Used Space"
                     }
                   ]
@@ -2234,6 +2339,155 @@
         },
         {
           "theme": "Mushroom",
+          "title": "downloads",
+          "path": "downloads",
+          "icon": "mdi:progress-download",
+          "badges": [],
+          "cards": [
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "custom:mushroom-chips-card",
+                  "chips": [
+                    {
+                      "type": "back"
+                    },
+                    {
+                      "type": "action",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "https://home.giff.ca/"
+                      },
+                      "icon": "mdi:view-dashboard-outline"
+                    },
+                    {
+                      "type": "action",
+                      "icon": "mdi:home-outline",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "house"
+                      }
+                    },
+                    {
+                      "type": "action",
+                      "icon": "mdi:shield-check-outline",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "security"
+                      }
+                    },
+                    {
+                      "type": "action",
+                      "icon": "mdi:countertop-outline",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "kitchen"
+                      }
+                    },
+                    {
+                      "type": "action",
+                      "icon": "mdi:server-network",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "rack"
+                      }
+                    },
+                    {
+                      "type": "action",
+                      "icon": "mdi:security-network",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "network"
+                      }
+                    },
+                    {
+                      "type": "action",
+                      "icon": "mdi:home-city-outline",
+                      "tap_action": {
+                        "action": "navigate",
+                        "navigation_path": "city"
+                      }
+                    }
+                  ],
+                  "alignment": "center"
+                },
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "sensor.mam_class"
+                    },
+                    {
+                      "entity": "sensor.mam_connectable"
+                    },
+                    {
+                      "entity": "sensor.mam_seedbonus"
+                    },
+                    {
+                      "entity": "sensor.mam_ratio"
+                    },
+                    {
+                      "entity": "sensor.mam_uploaded"
+                    },
+                    {
+                      "entity": "sensor.mam_downloaded"
+                    },
+                    {
+                      "entity": "sensor.mam_seedhnr"
+                    },
+                    {
+                      "entity": "sensor.mam_inactunsat"
+                    },
+                    {
+                      "entity": "sensor.mam_inacthnr"
+                    },
+                    {
+                      "entity": "sensor.mam_sat"
+                    },
+                    {
+                      "entity": "sensor.mam_unsat"
+                    },
+                    {
+                      "entity": "sensor.mam_leeching"
+                    }
+                  ],
+                  "state_color": true,
+                  "theme": "Mushroom",
+                  "title": "MyAnonaMouse"
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "custom:mushroom-title-card"
+                },
+                {
+                  "type": "entities",
+                  "entities": [
+                    "sensor.nzbget_article_cache",
+                    "sensor.nzbget_average_speed",
+                    "sensor.nzbget_disk_free",
+                    "switch.nzbget_download",
+                    "sensor.nzbget_download_paused",
+                    "sensor.nzbget_post_processing_jobs",
+                    "sensor.nzbget_post_processing_paused",
+                    "sensor.nzbget_queue_size",
+                    "sensor.nzbget_size",
+                    "sensor.nzbget_speed",
+                    "sensor.nzbget_uptime"
+                  ],
+                  "title": "NZBGet",
+                  "theme": "Mushroom"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme": "Mushroom",
           "title": "Network",
           "path": "network",
           "icon": "mdi:security-network",
@@ -2283,6 +2537,14 @@
                   "tap_action": {
                     "action": "navigate",
                     "navigation_path": "rack"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:progress-download",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "downloads"
                   }
                 },
                 {
@@ -2488,6 +2750,10 @@
                       "graph": "line"
                     }
                   ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": []
                 }
               ]
             }
@@ -2544,6 +2810,14 @@
                   "tap_action": {
                     "action": "navigate",
                     "navigation_path": "rack"
+                  }
+                },
+                {
+                  "type": "action",
+                  "icon": "mdi:progress-download",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "downloads"
                   }
                 },
                 {

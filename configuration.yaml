@@ -37,11 +37,9 @@ usb:
 # Includes
 automation: !include automations.yaml
 binary_sensor: !include binary_sensor.yaml
-camera: !include camera.yaml
 google_assistant: !include google_assistant.yaml
 homekit: !include homekit.yaml
 ios:
-notify: !include notify.yaml
 script: !include scripts.yaml
 sensor: !include_dir_merge_list sensor
 zone: !include zones.yaml
@@ -63,21 +61,5 @@ pyscript:
       - service_name: get_mam_jsonLoad
         url: !secret mam_url
         cookie: !secret mam_cookie
-
-spotify:
-  client_id: !secret spotify_id
-
-  client_secret: !secret spotify_secret
-
-media_player:
-  - platform: androidtv
-    name: Livingroom Android TV
-    host: !secret living_room_tv_ip
-  - platform: androidtv
-    name: Bedroom Android TV
-    host: !secret bedroom_tv_ip
-  - platform: androidtv
-    name: Guest Bedroom Android TV
-    host: !secret guest_bedroom_tv_ip
 
 stream:

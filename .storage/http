@@ -12,8 +12,8 @@
       "172.30.33.0"
     ],
     "ip_ban_enabled": true,
-    "server_port": 8123,
     "ssl_profile": "modern",
-    "login_attempts_threshold": -1
+    "login_attempts_threshold": -1,
+    "server_port": 8123
   }
 }

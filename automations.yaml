@@ -488,10 +488,11 @@
   description: ''
   trigger:
   - platform: time_pattern
-    hours: /1
+    minutes: '10'
   condition: []
   action:
   - service: pyscript.get_mam_jsonload
+    data: {}
   mode: single
 - id: '1635799181325'
   alias: Home Assistant Startup
@@ -773,11 +774,11 @@
     target:
       entity_id: media_player.kitchen_hub
     data:
-      media_content_id: media-source://tts/google_translate?message=Beth%2C+the+Fridge+door+has+been+open+for+over+5+minutes%2C+please+close+the+door.+++Thank+you.
+      media_content_id: media-source://tts/google_translate?message=Fellow+humans%2C+the+fridge+door+has+been+open+for+over+5+minutes%2C+please+close+the+door.+++Thank+you.
       media_content_type: provider
     metadata:
-      title: Beth, the Fridge door has been open for over 5 minutes, please close
-        the door.   Thank you.
+      title: Fellow humans, the fridge door has been open for over 5 minutes, please
+        close the door.   Thank you.
       thumbnail: https://brands.home-assistant.io/_/google_translate/logo.png
       media_class: app
       children_media_class:
@@ -786,7 +787,7 @@
       - media_content_type: app
         media_content_id: media-source://tts
       - media_content_type: provider
-        media_content_id: media-source://tts/google_translate?message=Beth%2C+the+Fridge+door+has+been+open+for+over+5+minutes%2C+please+close+the+door.+++Thank+you.
+        media_content_id: media-source://tts/google_translate?message=Fellow+humans%2C+the+fridge+door+has+been+open+for+over+5+minutes%2C+please+close+the+door.+++Thank+you.
   mode: single
 - id: '1658079559260'
   alias: In Meeting
@@ -914,4 +915,40 @@
       create_file: true
       data:
         parse_mode: html
+  mode: single
+- id: '1658979202433'
+  alias: Left Litter Box
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.scoopfree_left_rake_count
+    above: '25'
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.scoopfree_left_rake_count
+    above: '25'
+  action:
+  - service: notify.mobile_app_mobile
+    data:
+      message: The Left Litter Box has reached {{ states('sensor.scoopfree_left_rake_count')
+        }} rakes and the tray should be changed.
+      title: Petsafe Scoopfree
+  mode: single
+- id: '1658979270076'
+  alias: Right Litter Box
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.scoopfree_left_rake_count
+    above: '25'
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.scoopfree_left_rake_count
+    above: '25'
+  action:
+  - service: notify.mobile_app_mobile
+    data:
+      message: The Right Litter Box has reached {{ states('sensor.scoopfree_right_rake_count')
+        }} rakes and the tray should be changed.
+      title: Petsafe Scoopfree
   mode: single
