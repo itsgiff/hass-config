@@ -79,3 +79,4 @@ ip_bans.yaml
 .ip_authenticated.yaml
 .storage/.hpprinter.printer
 home-assistant.log.*
+zones.yaml
