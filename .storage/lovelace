@@ -378,7 +378,7 @@
                       "entity": "switch.frontyard_lights",
                       "layout": "vertical",
                       "tap_action": {
-                        "action": "more-info"
+                        "action": "toggle"
                       },
                       "icon_color": "{% if is_state('switch.frontyard_lights', 'on') %}\n  amber\n{% endif %}",
                       "hold_action": {
@@ -393,7 +393,7 @@
                       "entity": "switch.frontyard_fountain",
                       "layout": "vertical",
                       "tap_action": {
-                        "action": "more-info"
+                        "action": "toggle"
                       },
                       "icon_color": "{% if is_state('switch.frontyard_fountain', 'on') %}\n  blue\n{% endif %}",
                       "hold_action": {
@@ -408,7 +408,7 @@
                       "entity": "switch.backyard_lights",
                       "layout": "vertical",
                       "tap_action": {
-                        "action": "more-info"
+                        "action": "toggle"
                       },
                       "icon_color": "{% if is_state('switch.backyard_lights', 'on') %}\n  amber\n{% endif %}",
                       "hold_action": {
@@ -423,7 +423,7 @@
                       "entity": "switch.backyard_fountain",
                       "layout": "vertical",
                       "tap_action": {
-                        "action": "more-info"
+                        "action": "toggle"
                       },
                       "icon_color": "{% if is_state('switch.backyard_fountain', 'on') %}\n  blue\n{% endif %}",
                       "hold_action": {
@@ -1671,6 +1671,15 @@
                       "theme": "Mushroom"
                     }
                   ]
+                },
+                {
+                  "hours_to_show": 24,
+                  "graph": "line",
+                  "type": "sensor",
+                  "entity": "sensor.basement_fridge_temperature",
+                  "detail": 1,
+                  "name": "Basement Freezer",
+                  "icon": "mdi:fridge"
                 }
               ]
             }
@@ -2019,97 +2028,102 @@
                   "type": "custom:mushroom-title-card"
                 },
                 {
-                  "type": "custom:mushroom-title-card",
-                  "title": "Storage"
-                },
-                {
-                  "type": "custom:mushroom-chips-card",
-                  "chips": [
+                  "type": "vertical-stack",
+                  "cards": [
                     {
-                      "type": "conditional",
-                      "conditions": [
+                      "type": "custom:mushroom-title-card",
+                      "title": "Storage"
+                    },
+                    {
+                      "type": "custom:mushroom-chips-card",
+                      "chips": [
                         {
-                          "entity": "update.storage_dsm_update",
-                          "state": "on"
+                          "type": "conditional",
+                          "conditions": [
+                            {
+                              "entity": "update.storage_dsm_update",
+                              "state": "on"
+                            }
+                          ],
+                          "chip": {
+                            "type": "entity",
+                            "entity": "update.storage_dsm_update",
+                            "icon_color": "blue",
+                            "tap_action": {
+                              "action": "url",
+                              "url_path": "http://192.168.1.2:5000/"
+                            },
+                            "content_info": "name",
+                            "name": "Storage Update"
+                          }
+                        },
+                        {
+                          "type": "template",
+                          "entity": "binary_sensor.disk_station_manager",
+                          "icon": "mdi:nas",
+                          "tap_action": {
+                            "action": "more-info"
+                          },
+                          "icon_color": "{% if is_state('binary_sensor.disk_station_manager', 'off') %}\n  green\n{% elif is_state('binary_sensor.disk_station_manager', 'on') %}\n red\n{% endif %}",
+                          "content": "Disk Station"
+                        },
+                        {
+                          "type": "entity",
+                          "entity": "sensor.storage_containers_active",
+                          "icon_color": "blue"
+                        },
+                        {
+                          "type": "entity",
+                          "entity": "sensor.storage_k10temp_1_temperature",
+                          "name": "Tempurature"
                         }
                       ],
-                      "chip": {
-                        "type": "entity",
-                        "entity": "update.storage_dsm_update",
-                        "icon_color": "blue",
-                        "tap_action": {
-                          "action": "url",
-                          "url_path": "http://192.168.1.2:5000/"
+                      "alignment": "center"
+                    },
+                    {
+                      "type": "horizontal-stack",
+                      "cards": [
+                        {
+                          "type": "custom:mushroom-entity-card",
+                          "entity": "sensor.storage_cpu_utilization_total",
+                          "name": "Processor"
                         },
-                        "content_info": "name",
-                        "name": "Storage Update"
-                      }
+                        {
+                          "type": "custom:mushroom-entity-card",
+                          "entity": "sensor.storage_memory_usage_real",
+                          "name": "Memory"
+                        }
+                      ]
                     },
                     {
-                      "type": "template",
-                      "entity": "binary_sensor.disk_station_manager",
-                      "icon": "mdi:nas",
-                      "tap_action": {
-                        "action": "more-info"
-                      },
-                      "icon_color": "{% if is_state('binary_sensor.disk_station_manager', 'off') %}\n  grey\n{% elif is_state('binary_sensor.disk_station_manager', 'on') %}\n red\n{% endif %}",
-                      "content": "Disk Station"
+                      "type": "horizontal-stack",
+                      "cards": [
+                        {
+                          "type": "custom:mushroom-entity-card",
+                          "entity": "sensor.storage_used_percent",
+                          "name": "Storage Used"
+                        },
+                        {
+                          "type": "custom:mushroom-entity-card",
+                          "entity": "sensor.storage_used",
+                          "name": "Used Space"
+                        }
+                      ]
                     },
                     {
-                      "type": "entity",
-                      "entity": "sensor.storage_containers_active",
-                      "icon_color": "blue"
-                    },
-                    {
-                      "type": "entity",
-                      "entity": "sensor.storage_k10temp_1_temperature",
-                      "name": "Tempurature"
-                    }
-                  ],
-                  "alignment": "center"
-                },
-                {
-                  "type": "horizontal-stack",
-                  "cards": [
-                    {
-                      "type": "custom:mushroom-entity-card",
-                      "entity": "sensor.storage_cpu_utilization_total",
-                      "name": "Processor"
-                    },
-                    {
-                      "type": "custom:mushroom-entity-card",
-                      "entity": "sensor.storage_memory_usage_real",
-                      "name": "Memory"
-                    }
-                  ]
-                },
-                {
-                  "type": "horizontal-stack",
-                  "cards": [
-                    {
-                      "type": "custom:mushroom-entity-card",
-                      "entity": "sensor.storage_used_percent",
-                      "name": "Storage Used"
-                    },
-                    {
-                      "type": "custom:mushroom-entity-card",
-                      "entity": "sensor.storage_used",
-                      "name": "Used Space"
-                    }
-                  ]
-                },
-                {
-                  "type": "horizontal-stack",
-                  "cards": [
-                    {
-                      "type": "custom:mushroom-entity-card",
-                      "entity": "sensor.storage_upload_throughput",
-                      "name": "Network Up"
-                    },
-                    {
-                      "type": "custom:mushroom-entity-card",
-                      "entity": "sensor.storage_download_throughput",
-                      "name": "Network Down"
+                      "type": "horizontal-stack",
+                      "cards": [
+                        {
+                          "type": "custom:mushroom-entity-card",
+                          "entity": "sensor.storage_upload_throughput",
+                          "name": "Network Up"
+                        },
+                        {
+                          "type": "custom:mushroom-entity-card",
+                          "entity": "sensor.storage_download_throughput",
+                          "name": "Network Down"
+                        }
+                      ]
                     }
                   ]
                 },
@@ -2207,6 +2221,138 @@
               "cards": [
                 {
                   "type": "custom:mushroom-title-card"
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:mushroom-title-card",
+                      "title": "Downloads",
+                      "subtitle": ""
+                    },
+                    {
+                      "type": "custom:mushroom-chips-card",
+                      "chips": [
+                        {
+                          "type": "conditional",
+                          "conditions": [
+                            {
+                              "entity": "sensor.mam_inactunsat",
+                              "state_not": "0"
+                            }
+                          ],
+                          "chip": {
+                            "type": "entity",
+                            "entity": "sensor.mam_inactunsat",
+                            "icon_color": "red",
+                            "icon": "mdi:seed-off-outline"
+                          }
+                        },
+                        {
+                          "type": "conditional",
+                          "conditions": [
+                            {
+                              "entity": "sensor.mam_inacthnr",
+                              "state_not": "0"
+                            }
+                          ],
+                          "chip": {
+                            "type": "entity",
+                            "entity": "sensor.mam_inacthnr",
+                            "icon_color": "red",
+                            "icon": "mdi:seed-off-outline"
+                          }
+                        },
+                        {
+                          "type": "template",
+                          "entity": "sensor.mam_connectable",
+                          "icon": "mdi:connection",
+                          "icon_color": "{% if is_state('sensor.mam_connectable', 'yes') %}\n  green\n{% elif is_state('sensor.mam_connectable', 'no') %}\n  red\n{% endif %}"
+                        },
+                        {
+                          "type": "template",
+                          "icon": "mdi:emoticon-confused",
+                          "icon_color": "{% if is_state('sensor.mam_unsat', '0') %}\n  green\n{% else %}\n  orange\n{% endif %}",
+                          "entity": "sensor.mam_unsat",
+                          "content": "{{ states('sensor.mam_unsat') }}"
+                        },
+                        {
+                          "type": "template",
+                          "icon": "mdi:seed",
+                          "icon_color": "{% if is_state('sensor.mam_sat', '0') %}\n  orange\n{% else %}\n  green\n{% endif %}",
+                          "entity": "sensor.mam_sat",
+                          "content": "{{ states('sensor.mam_sat') }}"
+                        },
+                        {
+                          "type": "template",
+                          "entity": "sensor.mam_ratio",
+                          "icon": "mdi:aspect-ratio",
+                          "icon_color": "{% set ratio = states('sensor.mam_ratio') |float(0) %}\n{%    if ratio >= 10 %}\ngreen\n{%- elif ratio >= 3 and ratio <= 9 %}\norange\n{%- elif ratio <= 3 %}\norange\n{%- else -%}\nred\n{%- endif %}",
+                          "content": "{{ states('sensor.mam_ratio') }}"
+                        }
+                      ],
+                      "alignment": "center"
+                    },
+                    {
+                      "type": "horizontal-stack",
+                      "cards": [
+                        {
+                          "type": "custom:mushroom-template-card",
+                          "primary": "{{ states('sensor.mam_class') }}",
+                          "secondary": "",
+                          "icon": "mdi:rodent",
+                          "entity": "binary_sensor.printer_connectivity",
+                          "badge_icon": "mdi:crown",
+                          "badge_color": "green",
+                          "icon_color": "grey"
+                        },
+                        {
+                          "type": "custom:mushroom-template-card",
+                          "primary": "Bonus",
+                          "secondary": "{{ states('sensor.mam_seedbonus') }}",
+                          "icon": "mdi:counter",
+                          "entity": "sensor.mam_seedbonus",
+                          "icon_color": "{% set seed = states(\"sensor.mam_seedbonus\")|float(0) %}\n{%    if seed <= 50000 %}\ngreen\n{%- elif seed >= 75000 and seed <= 75000 %}\norange\n{%- else -%}\nred\n{%- endif %}",
+                          "badge_color": "",
+                          "badge_icon": ""
+                        }
+                      ]
+                    },
+                    {
+                      "type": "horizontal-stack",
+                      "cards": [
+                        {
+                          "type": "custom:mushroom-entity-card",
+                          "entity": "sensor.mam_uploaded"
+                        },
+                        {
+                          "type": "custom:mushroom-entity-card",
+                          "entity": "sensor.mam_downloaded"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "horizontal-stack",
+                      "cards": [
+                        {
+                          "hours_to_show": 48,
+                          "graph": "line",
+                          "type": "sensor",
+                          "entity": "sensor.mam_uploaded",
+                          "detail": 1,
+                          "theme": "Mushroom"
+                        },
+                        {
+                          "hours_to_show": 48,
+                          "graph": "line",
+                          "type": "sensor",
+                          "entity": "sensor.mam_downloaded",
+                          "detail": 1,
+                          "theme": "Mushroom"
+                        }
+                      ]
+                    }
+                  ]
                 },
                 {
                   "type": "custom:mushroom-title-card",
@@ -2413,48 +2559,95 @@
                   "alignment": "center"
                 },
                 {
-                  "type": "entities",
-                  "entities": [
+                  "type": "custom:mushroom-title-card",
+                  "title": "MyAnonaMouse",
+                  "subtitle": ""
+                },
+                {
+                  "type": "custom:mushroom-chips-card",
+                  "chips": [
                     {
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "entity": "sensor.mam_inactunsat",
+                          "state_not": "0"
+                        }
+                      ],
+                      "chip": {
+                        "type": "entity",
+                        "entity": "sensor.mam_inactunsat",
+                        "icon_color": "red",
+                        "icon": "mdi:seed-off-outline"
+                      }
+                    },
+                    {
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "entity": "sensor.mam_inacthnr",
+                          "state_not": "0"
+                        }
+                      ],
+                      "chip": {
+                        "type": "entity",
+                        "entity": "sensor.mam_inacthnr",
+                        "icon_color": "red",
+                        "icon": "mdi:seed-off-outline"
+                      }
+                    },
+                    {
+                      "type": "template",
+                      "entity": "sensor.mam_connectable",
+                      "icon": "mdi:connection",
+                      "icon_color": "{% if is_state('sensor.mam_connectable', 'yes') %}\n  green\n{% elif is_state('sensor.mam_connectable', 'no') %}\n  red\n{% endif %}"
+                    },
+                    {
+                      "type": "template",
+                      "icon": "mdi:emoticon-confused",
+                      "icon_color": "{% if is_state('sensor.mam_unsat', '0') %}\n  green\n{% else %}\n  orange\n{% endif %}",
+                      "entity": "sensor.mam_unsat",
+                      "content": "{{ states('sensor.mam_unsat') }}"
+                    },
+                    {
+                      "type": "template",
+                      "icon": "mdi:seed",
+                      "icon_color": "{% if is_state('sensor.mam_sat', '0') %}\n  orange\n{% else %}\n  green\n{% endif %}",
+                      "entity": "sensor.mam_unsat",
+                      "content": "{{ states('sensor.mam_sat') }}"
+                    }
+                  ],
+                  "alignment": "center"
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:mushroom-entity-card",
                       "entity": "sensor.mam_class"
                     },
                     {
-                      "entity": "sensor.mam_connectable"
-                    },
-                    {
-                      "entity": "sensor.mam_seedbonus"
-                    },
-                    {
+                      "type": "custom:mushroom-entity-card",
                       "entity": "sensor.mam_ratio"
                     },
                     {
+                      "type": "custom:mushroom-entity-card",
+                      "entity": "sensor.mam_seedbonus"
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "custom:mushroom-entity-card",
                       "entity": "sensor.mam_uploaded"
                     },
                     {
+                      "type": "custom:mushroom-entity-card",
                       "entity": "sensor.mam_downloaded"
-                    },
-                    {
-                      "entity": "sensor.mam_seedhnr"
-                    },
-                    {
-                      "entity": "sensor.mam_inactunsat"
-                    },
-                    {
-                      "entity": "sensor.mam_inacthnr"
-                    },
-                    {
-                      "entity": "sensor.mam_sat"
-                    },
-                    {
-                      "entity": "sensor.mam_unsat"
-                    },
-                    {
-                      "entity": "sensor.mam_leeching"
                     }
-                  ],
-                  "state_color": true,
-                  "theme": "Mushroom",
-                  "title": "MyAnonaMouse"
+                  ]
                 }
               ]
             },
